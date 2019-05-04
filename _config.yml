@@ -4,13 +4,13 @@ repository: sproogen/resume-theme
 
 # Personal info
 name: Hung Q. Pham
-title: Ph.D. student at Department of Chemistry, University of Minnesota
+title: Ph.D. candidate at Department of Chemistry, University of Minnesota
 email: pqh3.14@gmail.com
-website: https://github.com/hungpham2017/hungpham2017.github.io
+#website: https://github.com/hungpham2017
 
 # Social links
-twitter_username: facespics
-github_username:  sproogen
+#twitter_username: facespics
+github_username:  hungpham2017
 # dribbble_username: jekyll
 # facebook_username: jekyll
 # flickr_username: jekyll
