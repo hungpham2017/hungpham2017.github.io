@@ -1,24 +1,24 @@
 # Project template
-- name: Density matrix embedding theory for periodic systems
+- name: pDMET
   link: hungpham2017.github.io/pDMET
   github: github.com/hungpham2017/pDMET
   quote: >
-    Extension of DMET to periodic systems
+    An extension of DMET to periodic systems
   description: | # this will include new lines to allow paragraphs
     Description about the work on/with the project
 
-- name: Density matrix embedding theory for periodic systems
+- name: MCU
   link: hungpham2017.github.io/mcu
   github: github.com/hungpham2017/mcu
   quote: >
-    A package for periodic wavefunction and crystallography analysis. mcu is designed to support large scale analysis and topological descriptions for periodic wavefunction.
+    A package for periodic wavefunction and crystallography analysis.
   description: | # this will include new lines to allow paragraphs
-    Description about the work on/with the project
+    MCU is designed to support large scale analysis and topological descriptions for periodic wavefunction.
     
-- name: Density matrix embedding theory for periodic systems
+- name: pyWannier90
   link: hungpham2017.github.io/pyWannier90
   github: github.com/hungpham2017/pyWannier90
   quote: >
     A Wannier90 python interface for PySCF
   description: | # this will include new lines to allow paragraphs
-    Description about the work on/with the project    
+    I started this project because I need the MLWFs my pDMET project. It turns out pyWannier90 can be very useful for my other projects as well    
