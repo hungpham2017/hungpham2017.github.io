@@ -1,8 +1,24 @@
 # Project template
-- name: Project name
-  link: Link to project (eg. sproogen.github.io/modern-resume-theme)(optional)
-  github: Github page for project (eg. sproogen/modern-resume-theme)(optional)
+- name: Density matrix embedding theory for periodic systems
+  link: hungpham2017.github.io/pDMET
+  github: github.com/hungpham2017/pDMET
   quote: >
-    Short overview of the project (optional)
+    Extension of DMET to periodic systems
   description: | # this will include new lines to allow paragraphs
     Description about the work on/with the project
+
+- name: Density matrix embedding theory for periodic systems
+  link: hungpham2017.github.io/mcu
+  github: github.com/hungpham2017/mcu
+  quote: >
+    A package for periodic wavefunction and crystallography analysis. mcu is designed to support large scale analysis and topological descriptions for periodic wavefunction.
+  description: | # this will include new lines to allow paragraphs
+    Description about the work on/with the project
+    
+- name: Density matrix embedding theory for periodic systems
+  link: hungpham2017.github.io/pyWannier90
+  github: github.com/hungpham2017/pyWannier90
+  quote: >
+    A Wannier90 python interface for PySCF
+  description: | # this will include new lines to allow paragraphs
+    Description about the work on/with the project    
