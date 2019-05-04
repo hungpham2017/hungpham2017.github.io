@@ -5,7 +5,7 @@
   quote: >
     An extension of DMET to periodic systems
   description: | # this will include new lines to allow paragraphs
-    Description about the work on/with the project
+    A wavefunction theory for periodic systems
 
 - name: MCU
   link: hungpham2017.github.io/mcu
@@ -21,4 +21,4 @@
   quote: >
     A Wannier90 python interface for PySCF
   description: | # this will include new lines to allow paragraphs
-    I started this project because I need the MLWFs my pDMET project. It turns out pyWannier90 can be very useful for my other projects as well    
+    I started this project because I need the MLWFs for my pDMET project. It turns out pyWannier90 can be very useful for my other projects as well    
