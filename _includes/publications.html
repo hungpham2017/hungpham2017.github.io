@@ -19,9 +19,7 @@
           </a>
         {%- endif -%}
         </p>
-        <p class="journal">
-			{{ paper.journal | strip | markdownify }}
-        </p>
+        <p class="journal">{{ paper.journal}} </p>
         {{ paper.authors | strip | markdownify }}
       </div>
     </div>
