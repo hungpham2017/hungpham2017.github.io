@@ -36,8 +36,8 @@
         {%- endif -%}
         {%- if site.googlescholar_username -%}
           <li>
-            <a target="_blank" href="https://scholar.google.com/{{ site.googlescholar_username| cgi_escape | escape }}" class="button button--sacnite button--round-l">
-              <i class="fa fa-googlescholar" title="Google scholar"></i>
+            <a target="_blank" href="https://scholar.google.com/{{ site.googlescholar_username| escape }}" class="button button--sacnite button--round-l">
+              <i class="fa fa-google-scholar" title="Google scholar"></i>
             </a>
           </li>
         {%- endif -%}
