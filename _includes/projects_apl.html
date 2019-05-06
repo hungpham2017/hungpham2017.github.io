@@ -1,0 +1,16 @@
+<div class="container projects-container">
+  <h3>{{ site.projects_apl_title | default: "Application projects" }}</h3>
+  {% for project in site.data.projects_apl %}
+    <div class="row clearfix project">
+      <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
+        <h4>{{ project_apl.name }}</h4>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
+        {%- if project_apl.quote -%}
+          <p class="quote">{{ project_apl.quote }}</p>
+        {%- endif -%}
+        {{ project_apl.description | strip | markdownify }}
+      </div>
+    </div>
+  {% endfor %}
+</div>

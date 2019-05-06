@@ -24,6 +24,10 @@
         {%- include projects.html -%}
       {%- endif -%}
 
+      {%- if site.data.projects_apl.size > 0 -%}
+        {%- include projects_apl.html -%}
+      {%- endif -%}
+
       {%- if site.more_content -%}
         {%- include more.html -%}
       {%- endif -%}
