@@ -34,6 +34,14 @@
             </a>
           </li>
         {%- endif -%}
+        {%- if site.googlescholar_username -%}
+          <li>
+            <a target="_blank" href="https://scholar.google.com/{{ site.googlescholar_username| cgi_escape | escape }}" class="button button--sacnite button--round-l">
+              <i class="fa fa-github" title="Github link"></i>
+            </a>
+          </li>
+        {%- endif -%}
+        
         {%- if site.instagram_username -%}
           <li>
             <a target="_blank" href="https://www.instagram.com/{{ site.instagram_username| cgi_escape | escape }}" class="button button--sacnite button--round-l">

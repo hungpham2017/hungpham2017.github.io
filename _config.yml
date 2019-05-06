@@ -11,6 +11,7 @@ email: pqh3.14@gmail.com
 
 # Social links
 github_username:  hungpham2017
+googlescholar_username: citations?user=MIe6vYUAAAAJ&hl=en
 linkedin_username: hung-pham-4b46598b
 # twitter_username: jekyllrb
 # dribbble_username: jekyll
@@ -26,7 +27,7 @@ about_content: | # this will include new lines to allow paragraphs
 
 # Projects Section
 #(Use this to override about projects section title)
-projects_title: Coding Projects 
+# projects_title: Coding Projects 
 
 # Experience Section
 # experience_title: Experience #(Use this to override about experience section title)
