@@ -1,6 +1,5 @@
 # Project template
 - name: pDMET
-  link: hungpham2017.github.io/pDMET
   github: hungpham2017/pDMET
   quote: >
     An extension of DMET to periodic systems
@@ -16,7 +15,6 @@
     MCU is designed to support large scale analysis and topological descriptions for periodic wavefunction.
     
 - name: pyWannier90
-  link: hungpham2017.github.io/pyWannier90
   github: hungpham2017/pyWannier90
   quote: >
     A Wannier90 python interface for PySCF
