@@ -28,6 +28,10 @@
         {%- include projects_apl.html -%}
       {%- endif -%}
 
+      {%- if site.data.publications.size > 0 -%}
+        {%- include publications.html -%}
+      {%- endif -%}
+
       {%- if site.more_content -%}
         {%- include more.html -%}
       {%- endif -%}

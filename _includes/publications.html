@@ -1,0 +1,15 @@
+<div class="container publications-container">
+  <h3>{{ site.publications_title | default: "Publications" }}</h3>
+  {% for paper in site.data.publications %}
+    <div class="row clearfix project">
+      <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
+        {%- if paper.title -%}
+          <p class="title">{{ paper.title }}</p>
+        {%- endif -%}
+        {{ paper.authors | strip | markdownify }}
+      </div>
+    </div>
+  {% endfor %}
+</div>
