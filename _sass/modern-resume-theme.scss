@@ -231,3 +231,16 @@ p.title {
     margin-top: 0em;
   }
 }
+
+p.journal {
+  font-size: 1.6em;
+  font-style: italic;
+  padding: 0em 0em;
+  text-align: left;
+
+  @media print {
+    text-align: left;
+    padding: 0em 0em;
+    margin-top: 0em;
+  }
+}
