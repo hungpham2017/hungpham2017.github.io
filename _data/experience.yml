@@ -1,9 +1,38 @@
 # Experience template
 - company: University of Minnesota
   link: https://twin-cities.umn.edu/
-  job_title: Rsearch Assistant
-  dates: January 1th - present
+  job_title: Research Assistant
+  dates: January 1th, 2018 - present
   quote: >
    Department of Chemistry
   description: | # this will include new lines to allow paragraphs
     I am working on developing new electronic structure theories for periodic systems.
+    
+- company: University of Minnesota
+  link: https://twin-cities.umn.edu/
+  job_title: Teaching Assistant
+  dates: September 1th, 2015 - December 31th, 2017
+  quote: >
+   Department of Chemistry
+  description: | # this will include new lines to allow paragraphs
+    I was teaching General Chemistry laboratories
+    
+- company: VNUHCM - University of Science, Vietnam
+  link: https://en.hcmus.edu.vn/
+  job_title: Research Assistant
+  dates: October 1th, 2015 - August 1th, 2015
+  quote: >
+   Department of Chemistry
+  description: | # this will include new lines to allow paragraphs
+    I am working on developing new electronic structure theories for periodic systems.
+    
+- company: VNUHCM - University of Science, Vietnam
+  link: https://en.hcmus.edu.vn/
+  job_title: Teaching Assistant
+  dates: October 1th, 2015 - August 1th, 2015
+  quote: >
+   Department of Chemistry
+  description: | # this will include new lines to allow paragraphs
+    I was teaching General Chemistry laboratories, Physical Chemistry laboratories, Computational Chemistry laboratories
+    
+    
