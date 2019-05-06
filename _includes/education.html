@@ -3,16 +3,12 @@
   {% for education in site.data.education %}
     <div class="row clearfix education">
       <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
-        {%- if education.quote -%}
-          <p class="quote">{{ education.quote }}</p>
-        {%- endif -%}
-        {{ education.description | strip | markdownify }}
+        <p><b>{{ education.dates }}<b></p>
       </div>
 
       <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
         <h4><b>{{ education.name }}</b></h4>
         <p><b>{{ education.qualification }}</b></p>
-        <p>{{ education.dates }}</p>
       </div>
     </div>
   {% endfor %}
