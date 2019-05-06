@@ -188,15 +188,15 @@ ul.icons a {
 }
 
 p.quote {
-  font-size: 2.0em;
+  font-size: 1.6em;
   font-weight: bold;
   font-style: italic;
-  padding: 1em 0em;
+  padding: 0em 0em;
   text-align: left;
 
   @media print {
     text-align: left;
-    padding: 0em 1em;
-    margin-top: 1em;
+    padding: 0em 0em;
+    margin-top: 0em;
   }
 }
