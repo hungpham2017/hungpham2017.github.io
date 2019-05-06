@@ -4,12 +4,12 @@
     <div class="row clearfix education">
 
       {%- if site.education_image -%}
-        <div class="col-xs-12 col-sm-4 col-md-3 no-print">
+        <div class="col-xs-12 col-sm-3 col-md-2 no-print">
           <span class="education-img" style="background-image: url({{ site.education_image | relative_url }})" />
         </div>
       {%- endif -%}
 
-      <div class="{{ 'col-xs-12 ' }}{%- if site.education_image -%}col-sm-8 col-md-9 col-print-12{%- endif -%}">
+      <div class="{{ 'col-xs-12 ' }}{%- if site.education_image -%}col-sm-9 col-md-10 col-print-12{%- endif -%}">
         <h4><b>{{ education.name }}</b></h4>
         <p><b>{{ education.qualification }}</b></p>
         <p>{{ education.dates }}</p>
