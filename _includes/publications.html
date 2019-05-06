@@ -6,7 +6,7 @@
       </div>
       <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
 
-        <h6 class="title">
+        <p class="title">
         {%- if paper.link -%}
           {% include a.html href=paper.link %}
         {%- endif -%}
@@ -14,7 +14,7 @@
         {%- if paper.link -%}
           </a>
         {%- endif -%}
-        </h6>
+        </p>
 
         {{ paper.authors | strip | markdownify }}
       </div>
