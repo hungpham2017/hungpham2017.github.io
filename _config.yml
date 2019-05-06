@@ -26,8 +26,8 @@ about_content: | # this will include new lines to allow paragraphs
   (e.g. DFT, GW) to the field of materials science and condensed matter physics.
   
   I am most skilled in:
-    - Programming languages: <mark>Python</mark>, <mark>C/C++</mark>, <mark>Fortran</mark>, <mark> Shell script</mark>
-    - Electric structure codes: <mark>PySCF</mark>, <mark>VASP</mark>, <mark>CRYSTAL</mark>, <mark>Gaussian</mark>, ...
+    - Programming languages: <mark>Python</mark> <mark>C/C++</mark> <mark>Fortran</mark> <mark> Shell script</mark>
+    - Electronic structure codes: <mark>PySCF</mark> <mark>VASP</mark> <mark>CRYSTAL</mark> <mark>Gaussian</mark> <mark>...</mark>
     
 # Projects Section
 #(Use this to override about projects section title)
