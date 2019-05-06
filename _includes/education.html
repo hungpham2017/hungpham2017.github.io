@@ -2,13 +2,16 @@
   <h3>{{ site.education_title | default: "Education" }}</h3>
   {% for education in site.data.education %}
     <div class="row clearfix education">
-      <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
+
+      <div class="col-xs-12 col-sm-4 col-md-3 no-print">
+        <span class="profile-img" style="background-image: url({{ site.education_image | relative_url }})" />
       </div>
 
       <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
         <h4><b>{{ education.name }}</b></h4>
         <p><b>{{ education.qualification }}</b></p>
         <p>{{ education.dates }}</p>
+
       </div>
     </div>
   {% endfor %}

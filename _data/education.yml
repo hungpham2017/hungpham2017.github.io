@@ -1,14 +1,13 @@
 # Education Template
 - name: University of Minnesota, Twin Cities
-  dates: 2015-2020
+  dates: 2015 - 2020
   qualification: Ph.D. in Computational Chemistry
-  quote: >
-    The home of Goldy Gopher
-  description: | # this will include new lines to allow paragraphs
-    A beautiful campus locates in the center of Twin Cities
+  education_image: images/education.png
+#  quote: >
+#    The home of Goldy Gopher
+#  description: | # this will include new lines to allow paragraphs
+#    A beautiful campus locates in the center of Twin Cities
     
 - name: VNUHCM - University of Science, Vietnam
-  dates: 2007-2011
+  dates: 2007 - 2011
   qualification: Bachelor in Science, Chemistry
-  description: | # this will include new lines to allow paragraphs
-    A beautiful campus locates in the center of Twin Cities
