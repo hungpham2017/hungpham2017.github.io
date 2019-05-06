@@ -3,21 +3,20 @@
   {% for paper in site.data.publications %}
     <div class="row clearfix project">
       <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
-      </div>
-      <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
 
+      </div>
+
+      <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
         <p class="title">
         {%- if paper.link -%}
           {% include a.html href=paper.link %}
         {%- endif -%}
-        {{ paper.title }}
+        {{ forloop.index }} {{ paper.title }}
         {%- if paper.link -%}
           </a>
         {%- endif -%}
         </p>
-        
         {{ paper.authors | strip | markdownify }}
-
       </div>
     </div>
   {% endfor %}

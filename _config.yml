@@ -57,3 +57,6 @@ sass:
 
 plugins:
  - jekyll-seo-tag
+
+# For math 
+markdown: kramdown
