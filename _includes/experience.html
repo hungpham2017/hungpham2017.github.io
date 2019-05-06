@@ -3,7 +3,7 @@
   {% for experience in site.data.experience %}
     <div class="row clearfix experience">
       <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
-        <h5 class="name">
+        <p class="name">
           {%- if experience.link -%}
             {% include a.html href=experience.link %}
           {%- endif -%}
@@ -11,7 +11,7 @@
           {%- if experience.link -%}
             </a>
           {%- endif -%}
-          </h5>
+          </p>
         <p><b>{{ experience.job_title }}</b></p>
         <p>{{ experience.dates }}</p>
         {% for job in experience.jobs %}
