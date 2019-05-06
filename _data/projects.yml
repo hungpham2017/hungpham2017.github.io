@@ -1,7 +1,7 @@
 # Project template
 - name: pDMET
   link: hungpham2017.github.io/pDMET
-  github: github.com/hungpham2017/pDMET
+  github: hungpham2017/pDMET
   quote: >
     An extension of DMET to periodic systems
   description: | # this will include new lines to allow paragraphs
@@ -9,7 +9,7 @@
 
 - name: MCU
   link: hungpham2017.github.io/mcu
-  github: github.com/hungpham2017/mcu
+  github: hungpham2017/mcu
   quote: >
     A package for periodic wavefunction and crystallography analysis.
   description: | # this will include new lines to allow paragraphs
@@ -17,7 +17,7 @@
     
 - name: pyWannier90
   link: hungpham2017.github.io/pyWannier90
-  github: github.com/hungpham2017/pyWannier90
+  github: hungpham2017/pyWannier90
   quote: >
     A Wannier90 python interface for PySCF
   description: | # this will include new lines to allow paragraphs
