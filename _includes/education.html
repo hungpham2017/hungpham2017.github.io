@@ -3,13 +3,13 @@
   {% for education in site.data.education %}
     <div class="row clearfix education">
 
-      {%- if site.about_profile_image -%}
+      {%- if site.education_image -%}
         <div class="col-xs-12 col-sm-4 col-md-3 no-print">
-          <span class="profile-img" style="background-image: url({{ site.about_profile_image | relative_url }})" />
+          <span class="profile-img" style="background-image: url({{ site.education_image | relative_url }})" />
         </div>
       {%- endif -%}
     
-      <div class="{{ 'col-xs-12 ' }}{%- if site.about_profile_image -%}col-sm-8 col-md-9 col-print-12{%- endif -%}">
+      <div class="{{ 'col-xs-12 ' }}{%- if site.education_image -%}col-sm-8 col-md-9 col-print-12{%- endif -%}">
         <h4><b>{{ education.name }}</b></h4>
         <p><b>{{ education.qualification }}</b></p>
         <p>{{ education.dates }}</p>
