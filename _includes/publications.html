@@ -11,7 +11,7 @@
         {%- if paper.link -%}
           {% include a.html href=paper.link %}
         {%- endif -%}
-        {{ forloop.index }} <p>.</p> {{ paper.title }}
+        {{ forloop.index }} . {{ paper.title }}
         {%- if paper.link -%}
           </a>
         {%- endif -%}
