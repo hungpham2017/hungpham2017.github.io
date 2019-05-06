@@ -5,9 +5,16 @@
       <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
       </div>
       <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
-        {%- if paper.title -%}
-          <p class="title">{{ paper.title }}</p>
+        <h4 class="title">
+        {%- if paper.link -%}
+          {% include a.html href=paper.link %}
         {%- endif -%}
+        {{ paper.title }}
+        {%- if paper.link -%}
+          </a>
+        {%- endif -%}
+        </h4>
+
         {{ paper.authors | strip | markdownify }}
       </div>
     </div>
