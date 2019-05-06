@@ -25,7 +25,8 @@ about_content: | # this will include new lines to allow paragraphs
   (e.g. DFT, GW) to the field of materials science and condensed matter physics.
 
 # Projects Section
-projects_title: Coding Projects |#(Use this to override about projects section title)
+#(Use this to override about projects section title)
+projects_title: Coding Projects 
 
 # Experience Section
 # experience_title: Experience #(Use this to override about experience section title)
