@@ -1,0 +1,22 @@
+# Project template
+- name: Photocatalysis
+  quote: >
+    Bandgap engineering in MOFs
+  description: | # this will include new lines to allow paragraphs
+    The chemical and structural diversity of MOFs was explored to tune their electronic properties
+    This project was my undergraduate thesis topic and earned me my first paper on JPCC. 
+    I learned a lot from this project from the application of DFT to solid-state materials to the structure modeling of framework materials like MOFs, COFs, and ZIFs.
+    
+    
+    
+# Project template
+- name: Carbon capture
+  quote: >
+    In silico design and topology analysis for MOFs
+  description: | # this will include new lines to allow paragraphs
+    Structure modeling and reticular chemistry were employed to design new MOFs structures for carbon capture and gas storage
+    I started this project with the scope to design and synthesize new MOFs structures with exceptional surface areas and pore size from hexagonal linkers.
+    From my calculations, two outstanding structures were proposed, i.e. hxg- and she-MOFs. After exhausted efforts, my experimentalists could not turn them into real materials.
+    Instead, four other new structures were synthesized, i.e. MOF-888,-889,-890,-891. I was analysizing the topology for these new structures and earn my second paper in Inorganic Chemistry. 
+    Interestly, two years later after I already started my Ph.D. at Minnesota hxg- (Eddaudi) and she-MOFs (Zhang, Farha, and Snurr) were actually synthesized!
+    
