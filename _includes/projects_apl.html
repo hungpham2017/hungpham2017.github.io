@@ -4,11 +4,11 @@
     <div class="row clearfix project">
       <div class="col-xs-12 col-sm-4 col-md-3 col-print-12 left-column">
         <h4>{{ project.name }}</h4>
-		{%- if project.image -%}
-		<div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
-		  <span class="proj-img" style="background-image: url({{ project.image | relative_url }})" />
-		</div>
-		{%- endif -%}
+    		{%- if project.image -%}
+    		<div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
+    		  <span class="proj-img" style="background-image: url({{ project.image | relative_url }})" />
+    		</div>
+    		{%- endif -%}
       </div>
       <div class="col-xs-12 col-sm-8 col-md-9 col-print-12">
 		{%- if project.quote -%}
