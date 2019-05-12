@@ -1,7 +1,9 @@
 # Project template
 - name: Photovoltaics
   quote: >
-    Design lead-free perovskite for solar harvesting
+    Design novel lead-free perovskite for light harvesting
   description: | # this will include new lines to allow paragraphs
-    Design lead-free perovskite for solar harvesting
+    Lead halide perovskites have been shown to have a great potential as an alternative to popular semiconductor like crystalline sillicon
+    due to its chemical diversity and low processing cost. The primary problem is the environmental and human health concern relating to lead.
+    Our main goal is to apply first principle calculations to design new lead-free perovskites with outstanding optoelectronic performaces.
   image: images/proj_perovskite.jpg
