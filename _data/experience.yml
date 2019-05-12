@@ -3,8 +3,8 @@
   link: https://twin-cities.umn.edu/
   job_title: Research Assistant
   dates: Jan 1th, 2018 - present
-  quote: >
-   Department of Chemistry
+   # quote: >
+    # Department of Chemistry
   description: | # this will include new lines to allow paragraphs
     I am developing and applying electronic structure theories for periodic systems. 
     One of my development projects is the extension of density matrix embedding theory (DMET) to solid-state materials.
@@ -16,8 +16,8 @@
   link: https://twin-cities.umn.edu/
   job_title: Teaching Assistant
   dates: Sep 1th, 2015 - Dec 31th, 2017
-  quote: >
-   Department of Chemistry
+  # quote: >
+   # Department of Chemistry
   description: | # this will include new lines to allow paragraphs
     I was teaching General Chemistry laboratories for chemistry and non-chemistry students, including: CHEM 1017, CHEM 1065, CHEM 1066 
     
@@ -25,8 +25,8 @@
   link: https://en.hcmus.edu.vn/
   job_title: Research Assistant
   dates: Oct 1th, 2015 - Aug 1th, 2015
-  quote: >
-   Department of Chemistry
+  # quote: >
+   # Department of Chemistry
   description: | # this will include new lines to allow paragraphs
     I was applying periodic density functional theory (DFT) to study electronic structure of metal-organic frameworks (MOFs). 
     In addition, I was employing reticular chenistry, structure modeling, and GCMC simulation to design novel framework materials like MOFs, COFs, ZIFs for gas storage and carbon capture. 
@@ -35,8 +35,8 @@
   link: https://en.hcmus.edu.vn/
   job_title: Teaching Assistant
   dates: Oct 1th, 2015 - Aug 1th, 2015
-  quote: >
-   Department of Chemistry
+  # quote: >
+   # Department of Chemistry
   description: | # this will include new lines to allow paragraphs
     I was teaching General Chemistry laboratories, Physical Chemistry laboratories, Computational Chemistry laboratories for chemistry students.
     
