@@ -4,7 +4,7 @@
   quote: >
     An extension of DMET to periodic systems
   description: | # this will include new lines to allow paragraphs
-    pDMET is a wavefunction method for periodic systems, particularly the strongly correlated materials.
+    pDMET is a wavefunction method for periodic systems, particularly for strongly correlated materials.
 
 - name: MCU
   link: hungpham2017.github.io/mcu

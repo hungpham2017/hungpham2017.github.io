@@ -3,7 +3,7 @@
   quote: >
     Design novel lead-free perovskite for light harvesting
   description: | # this will include new lines to allow paragraphs
-    Lead halide perovskites have been shown to have a great potential as an alternative to popular semiconductor like crystalline sillicon
-    due to its chemical diversity and low processing cost. The primary problem is the environmental and human health concern relating to lead.
-    Our main goal is to apply first principle calculations to design new lead-free perovskites with outstanding optoelectronic performaces.
+    Lead halide perovskite has been shown to have a great potential as an alternative to popular semiconductor like crystalline sillicon
+    due to its chemical diversity and low processing cost. The use of lead halide perovskite in real solar devices has been hindered by the environmental concern relating to the lead component.
+    Our main goal is to apply first principle modeling to design new lead-free perovskites with outstanding optoelectronic performaces.
   image: images/proj_perovskite.jpg
