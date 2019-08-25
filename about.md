@@ -11,8 +11,8 @@ layout: page
 <h2>Educations</h2>
 
 <ul class="education-list">
-    <li><b>Ph.D. in chemistry</b>, University of Minnesota (2015-2020), Advisor: Laura Gagliardi</li>
-    <li><b>B.S. in chemistry, Honor program</b>, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)</li>
+    <li><strong>Ph.D. in chemistry</strong>, University of Minnesota (2015-2020), Advisor: Laura Gagliardi</li>
+    <li><strong>B.S. in chemistry, Honor program</strong>, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)</li>
 </ul>
 
 
