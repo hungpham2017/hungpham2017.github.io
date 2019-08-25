@@ -9,10 +9,11 @@ layout: page
   (e.g. DFT, GW) to the field of materials science and condensed matters.</p>
 
 <h2>Educations</h2>
-    <p>
-    * **Ph.D. in chemistry**, University of Minnesota (2015-2020), Advisor: Laura Gagliardi
-    * **B.S. in chemistry, Honor program**, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)
-    </p>
+
+<ul class="education-list">
+    <li>**Ph.D. in chemistry**, University of Minnesota (2015-2020), Advisor: Laura Gagliardi</li>
+    <li>**B.S. in chemistry, Honor program**, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)</li>
+</ul>
 
 
 <h2>Research interest</h2>
@@ -50,9 +51,7 @@ layout: page
 
 <h2>Publications</h2>
 1. **H. Q. Pham**, M. R. Hermes, L. Gagliardi; Periodic Density Matrix Embedding Theory: A Wave Function Approach for Strongly Correlated Materials, **2019**, Manuscript under preparation.
-<div class="breaker"></div>
 2. **H. Q. Pham**, D. Q. Le, N.-N. Pham-Tran, Y. Kawazoe, D. Nguyen-Manh; Electron Delocalization in Single-Layer Phthalocyanine-Based Covalent Organic Frameworks: A First Principle Study, **RSC Advances**, **2019**, Manuscript under revision.
-<div class="breaker"></div>
 3. R. Sanner, N. Cherepy, H P. Martinez, **H. Q. Pham**, V. Young; Highly Efficient Phosphorescence From Cyclometallated Iridium(III) Compounds: Improved Syntheses of Picolinate Complexes and Quantum Chemical Studies of Their Electronic Structures, **Inorganica Chim. Acta**, **2019**,496, 119040. 
 4. **H. Q. Pham**, R. J. Holmes, E. S. Aydil, L. Gagliardi; Lead-Free Double Perovskites Cs2InCuCl6and (CH3NH3)2InCuCl6: Electronic, Optical,and Electrical Properties, **Nanoscale**, **2019**, 11, 11173.
 5. **H. Q. Pham**, V. Bernales, L. Gagliardi; Can Density Matrix Embedding Theory with the Complete Active Space Self-Consistent Field Solver Describe Single and Double Bond Breaking in Molecular Systems?, **J. Chem. Theory Comput.**, **2018**, 14, 1960.
