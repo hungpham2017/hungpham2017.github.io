@@ -9,11 +9,8 @@ layout: page
   (e.g. DFT, GW) to the field of materials science and condensed matter physics.</p>
 
 <h2>Educations</h2>
-
-<ul class="research-list">
-    <li>**Ph.D. in chemistry**, University of Minnesota (2015-2020), Advisor: Laura Gagliardi</li>
-    <li>**B.S. in chemistry, Honor program**, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)</li>
-</ul>
+    * **Ph.D. in chemistry**, University of Minnesota (2015-2020), Advisor: Laura Gagliardi
+    * **B.S. in chemistry, Honor program**, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)
 
 <h2>Research interest</h2>
 
