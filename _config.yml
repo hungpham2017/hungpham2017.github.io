@@ -1,67 +1,120 @@
-# Site
-repository: Git repository where your resume will be hosted, only required if you are hosting on GitHub (eg. sproogen/modern-resume-theme)
-# favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
+# main text of home
+name: John Doe
+bio: A Man who travels the world eating noodles
 
-# Personal info
-name: Hung Q. Pham
-title: Ph.D. candidate at the department of Chemistry, University of Minnesota
-email: pqh3.14@gmail.com
-# phone: Your phone number (optional)
-# website: Your website (eg. https://google.com)(optional)
+# twitter summary info
+description: A blog about technology and stuff related
 
-# Social links
-github_username:  hungpham2017
-googlescholar_username: citations?user=MIe6vYUAAAAJ&hl=en
-linkedin_username: hung-pham-4b46598b
-researchgate_username: Hung_Pham17
-# twitter_username: jekyllrb
-# dribbble_username: jekyll
-# facebook_username: 
+# if it's an external image, update below for true
+# better with square images
+external-image: false
+picture: assets/images/profile.jpg
 
-# About Section
-# about_title: About Me (Use this to override about section title)
-about_profile_image: images/profile.jpg
-about_content: | # this will include new lines to allow paragraphs
-  Hello, my name's Hung and I'm a Ph.D. candidate at the department of chemistry, University of Minnesota.
-  My research includes the development of new electronic structure theories for periodic systems as well as the application of current numerical techniques
-  (e.g. DFT, GW) to the field of materials science and condensed matter physics.
-  
-  I am most skilled in:
-    - Programming languages: <mark>Python</mark> <mark>C/C++</mark> <mark>Fortran</mark> <mark> Shell script</mark>
-    - Electronic structure codes: <mark>PySCF</mark> <mark>VASP</mark> <mark>CRYSTAL</mark> <mark>Gaussian</mark> <mark>...</mark>
-    
-# Projects Section
-#(Use this to override about projects section title)
-# projects_title: Coding Projects 
+# If you want to include your resume, set to true
+# and specify source (external or local).
+resume: true
+resume-external: true
+resume-url: https://google.com/?q=my+resume
 
-# Experience Section
-# experience_title: Experience #(Use this to override about experience section title)
+url: https://koppl.in/indigo
+# your url: http://USERNAME.github.io
 
-# Education Section
-# education_title: Education #(Use this to override about education section title)
-education_image: images/education.png
+permalink: /:title/
 
-# More Section
-# more_title: A Little More About Me #(Use this to override about more section title)
-more_content: | # this will include new lines to allow paragraphs
-  Alongside my interests in quantum chemistry and software engineering some of my other interests and hobbies are:
-   - EDM
-   - Movie
-   - Karate
-   
-# Footer
-footer_show_references: true
+# To enable google analytics, supply your token below
+# analytics-google: 'UA-MYANALYTICS'
 
-# Build settings
-# theme: modern-resume-theme (Use this is you are hosting your resume yourself)
-# remote_theme: sproogen/modern-resume-theme (Use this if you are hosting your resume on GitHub)
+# To enable piwik tracking, supply your url & site ID below
+# analytics-piwik-url: 'piwik.my-host.com'
+# analytics-piwik-id: 1
 
-sass:
-  sass_dir: _sass
-  style: compressed
+# if you don't want comments in your posts, leave categories empty
+disqus:
+  shortname: mydisqus # enter this from your disqus account
+  categories: [blog, project] # only show disqus for posts that have these categories
+
+# if you don't have any of social below, comment the line
+facebook: myfacebook
+twitter: mytwitter
+# google: mygoogle
+# instagram: myinstagram
+# pinterest: mypinterest
+# linkedin: mylinkedin
+# youtube: myyoutube
+# spotify: myspotify
+github: mygithub
+# gitlab: mygitlab
+# lastfm: mylastfm
+# stackoverflow: 7044681/mystackoverflow
+# quora: userquora
+# reddit: username
+medium: medium
+# vimeo: myvimeo
+# lanyrd: mylanyrd
+email: myemail@gmail.com
+
+authors:
+    johndoe:
+        name: John Doe
+        bio: A Man who travels the world eating noodles
+        external-image: false
+        picture: assets/images/profile.jpg
+        twitter: johndoe
+    jamesfoster:
+        name: James Foster
+        bio: A Man who develops software with coffee
+        external-image: false
+        picture: assets/images/james.jpg
+        twitter: jamesfoster
+
+# do you want a larger site? change the option below
+# options: [normal, large] | default: normal
+# normal = 560px / large = 810px
+width: normal
+
+# if you don't need pagination, comment the *paginate* configs below
+# paginate: 5
+# paginate_path: "blog/:num/"
+
+# if you don't need projects, comment the *projects* configs below
+projects: true
+
+# if you don't need "about" or "blog", comment them out below
+about: true
+blog: true
+
+# do you want to show the "read time" of the posts?
+read-time: true
+
+# do you want to show the "tags" inside the posts?
+show-tags: true
+
+# related posts inside a post?
+related: true
+
+# Display links for next and previous posts for the specified categories
+post-advance-links: [blog]
+
+# show author block at the end of a post ?
+show-author: true
+
+# do you want some animations?
+animation: true
 
 plugins:
- - jekyll-seo-tag
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-admin
 
-# For math 
-markdown: kramdown
+jekyll-mentions:
+    base_url: https://github.com
+
+compress_html:
+    ignore:
+        envs:
+        - development
+        - stage
+
+exclude: ["travis.sh", "Rakefile", "README.md", "Gemfile", "Gemfile.lock", "FAQ.md"]
