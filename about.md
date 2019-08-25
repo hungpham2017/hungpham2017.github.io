@@ -11,6 +11,10 @@ layout: page
 <h2>Skills</h2>
 
 <ul class="skill-list">
+    <li>Quantum embedding theory</li>
+    <li>Wave function theories for condensed phases</li>
+    <li>Density functional theory</li>
+    <li>Solid-state chemistry</li>
 	<li>Programming languages: Python, C/C++, Fortran, shell script, Git</li>
 </ul>
 
