@@ -1,6 +1,6 @@
 # main text of home
 name: Hung Pham
-bio: A computational chemist who enjoys food and shotokan karate in his spare time.
+bio: A computational chemist who enjoys food and shotokan karate.
 
 # twitter summary info
 description: A blog about computational chemistry and stuff related
@@ -22,7 +22,7 @@ url: https://hungpham2017.github.io
 permalink: /:title/
 
 # To enable google analytics, supply your token below
-# analytics-google: 'UA-MYANALYTICS'
+analytics-google: 'UA-146457008-1'
 
 # To enable piwik tracking, supply your url & site ID below
 # analytics-piwik-url: 'piwik.my-host.com'
