@@ -9,11 +9,9 @@ layout: page
   (e.g. DFT, GW) to the field of materials science and condensed matter physics.</p>
 
 <h2>Educations</h2>
-**Ph.D. in chemistry**
-University of Minnesota (2015-2020)
-Advisor: Laura Gagliardi
-**B.S. in chemistry, Honor program** 
-Vietnam National University Ho Chi Minh City - University of Science (2007-2011)
+    <li>**Ph.D. in chemistry**, University of Minnesota (2015-2020), Advisor: Laura Gagliardi</li>
+    <li>**B.S. in chemistry, Honor program**, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)</li>
+
 
 <h2>Research interest</h2>
 
@@ -43,9 +41,9 @@ Vietnam National University Ho Chi Minh City - University of Science (2007-2011)
 <h2>Projects</h2>
 
 <ul>
-	<li>Density matrix embedding theory for periodic systems<a href="https://github.com/hungpham2017/pDMET">pDMET</a></li>
-	<li>Modeling and Crystallographic Utilities<a href="https://github.com/hungpham2017/mcu">mcu</a></li>
-	<li>Python interface for wannier90<a href="https://github.com/hungpham2017/pyWannier90">pyWannier90</a></li>
+	<li>Density matrix embedding theory for periodic systems <a href="https://github.com/hungpham2017/pDMET">pDMET</a></li>
+	<li>Modeling and Crystallographic Utilities <a href="https://github.com/hungpham2017/mcu">mcu</a></li>
+	<li>Python interface for wannier90 <a href="https://github.com/hungpham2017/pyWannier90">pyWannier90</a></li>
 </ul>
 
 <h2>Publications</h2>
