@@ -8,13 +8,18 @@ layout: page
   My research includes the development of new electronic structure theories for periodic systems as well as the application of current numerical techniques
   (e.g. DFT, GW) to the field of materials science and condensed matter physics.</p>
 
-<h2>Skills</h2>
+<h2>Research interest</h2>
 
 <ul class="skill-list">
     <li>Quantum embedding theory</li>
     <li>Wave function theories for condensed phases</li>
     <li>Density functional theory</li>
     <li>Solid-state chemistry</li>
+</ul>
+
+<h2>Skills</h2>
+
+<ul class="skill-list">
 	<li>Programming languages: Python, C/C++, Fortran, shell script, Git</li>
 </ul>
 
