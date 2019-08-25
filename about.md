@@ -30,3 +30,12 @@ layout: page
 	<li><a href="https://github.com/hungpham2017/mcu">mcu</a></li>
 	<li><a href="https://github.com/hungpham2017/pyWannier90">pyWannier90</a></li>
 </ul>
+
+<h2>Publications</h2>
+
+<ul>
+	<li><a href="https://github.com/hungpham2017/pDMET">pDMET</a></li>
+	<li><a href="https://github.com/hungpham2017/mcu">mcu</a></li>
+	<li><a href="https://github.com/hungpham2017/pyWannier90">pyWannier90</a></li>
+</ul>
+

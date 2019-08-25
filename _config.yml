@@ -77,9 +77,6 @@ projects: true
 about: true
 blog: true
 
-# if you don't need "publications", comment them out below
-publications: true
-
 # do you want to show the "read time" of the posts?
 read-time: true
 
