@@ -22,6 +22,7 @@ layout: page
     <li>Quantum embedding theory</li>
     <li>Wave function theories for condensed phases</li>
     <li>Density functional theory</li>
+    <li>Condensed matter physics</li>
     <li>Solid-state chemistry</li>
 </ul>
 
@@ -51,7 +52,7 @@ layout: page
 
 <h2>Publications</h2>
 1. **H. Q. Pham**, M. R. Hermes, L. Gagliardi; Periodic Density Matrix Embedding Theory: A Wave Function Approach for Strongly Correlated Materials, **2019**, Manuscript under preparation.
-2. **H. Q. Pham**, D. Q. Le, N.-N. Pham-Tran, Y. Kawazoe, D. Nguyen-Manh; Electron Delocalization in Single-Layer Phthalocyanine-Based Covalent Organic Frameworks: A First Principle Study, **RSC Advances**, **2019**, Manuscript under revision.
+2. **H. Q. Pham**, D. Q. Le, N.-N. Pham-Tran, Y. Kawazoe, D. Nguyen-Manh; Electron Delocalization in Single-Layer Phthalocyanine-Based Covalent Organic Frameworks: A First Principle Study, * **RSC Advances** *, **2019**, Manuscript under revision.
 3. R. Sanner, N. Cherepy, H P. Martinez, **H. Q. Pham**, V. Young; Highly Efficient Phosphorescence From Cyclometallated Iridium(III) Compounds: Improved Syntheses of Picolinate Complexes and Quantum Chemical Studies of Their Electronic Structures, **Inorganica Chim. Acta**, **2019**,496, 119040. 
 4. **H. Q. Pham**, R. J. Holmes, E. S. Aydil, L. Gagliardi; Lead-Free Double Perovskites Cs2InCuCl6and (CH3NH3)2InCuCl6: Electronic, Optical,and Electrical Properties, **Nanoscale**, **2019**, 11, 11173.
 5. **H. Q. Pham**, V. Bernales, L. Gagliardi; Can Density Matrix Embedding Theory with the Complete Active Space Self-Consistent Field Solver Describe Single and Double Bond Breaking in Molecular Systems?, **J. Chem. Theory Comput.**, **2018**, 14, 1960.
