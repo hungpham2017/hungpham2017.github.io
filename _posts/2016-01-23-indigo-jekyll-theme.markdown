@@ -1,35 +1,33 @@
 ---
-title: ":ramen: Indigo, minimalist jekyll theme"
+title: "Density matrix embedding theory for strongly-correlated materials"
 layout: post
-date: 2016-01-23 22:10
+date: 2019-08-25 20:00
 tag: jekyll
 image: https://koppl.in/indigo/assets/images/jekyll-logo-light-solid.png
 headerImage: true
 projects: true
 hidden: true # don't count this post in blog pagination
-description: "This is a simple and minimalist template for Jekyll for those who likes to eat noodles."
+description: "This is a description for my pDMET project."
 category: project
-author: johndoe
+author: hungpham
 externalLink: false
 ---
 
-![Screenshot](https://raw.githubusercontent.com/sergiokopplin/indigo/gh-pages/assets/screen-shot.png)
+![Screenshot](https://github.com/hungpham2017/hungpham2017.github.io/tree/master/assets/images/pDMET_screenshot.png)
 
-Example of project - Indigo Minimalist Jekyll Template - [Demo](http://sergiokopplin.github.io/indigo/). This is a simple and minimalist template for Jekyll for those who likes to eat noodles.
 
 ---
+What is DMET?
+- Gulp
 
-What has inside?
+
+---
+DMET for solid-state materials
 
 - Gulp
-- BrowserSync
-- Stylus
-- SVG
-- Travis
-- No JS
-- [98/100](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Fsergiokopplin.github.io%2Findigo%2F)
+- 
 
 ---
 
-[Check it out](http://sergiokopplin.github.io/indigo/) here.
-If you need some help, just [tell me](http://github.com/sergiokopplin/indigo/issues).
+[Check it out](https://github.com/hungpham2017/pDMET/) here.
+If you need some help, just [tell me](https://github.com/hungpham2017/pDMET/issues).
