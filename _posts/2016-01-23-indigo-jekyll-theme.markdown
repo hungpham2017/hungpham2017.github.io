@@ -1,9 +1,9 @@
 ---
-title: "Density matrix embedding theory for strongly-correlated materials"
+title: ":cocktail: Density matrix embedding theory for strongly-correlated materials"
 layout: post
 date: 2019-08-25 20:00
 tag: jekyll
-image: https://koppl.in/indigo/assets/images/jekyll-logo-light-solid.png
+image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/DMET.png
 headerImage: true
 projects: true
 hidden: true # don't count this post in blog pagination
@@ -13,7 +13,7 @@ author: hungpham
 externalLink: false
 ---
 
-![Screenshot](https://github.com/hungpham2017/hungpham2017.github.io/tree/master/assets/images/pDMET_screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET_screenshot.png)
 
 
 ---
