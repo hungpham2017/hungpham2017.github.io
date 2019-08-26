@@ -2,7 +2,7 @@
 title: ":cocktail: Density matrix embedding theory for strongly-correlated materials"
 layout: post
 date: 2019-08-25 20:00
-tag: jekyll
+tag: DMET, periodic systems
 image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/DMET.png
 headerImage: true
 projects: true
@@ -13,7 +13,7 @@ author: hungpham
 externalLink: false
 ---
 
-[//]: <> (![Screenshot](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET_screenshot.png))
+![Screenshot](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET_screenshot.png)
 
 
 ---
