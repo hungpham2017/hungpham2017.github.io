@@ -13,19 +13,18 @@ author: hungpham
 externalLink: false
 ---
 
-![Screenshot](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET_screenshot.png)
+[//]: <> (![Screenshot](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET_screenshot.png))
 
 
 ---
-What is DMET?
-- Gulp
+**What is DMET?**
+to be written
 
 
 ---
-DMET for solid-state materials
-
+**DMET for solid-state materials**
+to be written
 - Gulp
-- 
 
 ---
 
