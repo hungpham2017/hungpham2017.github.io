@@ -18,14 +18,14 @@ externalLink: false
 --->
 
 ---
-**What is DMET?**
+<h4>What is DMET?</h4>
 <p>
 Density matrix embedding theory is a wave function-in-wave function embedding technique that allows one to treat extended systems
 at the cost that is proportional to the size of a small fragment.
 </p>
 
 ---
-**DMET for solid-state materials**
+<h4>DMET for solid-state materials</h4>
 <p>
 DMET algorithm can be extended to periodic systems by using the Wannier functions.
 <a href="https://github.com/hungpham2017/pDMET">pDMET</a> is a Python code to perform DMET calculation for solids.
@@ -35,7 +35,7 @@ to treat excitation and other type of interacting particles.
 
 ---
 
-**References**
+<h4>References</h4>
 <p>
 to be updated
 </p>
