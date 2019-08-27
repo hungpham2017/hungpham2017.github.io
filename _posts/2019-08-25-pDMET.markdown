@@ -28,7 +28,7 @@ at the cost that is proportional to the size of a small fragment.
 **DMET for solid-state materials**
 <p>
 DMET algorithm can be extended to periodic systems by using the Wannier functions.
-[pDMET](https://github.com/hungpham2017/pDMET) is a Python code to perform DMET calculation for solids.
+<a href="https://github.com/hungpham2017/pDMET">pDMET</a> is a Python code to perform DMET calculation for solids.
 One can obtain both ground-state energy and band structures. Future direction would be extending the algorithm 
 to treat excitation and other type of interacting particles. 
 </p>
