@@ -2,8 +2,8 @@
 title: ":cocktail: Density matrix embedding theory for strongly-correlated materials"
 layout: post
 date: 2019-08-25 20:00
-tag: DMET, periodic systems
-image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/DMET.png
+tag: DMET
+image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET.png
 headerImage: true
 projects: true
 hidden: true # don't count this post in blog pagination
@@ -13,20 +13,33 @@ author: hungpham
 externalLink: false
 ---
 
+<!---
 ![Screenshot](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET_screenshot.png)
-
+--->
 
 ---
 **What is DMET?**
-to be written
-
+<p>
+Density matrix embedding theory is a wave function-in-wave function embedding technique that allows one to treat extended systems
+at the cost that is proportional to the size of a small fragment.
+</p>
 
 ---
 **DMET for solid-state materials**
-to be written
-- Gulp
+<p>
+DMET algorithm can be extended to periodic systems by using the Wannier functions.
+[pDMET](https://github.com/hungpham2017/pDMET) is a Python code to perform DMET calculation for solids.
+One can obtain both ground-state energy and band structures. Future direction would be extending the algorithm 
+to treat excitation and other type of interacting particles. 
+</p>
 
 ---
 
+**References**
+<p>
+to be updated
+</p>
+
+---
 [Check it out](https://github.com/hungpham2017/pDMET/) here.
 If you need some help, just [tell me](https://github.com/hungpham2017/pDMET/issues).
