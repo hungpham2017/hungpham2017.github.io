@@ -4,9 +4,16 @@ layout: page
 ---
 ![Profile Image]({{ site.url }}/{{ site.picture }})
 
-<p>  Hello, my name's Hung and I'm a Ph.D. candidate at the department of chemistry, University of Minnesota.
-  My research includes the development of new electronic structure theories for periodic systems as well as the application of current techniques
-  (e.g. DFT, GW) to the field of materials science and condensed matters.</p>
+<p>  
+Hello, my name's Hung and I'm a Ph.D. candidate at the department of chemistry, University of Minnesota.
+My research includes the development of new electronic structure theories for periodic systems as well as the application of current techniques
+(e.g. DFT, GW) to the field of materials science and condensed matters.
+</p>
+
+<p>
+<a href="https://scholar.google.com/citations?user=MIe6vYUAAAAJ&hl=en&authuser=1#">My Google Scholar</a>
+</p>
+
 
 <h2>Educations</h2>
 
