@@ -50,6 +50,7 @@ layout: page
 	<li>Python interface for wannier90 <a href="https://github.com/hungpham2017/pyWannier90">pyWannier90</a></li>
 </ul>
 
+<!---
 <h2>Publications</h2>
 1. **H. Q. Pham**, M. R. Hermes, L. Gagliardi; Periodic Density Matrix Embedding Theory: A Wave Function Approach for Strongly Correlated Materials, **2019**, Manuscript under preparation.
 2. **H. Q. Pham**, D. Q. Le, N.-N. Pham-Tran, Y. Kawazoe, D. Nguyen-Manh; Electron Delocalization in Single-Layer Phthalocyanine-Based Covalent Organic Frameworks: A First Principle Study, [**RSC Advances**](https://chemrxiv.org/articles/Electron_Delocalization_in_Single-Layer_Phthalocyanine-Based_Covalent_Organic_Frameworks_A_First_Principle_Study/8378486), **2019**, Manuscript under revision.
@@ -60,3 +61,4 @@ layout: page
 7. P. T. K. Nguyen, H. T. D. Nguyen, **H. Q. Pham**, J. Kim, K. E. Cordova, H. Furukawa; Synthesis and Selective Capture Properties of a Series of Hexatopic Linker-Based Metal–Organic Frameworks, [**Inorg. Chem.**](https://pubs.acs.org/doi/abs/10.1021/acs.inorgchem.5b01900), **2015**, 54 (20), 10065.
 8. T. L. H. Doan, H. L. Nguyen, **H. Q. Pham**, N.-N. Pham-Tran, T. N. Le, K. E. Cordova; Tailoring the Optical Absorption of Water-Stable Zr− and Hf−Based Metal–Organic Framework Photocatalysts, [**Chem. Asian J.**](https://onlinelibrary.wiley.com/doi/full/10.1002/asia.201500641), **2015**, 10, 2660.
 9. **H. Q. Pham**, T. Mai, N.-N. Pham-Tran, Y. Kawazoe, H. Mizuseki, D. Nguyen-Manh; Engineering of Band Gap in Metal–Organic Frameworks by Functionalizing Organic Linker: A Systematic Density Functional Theory Investigation, [**J. Phys. Chem. C**](https://pubs.acs.org/doi/10.1021/jp405997r), **2014**, 118 (9), 4567.
+--->
