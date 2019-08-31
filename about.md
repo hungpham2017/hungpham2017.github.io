@@ -22,7 +22,6 @@ My research includes the development of new electronic structure theories for pe
     <li><strong>B.S. in chemistry, Honor program</strong>, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)</li>
 </ul>
 
-
 <h2>Research interest</h2>
 
 <ul class="research-list">
@@ -47,6 +46,13 @@ My research includes the development of new electronic structure theories for pe
 	<li>Programming languages: Fortran, HTML</li>
 	<li>Ab inito codes: ADF, Qchem </li>
 	<li>Classical mechanic codes: Forcite, GULD, Music</li>    
+</ul>
+
+<h2>Reviewing activities</h2>
+
+<ul class="reviewing-list">
+    <li><a href="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/ACS_2018.pdf">Journal of Chemical Theory and Computation, ACS</a></li>
+    <li><a href="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/SSC_Elsevier.pdf">Solid State Communications, Elsevier</a></li>
 </ul>
 
 <h2>Projects</h2>
