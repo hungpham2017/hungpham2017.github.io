@@ -5,7 +5,7 @@ date: 2019-08-28 15:00
 tag: MOFs, COFs
 image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/MOFs.png
 headerImage: true
-research: true
+research: false
 hidden: true # don't count this post in blog pagination
 description: "This is a description for my MOFs/COFs project."
 category: research
