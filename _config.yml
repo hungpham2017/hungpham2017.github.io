@@ -70,7 +70,7 @@ width: large
 # paginate: 5
 # paginate_path: "blog/:num/"
 
-# if you don't need projects, comment the *projects* configs below
+# if you don't need research, comment the *research* configs below
 research: true
 
 # if you don't need "about" or "blog", comment them out below
