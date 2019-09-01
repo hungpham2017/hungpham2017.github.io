@@ -5,7 +5,7 @@ date: 2019-08-28 16:00
 tag: Perovskite
 image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/perovskite.png
 headerImage: true
-projects: true
+research: true
 hidden: true # don't count this post in blog pagination
 description: "This is a description for my perovskite project."
 category: research

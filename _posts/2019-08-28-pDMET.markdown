@@ -5,7 +5,7 @@ date: 2019-08-28 17:00
 tag: DMET
 image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET.png
 headerImage: true
-projects: true
+research: true
 hidden: true # don't count this post in blog pagination
 description: "This is a description for my pDMET project."
 category: research
