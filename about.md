@@ -14,7 +14,6 @@ My research includes the development of new electronic structure theories for pe
 <br><a href="https://github.com/hungpham2017/hungpham2017.github.io/raw/master/assets/HP_resume.pdf">Résumé</a>
 </p>
 
----
 <h2>Contact</h2>
 
 <p> 
@@ -33,7 +32,6 @@ Smith 101
     <li><strong>B.S. in chemistry, Honor program</strong>, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)</li>
 </ul>
 
----
 <h2>Research interest</h2>
 
 <ul class="research-list">
@@ -44,7 +42,6 @@ Smith 101
     <li>Solid-state chemistry</li>
 </ul>
 
----
 <h2>Projects</h2>
 
 <ul>
