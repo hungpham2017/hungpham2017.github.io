@@ -7,10 +7,10 @@ tag:
 - COFs
 image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/MOFs.png
 headerImage: true
-research: false
-hidden: false # don't count this post in blog pagination
+research: true
+hidden: true # don't count this post in blog pagination
 description: "This is a description for my MOFs/COFs project."
-category: blog
+category: research
 author: hungpham
 externalLink: false
 ---
