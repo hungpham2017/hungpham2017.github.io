@@ -12,6 +12,8 @@ My research includes the development of new electronic structure theories for pe
 
 <p>
 <a href="https://scholar.google.com/citations?user=MIe6vYUAAAAJ&hl=en&authuser=1#">My Google Scholar</a>
+<a href="https://github.com/hungpham2017/hungpham2017.github.io/raw/master/assets/HP_CV.pdf">My curriculum vitae</a>
+<a href="https://github.com/hungpham2017/hungpham2017.github.io/raw/master/assets/HP_resume.pdf">My résumé</a>
 </p>
 
 
