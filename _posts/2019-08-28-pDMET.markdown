@@ -2,7 +2,9 @@
 title: ":cocktail: Density matrix embedding theory for strongly-correlated materials"
 layout: post
 date: 2019-08-28 17:00
-tag: DMET
+tag: 
+- DMET
+- periodic
 image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET.png
 headerImage: true
 research: true
