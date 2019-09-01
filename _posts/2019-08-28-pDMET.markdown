@@ -8,7 +8,7 @@ headerImage: true
 projects: true
 hidden: true # don't count this post in blog pagination
 description: "This is a description for my pDMET project."
-category: project
+category: research
 author: hungpham
 externalLink: false
 ---
