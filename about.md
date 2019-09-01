@@ -8,13 +8,22 @@ layout: page
 Hello, my name's Hung and I'm a Ph.D. candidate at the department of chemistry, University of Minnesota.
 My research includes the development of new electronic structure theories for periodic systems as well as the application of current techniques
 (e.g. DFT, GW) to the field of materials science and condensed matters.
-</p>
 
-<p>
 <a href="https://scholar.google.com/citations?user=MIe6vYUAAAAJ&hl=en&authuser=1#">Google Scholar</a>
 <br><a href="https://github.com/hungpham2017/hungpham2017.github.io/raw/master/assets/HP_CV.pdf">Curriculum vitae</a>
 <br><a href="https://github.com/hungpham2017/hungpham2017.github.io/raw/master/assets/HP_resume.pdf">Résumé</a>
 </p>
+
+---
+<h2>Contact</h2>
+
+<p> 
+Smith 101
+<br>Department of Chemistry
+<br>University of Minnesota, Twin Cities
+<br>Pleasant St SE, Minneapolis, MN 55455
+<br>Email: pqh3.14@gmail.com
+</p> 
 
 ---
 <h2>Educations</h2>
@@ -33,24 +42,6 @@ My research includes the development of new electronic structure theories for pe
     <li>Density functional theory</li>
     <li>Condensed matter physics</li>
     <li>Solid-state chemistry</li>
-</ul>
-
----
-<h2>I am most skilled at:</h2>
-
-<ul class="skill-list">
-	<li>Programming languages: Python, C/C++, shell script, Git, OpenMP</li>
-	<li>Ab inito codes: PySCF, VASP, CRYSTAL, wannier90, Gaussian</li> 
-    <li>Visualization: Crystal Maker, Materials Studio Visualizer</li>
-</ul>
-
----
-<h2>I am familiar with:</h2>
-
-<ul class="skill-list">
-	<li>Programming languages: Fortran, HTML</li>
-	<li>Ab inito codes: ADF, Qchem </li>
-	<li>Classical mechanic codes: Forcite, GULD, Music</li>    
 </ul>
 
 ---
