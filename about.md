@@ -16,7 +16,7 @@ My research includes the development of new electronic structure theories for pe
 <br><a href="https://github.com/hungpham2017/hungpham2017.github.io/raw/master/assets/HP_resume.pdf">Résumé</a>
 </p>
 
-
+---
 <h2>Educations</h2>
 
 <ul class="education-list">
@@ -24,6 +24,7 @@ My research includes the development of new electronic structure theories for pe
     <li><strong>B.S. in chemistry, Honor program</strong>, Vietnam National University Ho Chi Minh City - University of Science (2007-2011)</li>
 </ul>
 
+---
 <h2>Research interest</h2>
 
 <ul class="research-list">
@@ -34,6 +35,7 @@ My research includes the development of new electronic structure theories for pe
     <li>Solid-state chemistry</li>
 </ul>
 
+---
 <h2>I am most skilled at:</h2>
 
 <ul class="skill-list">
@@ -42,6 +44,7 @@ My research includes the development of new electronic structure theories for pe
     <li>Visualization: Crystal Maker, Materials Studio Visualizer</li>
 </ul>
 
+---
 <h2>I am familiar with:</h2>
 
 <ul class="skill-list">
@@ -50,13 +53,7 @@ My research includes the development of new electronic structure theories for pe
 	<li>Classical mechanic codes: Forcite, GULD, Music</li>    
 </ul>
 
-<h2>Reviewing activities</h2>
-
-<ul class="reviewing-list">
-    <li><a href="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/ACS_2018.pdf">Journal of Chemical Theory and Computation, ACS</a></li>
-    <li><a href="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/SSC_Elsevier.pdf">Solid State Communications, Elsevier</a></li>
-</ul>
-
+---
 <h2>Projects</h2>
 
 <ul>
