@@ -8,7 +8,7 @@ headerImage: true
 research: false
 hidden: true # don't count this post in blog pagination
 description: "This is a description for my MOFs/COFs project."
-category: research
+category: blog
 author: hungpham
 externalLink: false
 ---
