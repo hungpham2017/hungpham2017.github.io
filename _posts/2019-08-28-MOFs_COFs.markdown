@@ -27,7 +27,7 @@ however, COFs are composed of purely organic building units.
 
 The story behind the success of MOFs can be found in this excellent lecture by Omar Yaghi:
 <div class="video">
-<iframe width="560" height="310" src="https://www.youtube.com/watch?v=bzDIH7olP0c" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bzDIH7olP0c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 </p>
