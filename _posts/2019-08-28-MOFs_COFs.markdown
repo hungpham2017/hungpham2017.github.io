@@ -24,6 +24,12 @@ metal oxide clusters and organic ligands) with different geometries and function
 can be made for a certain application.
 <br>In a similar manner, covalent organic frameworks (COFs) are also crystalline framework materials,
 however, COFs are composed of purely organic building units.
+
+The story behind the success of MOFs can be found in this excellent lecture by Omar Yaghi:
+<div class="video">
+<iframe width="560" height="310" src="https://www.youtube.com/watch?v=bzDIH7olP0c" frameborder="0" allowfullscreen></iframe>
+</div>
+
 </p>
 
 <div class="breaker"></div>
