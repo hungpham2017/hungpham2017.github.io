@@ -42,7 +42,7 @@ This implys that one can obtain useful information of the bulk gap by only inspe
 </p>
 
 <p align="center">
-  <img width="709" height="413" src="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/MOFs.png">
+  <img width="709" height="413" src="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/MOFs_bandgap.png">
 </p>
 
 ---
@@ -69,6 +69,3 @@ for semiconducting applications.
 3. T. L. H. Doan, H. L. Nguyen, **H. Q. Pham**, N.-N. Pham-Tran, T. N. Le, K. E. Cordova; Tailoring the Optical Absorption of Water-Stable Zr− and Hf−Based Metal–Organic Framework Photocatalysts, [**Chem. Asian J.**](https://onlinelibrary.wiley.com/doi/full/10.1002/asia.201500641), **2015**, 10, 2660.
 4. **H. Q. Pham**, D. Q. Le, N.-N. Pham-Tran, Y. Kawazoe, D. Nguyen-Manh; Electron Delocalization in Single-Layer Phthalocyanine-Based Covalent Organic Frameworks: A First Principle Study, [**RSC Advances**](https://chemrxiv.org/articles/Electron_Delocalization_in_Single-Layer_Phthalocyanine-Based_Covalent_Organic_Frameworks_A_First_Principle_Study/8378486), **2019**, Manuscript under revision.
 
----
-[Check it out](https://github.com/hungpham2017/pDMET/) here.
-If you need some help, just [tell me](https://github.com/hungpham2017/pDMET/issues).
