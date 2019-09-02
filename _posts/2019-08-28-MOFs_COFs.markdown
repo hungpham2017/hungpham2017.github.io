@@ -20,28 +20,39 @@ externalLink: false
 --->
 
 ---
-<h4>Structural and chemical diversity in the chemistry of MOFs and COFs</h4>
+<h4>MOFs and COFs</h4>
 <p>
-to be written
+For the last two decades, metal organic frameworks (MOFs) have been an attractive class of materials 
+with variety of applications, such as gas storage, carbon capture, catalysis, and electronic devides.
+Their successes have been attributed to their structural and chemical diversity. By combining building units (e.g., 
+metal oxide clusters and organic ligands) with different geometries and functional groups, thousands of structures 
+can be made for a certain application.
+<br>In a similar manner, covalent organic frameworks (COFs) are also crystalline framework materials,
+however, COFs are composed of purely organic building units.
 </p>
 
 ---
 <h4>Band gap engineering in MOFs</h4>
 <p>
-to be written
+The chemical diversity of MOFs can be used to tune their electronic structure, in particular, their band gaps.
+In out work [1], we have explored the possibility of tuning the band gaps in series of isoreticular MOFs based on IRMOF-20.
+We have found that a semiconducting band gap in MOFs can be possibly obtained via this approach. 
+Importantly, the bulk gaps are mainly determined by the organic linker rather than the ZnO4 cluster.
+This implys that one can obtain useful information of the bulk gap by only inspecting the electronic structure of linkers.
 </p>
 
 ---
 <h4>Charge transport in COFs</h4>
 <p>
-to be written
+Single-layer two-dimensional COFs are attractive for electronic devides. However, their application have been prohibited due to 
+the electronic localization of the linkages. In our work [4], we have investigated this localization for some common linkages 
+of COFs chemistry. Next, we have analyzed the electronic delocalization in CS-COFs and phthalocyanine-based COFs (PcCOFs). We further 
+compute the charge mobility for a series of PcCOFs with different numbers of benzene units between Pc. We found that these materials 
+exhibit exceptionally high mobilities which are comparable with other 2D materials like MoS2 and graphene. 
+The attractive transport properties together with their thermodynamic and mechanical stability make these materials if realized promising 
+for semiconducting applications. 
 </p>
-
----
-<h4>Breaking the record for the high-surface area in MOFs chemistry</h4>
-<p>
-to be written
-</p>
+![COFs](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/COFs.png)
 
 ---
 
