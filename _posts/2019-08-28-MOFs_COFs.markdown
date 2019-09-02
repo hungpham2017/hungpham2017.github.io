@@ -41,6 +41,10 @@ Importantly, the bulk gaps are mainly determined by the organic linker rather th
 This implys that one can obtain useful information of the bulk gap by only inspecting the electronic structure of linkers.
 </p>
 
+<p align="center">
+  <img width="709" height="418" src="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/MOFs.png">
+</p>
+
 ---
 <h4>Charge transport in COFs</h4>
 <p>
