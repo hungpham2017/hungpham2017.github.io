@@ -15,7 +15,7 @@ author: hungpham
 externalLink: false
 ---
 
-<h4>MOFs and COFs</h4>
+<h3>MOFs and COFs</h3>
 <p>
 For the last two decades, metal organic frameworks (MOFs) have been an attractive class of materials 
 with variety of applications, such as gas storage, carbon capture, catalysis, and electronic devides.
@@ -28,7 +28,7 @@ however, COFs are composed of purely organic building units.
 
 <div class="breaker"></div>
 
-<h4>Band gap engineering in MOFs</h4>
+<h3>Band gap engineering in MOFs</h3>
 <div class="side-by-side">
     <div class="toleft">
         <img class="image" src="https://hungpham2017.github.io/assets/images/MOFs_bandgap.png" alt="Alt Text">
@@ -48,7 +48,7 @@ however, COFs are composed of purely organic building units.
 
 <div class="breaker"></div>
 
-<h4>Charge transport in COFs</h4>
+<h3>Charge transport in COFs</h3>
 <div class="side-by-side">
     <div class="toleft">
         <p>
@@ -69,7 +69,7 @@ however, COFs are composed of purely organic building units.
 </div>
 
 ---
-<h4>Publications</h4>
+<h3>Publications</h3>
 1. **H. Q. Pham**, T. Mai, N.-N. Pham-Tran, Y. Kawazoe, H. Mizuseki, D. Nguyen-Manh; Engineering of Band Gap in Metal–Organic Frameworks by Functionalizing Organic Linker: A Systematic Density Functional Theory Investigation, [**J. Phys. Chem. C**](https://pubs.acs.org/doi/10.1021/jp405997r), **2014**, 118 (9), 4567.
 2. P. T. K. Nguyen, H. T. D. Nguyen, **H. Q. Pham**, J. Kim, K. E. Cordova, H. Furukawa; Synthesis and Selective Capture Properties of a Series of Hexatopic Linker-Based Metal–Organic Frameworks, [**Inorg. Chem.**](https://pubs.acs.org/doi/abs/10.1021/acs.inorgchem.5b01900), **2015**, 54 (20), 10065.
 3. T. L. H. Doan, H. L. Nguyen, **H. Q. Pham**, N.-N. Pham-Tran, T. N. Le, K. E. Cordova; Tailoring the Optical Absorption of Water-Stable Zr− and Hf−Based Metal–Organic Framework Photocatalysts, [**Chem. Asian J.**](https://onlinelibrary.wiley.com/doi/full/10.1002/asia.201500641), **2015**, 10, 2660.
