@@ -71,11 +71,6 @@ however, COFs are composed of purely organic building units.
     </div>
 </div>
 
-
-<p align="center">
-  <img width="709" height="418" src="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/COFs.png">
-</p>
-
 ---
 
 <h4>Publications</h4>
