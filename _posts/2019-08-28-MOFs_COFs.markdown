@@ -1,5 +1,5 @@
 ---
-title: ":cocktail: Crystalline Framework Materials"
+title: "Crystalline Framework Materials"
 layout: post
 date: 2019-08-28 15:00
 tag: 

@@ -1,5 +1,5 @@
 ---
-title: ":cocktail: Density matrix embedding theory for strongly-correlated materials"
+title: "Density matrix embedding theory for strongly-correlated materials"
 layout: post
 date: 2019-08-28 17:00
 tag: 

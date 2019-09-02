@@ -1,5 +1,5 @@
 ---
-title: ":cocktail: Lead-free halide perovskite for light harvesting applications"
+title: "Lead-free halide perovskite for light harvesting applications"
 layout: post
 date: 2019-08-28 16:00
 tag: Perovskite
@@ -43,7 +43,8 @@ Seeking for non-toxic halide perovskite have been one of the hottest topics in m
     <div class="toright">
         <p>
         We have investigating the electronic structures of a series of In-based halide double perovskites for solar harvesting applications.
-        Cs2InCuCl6 and MA2InCuCl6 are two outstanding compounds in terms of electronic, transporting, and optical properties. 
+        Cs2InCuCl6 and MA2InCuCl6 are two outstanding compounds in terms of electronic, transporting, and optical properties. More details can 
+        be found in our recent paper [1].
         </p>
     </div>
 </div>
