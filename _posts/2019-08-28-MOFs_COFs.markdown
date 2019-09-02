@@ -33,18 +33,6 @@ however, COFs are composed of purely organic building units.
 
 ---
 <h4>Band gap engineering in MOFs</h4>
-<p>
-The chemical diversity of MOFs can be used to tune their electronic structure, in particular, their band gaps.
-In out work [1], we have explored the possibility of tuning the band gaps in series of isoreticular MOFs based on IRMOF-20.
-We have found that a semiconducting band gap in MOFs can be possibly obtained via this approach. 
-Importantly, the bulk gaps are mainly determined by the organic linker rather than the ZnO4 cluster.
-This implys that one can obtain useful information of the bulk gap by only inspecting the electronic structure of linkers.
-</p>
-
-<p align="center">
-  <img width="709" height="413" src="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/MOFs_bandgap.png">
-</p>
-
 <div class="side-by-side">
     <div class="toleft">
         <img class="image" src="https://hungpham2017.github.io/assets/images/MOFs_bandgap.png" alt="Alt Text">
@@ -64,15 +52,25 @@ This implys that one can obtain useful information of the bulk gap by only inspe
 
 ---
 <h4>Charge transport in COFs</h4>
-<p>
-Single-layer two-dimensional COFs are attractive for electronic devides. However, their application have been prohibited due to 
-the electronic localization of the linkages. In our work [4], we have investigated this localization for some common linkages 
-of COFs chemistry. Next, we have analyzed the electronic delocalization in CS-COFs and phthalocyanine-based COFs (PcCOFs). We further 
-compute the charge mobility for a series of PcCOFs with different numbers of benzene units between Pc. We found that these materials 
-exhibit exceptionally high mobilities which are comparable with other 2D materials like MoS2 and graphene. 
-The attractive transport properties together with their thermodynamic and mechanical stability make these materials if realized promising 
-for semiconducting applications. 
-</p>
+<div class="side-by-side">
+    <div class="toleft">
+        <p>
+        Single-layer two-dimensional COFs are attractive for electronic devides. However, their application have been prohibited due to 
+        the electronic localization of the linkages. In our work [4], we have investigated this localization for some common linkages 
+        of COFs chemistry. Next, we have analyzed the electronic delocalization in CS-COFs and phthalocyanine-based COFs (PcCOFs). We further 
+        compute the charge mobility for a series of PcCOFs with different numbers of benzene units between Pc. We found that these materials 
+        exhibit exceptionally high mobilities which are comparable with other 2D materials like MoS2 and graphene. 
+        The attractive transport properties together with their thermodynamic and mechanical stability make these materials if realized promising 
+        for semiconducting applications. 
+        </p>
+    </div>
+
+    <div class="toright">
+        <img class="image" src="https://hungpham2017.github.io/assets/images/COFs.png" alt="Alt Text">
+        <figcaption class="caption">Charge transport in NiPc-2P</figcaption>
+    </div>
+</div>
+
 
 <p align="center">
   <img width="709" height="418" src="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/COFs.png">
