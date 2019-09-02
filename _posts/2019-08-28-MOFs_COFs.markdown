@@ -52,7 +52,10 @@ exhibit exceptionally high mobilities which are comparable with other 2D materia
 The attractive transport properties together with their thermodynamic and mechanical stability make these materials if realized promising 
 for semiconducting applications. 
 </p>
-![COFs](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/COFs.png)
+
+<p align="center">
+  <img width="709" height="418" src="https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/COFs.png">
+</p>
 
 ---
 
