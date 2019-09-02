@@ -15,11 +15,6 @@ author: hungpham
 externalLink: false
 ---
 
-<!---
-![Screenshot](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET_screenshot.png)
---->
-
----
 <h4>MOFs and COFs</h4>
 <p>
 For the last two decades, metal organic frameworks (MOFs) have been an attractive class of materials 
@@ -31,7 +26,8 @@ can be made for a certain application.
 however, COFs are composed of purely organic building units.
 </p>
 
----
+<div class="breaker"></div>
+
 <h4>Band gap engineering in MOFs</h4>
 <div class="side-by-side">
     <div class="toleft">
@@ -50,7 +46,8 @@ however, COFs are composed of purely organic building units.
     </div>
 </div>
 
----
+<div class="breaker"></div>
+
 <h4>Charge transport in COFs</h4>
 <div class="side-by-side">
     <div class="toleft">
@@ -72,7 +69,6 @@ however, COFs are composed of purely organic building units.
 </div>
 
 ---
-
 <h4>Publications</h4>
 1. **H. Q. Pham**, T. Mai, N.-N. Pham-Tran, Y. Kawazoe, H. Mizuseki, D. Nguyen-Manh; Engineering of Band Gap in Metal–Organic Frameworks by Functionalizing Organic Linker: A Systematic Density Functional Theory Investigation, [**J. Phys. Chem. C**](https://pubs.acs.org/doi/10.1021/jp405997r), **2014**, 118 (9), 4567.
 2. P. T. K. Nguyen, H. T. D. Nguyen, **H. Q. Pham**, J. Kim, K. E. Cordova, H. Furukawa; Synthesis and Selective Capture Properties of a Series of Hexatopic Linker-Based Metal–Organic Frameworks, [**Inorg. Chem.**](https://pubs.acs.org/doi/abs/10.1021/acs.inorgchem.5b01900), **2015**, 54 (20), 10065.
