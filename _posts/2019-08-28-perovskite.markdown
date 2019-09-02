@@ -1,5 +1,5 @@
 ---
-title: ":cocktail: Lead-free perovskite for light harvesting applications"
+title: ":cocktail: Lead-free halide perovskite for light harvesting applications"
 layout: post
 date: 2019-08-28 16:00
 tag: Perovskite
@@ -20,14 +20,34 @@ externalLink: false
 ---
 <h4>Why perovskite?</h4>
 <p>
-To be written
+Metal halide perovskites with the general formula ABX3 (A and B are metals, X is a halogen) have been emerged as promising solar-cell materials for 
+the post-silicon era. Since the first work on the lead halide perovskites-based (MAPbI3) solar cell in 2009, more than one thousand of publication on this topic have been reported. 
+Currently, the record-high power conversion efficiency of 23.3% is comparable to that of crystalline silicon making perovskites a promising 
+alternative to silicon in semiconducting technology. 
+<br> One big major problem of lead halide perovskites is the negative impact on the environment owing to its chemical instability. 
+Seeking for non-toxic halide perovskite have been one of the hottest topics in materials science and semiconducting chemistry. 
 </p>
+<div class="image">
+    <img class="image" src="https://hungpham2017.github.io/assets/images/halideperovskite_history.png" alt="Alt Text">
+    <figcaption class="caption">IRMOF-20 and its derivatives</figcaption>
+</div>
 
 ---
-<h4>Lead-free perovskites for photovoltaics</h4>
-<p>
-To be written
-</p>
+<h4>Lead-free double perovskites for photovoltaics</h4>
+<div class="side-by-side">
+    <div class="toleft">
+        <img class="image" src="https://hungpham2017.github.io/assets/images/Cs2InCuCl6.png" alt="Alt Text">
+        <figcaption class="caption">Probing the electronic, electrical, and optilcal properties of Cs2InCuCl6</figcaption>
+    </div>
+
+    <div class="toright">
+        <p>
+        We have investigating the electronic structures of a series of In-based halide double perovskites for solar harvesting applications.
+        Cs2InCuCl6 and MA2InCuCl6 are two outstanding compounds in terms of electronic, transporting, and optical properties. 
+        </p>
+    </div>
+</div>
+
 
 ---
 
