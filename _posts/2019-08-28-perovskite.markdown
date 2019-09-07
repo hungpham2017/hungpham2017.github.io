@@ -29,7 +29,7 @@ Seeking for non-toxic halide perovskite have been one of the hottest topics in m
 </p>
 <div class="image">
     <img class="image" src="https://hungpham2017.github.io/assets/images/halideperovskite_history.png" alt="Alt Text">
-    <figcaption class="caption">IRMOF-20 and its derivatives</figcaption>
+    <figcaption class="caption">Progress in perovskites</figcaption>
 </div>
 
 ---

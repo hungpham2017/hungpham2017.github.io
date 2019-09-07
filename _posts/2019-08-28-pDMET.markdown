@@ -22,9 +22,21 @@ externalLink: false
 ---
 <h4>What is DMET?</h4>
 <p>
-Density matrix embedding theory is a wave function-in-wave function embedding technique that allows one to treat extended systems
+Density matrix embedding theory (DMET) is a wave function-in-wave function embedding technique that allows one to treat extended systems
 at the cost that is proportional to the size of a small fragment.
 </p>
+
+---
+<h4>DMET with multireference solvers</h4>
+<p>
+We have explored the use of completely actice space self-consistent field (CASSCF) solver in conjunction with DMET[1]. An active space is introduced inside different fragments, i.e., 
+an DMET active space. The motivation is to limit the number of configurations of the impurity problem 
+and avoid using the full configuration interaction (FCI) solver which is unaffordable for most of chemical systems. 
+</p>
+<div class="image">
+    <img class="image" src="https://hungpham2017.github.io/assets/images/CASDMET.png" alt="Alt Text">
+    <figcaption class="caption">An CASSCF active-space in DMET active-space</figcaption>
+</div>
 
 ---
 <h4>DMET for solid-state materials</h4>
