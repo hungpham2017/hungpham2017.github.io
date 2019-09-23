@@ -13,7 +13,7 @@
 }
 
 /* Next & previous buttons */
-.ss_prev, .ss_next {
+.prev, .next {
   cursor: pointer;
   position: absolute;
   top: 50%;
@@ -29,18 +29,18 @@
 }
 
 /* Position the "next button" to the right */
-.ss_next {
+.next {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.ss_prev:hover, .ss_next:hover {
+.prev:hover, .next:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
 /* Caption text */
-.ss_text {
+.text {
   color: #f2f2f2;
   font-size: 15px;
   padding: 8px 12px;
@@ -51,7 +51,7 @@
 }
 
 /* Number text (1/3 etc) */
-.ss_numbertext {
+.numbertext {
   color: #f2f2f2;
   font-size: 12px;
   padding: 8px 12px;
@@ -60,7 +60,7 @@
 }
 
 /* The dots/bullets/indicators */
-.ss_dot {
+.dot {
   cursor: pointer;
   height: 15px;
   width: 15px;
@@ -71,24 +71,24 @@
   transition: background-color 0.6s ease;
 }
 
-.ss_active, .ss_dot:hover {
+.active, .dot:hover {
   background-color: #717171;
 }
 
 /* Fading animation */
-.ss_fade {
+.fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
   animation-duration: 1.5s;
 }
 
-@-webkit-keyframes ss_fade {
+@-webkit-keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
 }
 
-@keyframes ss_fade {
+@keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
 }
