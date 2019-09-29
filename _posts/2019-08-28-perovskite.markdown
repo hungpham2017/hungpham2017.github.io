@@ -20,7 +20,7 @@ externalLink: false
 ---
 <h4>Why perovskite?</h4>
 <p>
-Metal halide perovskites with the general formula ABX3 (A and B are metals, X is a halogen) have been emerged as promising solar-cell materials for 
+Metal halide perovskites with the general formula ABX<sub>3</sub> (A and B are metals, X is a halogen) have been emerged as promising solar-cell materials for 
 the post-silicon era. Since the first work on the lead halide perovskites-based (MAPbI3) solar cell in 2009, more than one thousand of publication on this topic have been reported. 
 Currently, the record-high power conversion efficiency of 23.3% is comparable to that of crystalline silicon making perovskites a promising 
 alternative to silicon for semiconducting technology. 
