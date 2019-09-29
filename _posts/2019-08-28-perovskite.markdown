@@ -21,7 +21,7 @@ externalLink: false
 <h4>Why perovskite?</h4>
 <p>
 Metal halide perovskites with the general formula ABX<sub>3</sub> (A and B are metals, X is a halogen) have been emerged as promising solar-cell materials for 
-the post-silicon era. Since the first work on the lead halide perovskites-based (MAPbI3) solar cell in 2009, more than one thousand of publication on this topic have been reported. 
+the post-silicon era. Since the first work on the lead halide perovskites-based (MAPbI<sub>3</sub>) solar cell in 2009, more than one thousand of publication on this topic have been reported. 
 Currently, the record-high power conversion efficiency of 23.3% is comparable to that of crystalline silicon making perovskites a promising 
 alternative to silicon for semiconducting technology. 
 <br> One big major problem of lead halide perovskites is the negative impact on the environment owing to its chemical instability. 
@@ -43,7 +43,7 @@ Seeking for non-toxic halide perovskite have been one of the hottest topics in m
     <div class="toright">
         <p>
         We have investigating the electronic structures of a series of In-based halide double perovskites for solar harvesting applications.
-        Cs2InCuCl6 and MA2InCuCl6 are two outstanding compounds in terms of electronic, transporting, and optical properties. More details can 
+        Cs<sub>2</sub>InCuCl<sub>6</sub> and MA<sub>2</sub>InCuCl<sub>6</sub> are two outstanding compounds in terms of electronic, transporting, and optical properties. More details can 
         be found in our recent paper [1].
         </p>
     </div>
@@ -53,8 +53,8 @@ Seeking for non-toxic halide perovskite have been one of the hottest topics in m
 ---
 
 <h4>Publications</h4>
-1. **H. Q. Pham**, R. J. Holmes, E. S. Aydil, L. Gagliardi; Lead-Free Double Perovskites Cs2InCuCl6and (CH3NH3)2InCuCl6: Electronic, Optical,and Electrical Properties, [**Nanoscale**](https://pubs.rsc.org/en/content/articlelanding/2019/nr/c9nr01645g#!divAbstract), **2019**, 11, 11173.
-2. D. Ray, C. Clarke, **H. Q. Pham**, J. Borycz; T. Zhang, E. S. Aydil, R. J. Holmes, L. Gagliardi; A Computational Study of Structural and Electronic Properties of Lead-Free CsMI3 Perovskites (M = Ge, Sn, Pb, Mg, Ca, Sr, Ba), [**J. Phys. Chem. C**, **2018**](https://pubs.acs.org/doi/abs/10.1021/acs.jpcc.8b00226), 122, 7838.
+1. **H. Q. Pham**, R. J. Holmes, E. S. Aydil, L. Gagliardi; Lead-Free Double Perovskites Cs<sub>2</sub>InCuCl<sub>6</sub> and (CH3NH3)<sub>2</sub>InCuCl<sub>6</sub>: Electronic, Optical,and Electrical Properties, [**Nanoscale**](https://pubs.rsc.org/en/content/articlelanding/2019/nr/c9nr01645g#!divAbstract), **2019**, 11, 11173.
+2. D. Ray, C. Clarke, **H. Q. Pham**, J. Borycz; T. Zhang, E. S. Aydil, R. J. Holmes, L. Gagliardi; A Computational Study of Structural and Electronic Properties of Lead-Free CsMI<sub>3</sub> Perovskites (M = Ge, Sn, Pb, Mg, Ca, Sr, Ba), [**J. Phys. Chem. C**, **2018**](https://pubs.acs.org/doi/abs/10.1021/acs.jpcc.8b00226), 122, 7838.
 
 
 ---
