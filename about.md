@@ -2,7 +2,8 @@
 title: About
 layout: page
 ---
-![Profile Image]({{ site.url }}/{{ site.picture }})
+<!-- ![Profile Image]({{ site.url }}/{{ site.picture }}) -->
+{% include mypics.html %}
 
 <p>  
 Hello, my name's Hung and I'm a Ph.D. candidate at the department of chemistry, University of Minnesota.
