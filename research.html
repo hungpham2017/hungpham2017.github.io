@@ -4,6 +4,7 @@ title: Research
 ---
 <section class="list">
     {% for post in site.posts %}
+		{{ forloop.counter }}
         {% if post.research %}
             <div class="item {% if post.star %}star{% endif %}">
                 <a class="url" href="{% if post.externalLink %}{{ post.externalLink }}{% else %}{{ site.url }}{{ post.url }}{% endif %}">
