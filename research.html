@@ -4,12 +4,10 @@ title: Research
 ---
 <section class="list">
     {% for post in site.posts %}
-		{% if  forloop.counter == 1 %}
-            <div class="item">
-				<h3 class="title"> I don't know what is going on </h3>
-            </div>
-			
-		{% endif %}
+	
+    <tr>
+        <td width="10%" align="center">{{ forloop.counter }}</td>
+    </tr>
 		
         {% if post.research %}
             <div class="item {% if post.star %}star{% endif %}">
