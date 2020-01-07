@@ -3,7 +3,8 @@ layout: page
 title: Research
 ---
 <section class="list">
-	{% counter = 0 %}
+	{% with my_var="my string" %}
+	{% endwith %}
 		
     {% for post in site.posts %}
         {% if post.research %}
