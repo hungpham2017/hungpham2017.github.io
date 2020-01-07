@@ -9,11 +9,13 @@ title: Research
                 <a class="url" href="{% if post.externalLink %}{{ post.externalLink }}{% else %}{{ site.url }}{{ post.url }}{% endif %}">
                     <aside><time datetime="{{ post.date | date:"%d-%m-%Y" }}">{{ post.date | date: "%b %d %Y" }}</time></aside>
                     <h3 class="title">{{ post.title }}</h3>
-				{% if post.image and post.headerImage %}
-					<img class="title-image" src="{{ post.image }}" alt="{{ post.title }}">
-				{% endif %}
                 </a>
             </div>
+			{% if post.image and post.headerImage %}
+			  <div class="topic-image">
+				<img class="title-image" src="{{ post.image }}" alt="{{ post.title }}">
+			  </div>
+			{% endif %}
         {% endif %}
     {% endfor %}
 </section>
