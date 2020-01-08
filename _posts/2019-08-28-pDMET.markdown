@@ -30,6 +30,11 @@ at the cost that is proportional to the size of a small fragment.
 <h4>DMET for solid-state materials</h4>
 
 <div class="side-by-side">
+    <div class="toleft">
+        <img class="image" src="https://hungpham2017.github.io/assets/images/pDMET_cover.png" alt="Alt Text">
+        <figcaption class="caption">Electronic structure of 1D solids within periodic DMET</figcaption>
+    </div>
+	
     <div class="toright">
         <p>
 		DMET algorithm can be extended to periodic systems by using the Wannier functions.
@@ -37,11 +42,6 @@ at the cost that is proportional to the size of a small fragment.
 		One can obtain both ground-state energy and band structures. Future direction would be extending the algorithm 
 		to treat excitation and other type of interacting particles. 
         </p>
-    </div>
-    
-    <div class="toleft">
-        <img class="image" src="https://hungpham2017.github.io/assets/images/pDMET_cover.png" alt="Alt Text">
-        <figcaption class="caption">Electronic structure of 1D solids within periodic DMET</figcaption>
     </div>
 </div>
 
