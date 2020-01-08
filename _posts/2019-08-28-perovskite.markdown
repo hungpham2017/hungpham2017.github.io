@@ -18,7 +18,7 @@ externalLink: false
 --->
 
 ---
-<h4>Why perovskite?</h4>
+<h3>Why perovskite?</h3>
 <p>
 Metal halide perovskites with the general formula ABX<sub>3</sub> (A and B are metals, X is a halogen) have been emerged as promising solar-cell materials for 
 the post-silicon era. Since the first work on the lead halide perovskites-based (MAPbI<sub>3</sub>) solar cell in 2009, more than one thousand of publication on this topic have been reported. 
@@ -33,7 +33,7 @@ Seeking for non-toxic halide perovskite have been one of the hottest topics in m
 </div>
 
 ---
-<h4>Lead-free double perovskites for photovoltaics</h4>
+<h3>Lead-free double perovskites for photovoltaics</h3>
 <div class="side-by-side">
     <div class="toleft">
         <img class="image" src="https://hungpham2017.github.io/assets/images/Cs2InCuCl6.png" alt="Alt Text">

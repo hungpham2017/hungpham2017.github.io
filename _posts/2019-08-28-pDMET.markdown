@@ -20,14 +20,14 @@ externalLink: false
 --->
 
 ---
-<h4>What is DMET?</h4>
+<h3>What is DMET?</h3>
 <p>
 Density matrix embedding theory (DMET) is a wave function-in-wave function embedding technique that allows one to treat extended systems
 at the cost that is proportional to the size of a small fragment.
 </p>
 
 ---
-<h4>DMET for solid-state materials</h4>
+<h3>DMET for solid-state materials</h3>
 
 <div class="side-by-side">
     <div class="toleft">
@@ -45,8 +45,9 @@ at the cost that is proportional to the size of a small fragment.
     </div>
 </div>
 
----
-<h4>DMET with multireference solvers</h4>
+<div class="breaker"></div>
+
+<h3>DMET with multireference solvers</h3>
 
 <div class="side-by-side">
     <div class="toleft">
@@ -69,7 +70,7 @@ at the cost that is proportional to the size of a small fragment.
 
 <h4>Publications</h4>
 1. **H. Q. Pham**, V. Bernales, L. Gagliardi; Can Density Matrix Embedding Theory with the Complete Active Space Self-Consistent Field Solver Describe Single and Double Bond Breaking in Molecular Systems?, [**J. Chem. Theory Comput.**, **2018**](https://pubs.acs.org/doi/10.1021/acs.jctc.7b01248), 14, 1960.
-2. **H. Q. Pham**, M. R. Hermes, L. Gagliardi; Periodic Density Matrix Embedding Theory: A Wave Function Approach for Strongly Correlated Materials, **2019**, Manuscript under preparation.
+2. **H. Q. Pham**, M. R. Hermes, L. Gagliardi; Periodic Electronic Structure Calculations with the Density Matrix Embedding Theory, [**J. Chem. Theory Comput.**, **2019**](https://pubs.acs.org/doi/abs/10.1021/acs.jctc.9b00939), ASAP.
 
 ---
 [Check it out](https://github.com/hungpham2017/pDMET/) here.
