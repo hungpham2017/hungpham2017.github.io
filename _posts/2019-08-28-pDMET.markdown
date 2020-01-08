@@ -27,24 +27,6 @@ at the cost that is proportional to the size of a small fragment.
 </p>
 
 ---
-<h4>DMET with multireference solvers</h4>
-
-<div class="side-by-side">
-    <div class="toleft">
-        <p>
-        We have explored the use of completely actice space self-consistent field (CASSCF) solver in conjunction with DMET[1]. An active space is introduced inside different fragments, i.e., 
-        an DMET active space. The motivation is to limit the number of configurations of the impurity problem 
-        and avoid using the full configuration interaction (FCI) solver which is unaffordable for most of chemical systems. 
-        </p>
-    </div>
-    
-    <div class="toright">
-        <img class="image" src="https://hungpham2017.github.io/assets/images/CASDMET.png" alt="Alt Text">
-        <figcaption class="caption">An CASSCF active-space in DMET active-space</figcaption>
-    </div>
-</div>
-
----
 <h4>DMET for solid-state materials</h4>
 
 <p>
@@ -69,6 +51,26 @@ to treat excitation and other type of interacting particles.
         <figcaption class="caption">Electronic structure of 1D solids within periodic DMET</figcaption>
     </div>
 </div>
+
+---
+<h4>DMET with multireference solvers</h4>
+
+<div class="side-by-side">
+    <div class="toleft">
+        <p>
+        We have explored the use of completely actice space self-consistent field (CASSCF) solver in conjunction with DMET[1]. An active space is introduced inside different fragments, i.e., 
+        an DMET active space. The motivation is to limit the number of configurations of the impurity problem 
+        and avoid using the full configuration interaction (FCI) solver which is unaffordable for most of chemical systems. 
+        </p>
+    </div>
+    
+    <div class="toright">
+        <img class="image" src="https://hungpham2017.github.io/assets/images/CASDMET.png" alt="Alt Text">
+        <figcaption class="caption">An CASSCF active-space in DMET active-space</figcaption>
+    </div>
+</div>
+
+
 
 ---
 
