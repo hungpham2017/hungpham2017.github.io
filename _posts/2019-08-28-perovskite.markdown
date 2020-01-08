@@ -32,7 +32,8 @@ Seeking for non-toxic halide perovskite have been one of the hottest topics in m
     <figcaption class="caption">Progress in perovskites</figcaption>
 </div>
 
----
+<div class="breaker"></div>
+
 <h3>Lead-free double perovskites for photovoltaics</h3>
 <div class="side-by-side">
     <div class="toleft">
