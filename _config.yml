@@ -14,7 +14,7 @@ picture: assets/images/profile.jpg
 # and specify source (external or local).
 resume: true
 resume-external: true
-resume-url: https://github.com/hungpham2017/hungpham2017.github.io/raw/master/assets/HP_CV.pdf
+resume-url: https://github.com/hungpham2017/hungpham2017.github.io/blob/master/assets/HP_CV.pdf
 
 
 url: https://hungpham2017.github.io
