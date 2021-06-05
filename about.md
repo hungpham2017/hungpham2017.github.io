@@ -11,7 +11,7 @@ My research includes the development of new electronic structure theories for pe
 (e.g. DFT, AF-QMC, GW) to the field of materials science and condensed matters.
 
 <br><a href="https://scholar.google.com/citations?user=VzztEMUAAAAJ&hl=en&authuser=2">Google Scholar</a>, 
-<a href="https://github.com/hungpham2017/hungpham2017.github.io/blob/master/assets/HP_CV.pdf" target="_blank">Curriculum vitae</a>, 
+<a href="https://github.com/hungpham2017/hungpham2017.github.io/raw/master/assets/HP_CV.pdf" target="_blank">Curriculum vitae</a>, 
 </p>
 
 <h2>Contact</h2>
