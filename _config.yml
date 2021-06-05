@@ -31,13 +31,13 @@ analytics-google: 'UA-146457008-1'
 
 # if you don't want comments in your posts, leave categories empty
 disqus:
-  shortname: hungqpham # enter this from your disqus account
+  shortname: hungpham # enter this from your disqus account
   categories: [blog, research] # only show disqus for posts that have these categories
 
 # if you don't have any of social below, comment the line
 # facebook: myfacebook
-twitter: hungphamumn
-google: citations?user=MIe6vYUAAAAJ&hl=en
+twitter: hungpham314
+google: citations?user=VzztEMUAAAAJ&hl=en&authuser=2
 # instagram: myinstagram
 # pinterest: mypinterest
 linkedin: hung-pham-4b46598b
@@ -52,7 +52,7 @@ github: hungpham2017
 # medium: medium
 # vimeo: myvimeo
 # lanyrd: mylanyrd
-email: pqh3.14@gmail.com
+email: hqp2000@columbia.com
 
 authors:
     hungpham:
@@ -60,7 +60,7 @@ authors:
         bio: A computational chemist who enjoys food and shotokan karate in his spare time.
         external-image: false
         picture: assets/images/profile.jpg
-        twitter: hungphamumn
+        twitter: hungpham314
 
 # do you want a larger site? change the option below
 # options: [normal, large] | default: normal
