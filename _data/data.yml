@@ -13,7 +13,7 @@ sidebar:
 
     # Sidebar links
     email: pqh3.14@gmail.com
-    phone: 012 345 6789
+    phone:
     citizenship:
     website: 
     linkedin: hung-pham-4b46598b
@@ -30,33 +30,28 @@ sidebar:
 
     languages:
       - idiom: English
+        level: Fluent
+
+      - idiom: Vietnamese
         level: Native
 
-      - idiom: French
-        level: Professional
-
-      - idiom: Spanish
-        level: Professional
-
     interests:
-      - item: Climbing
+      - item: Reading
+        link:
+        
+      - item: Traveling
         link:
 
-      - item: Snowboarding
-        link:
-
-      - item: Cooking
+      - item: Shotokan
         link:
 
 career-profile:
-    title: Career Profile
+    title: About me
     summary: |
-      Summarise your career here lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. You can [download this free resume/CV template here]().
-      Aenean commodo ligula eget dolor aenean massa. Cum sociis natoque
-      penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      Donec quam felis, ultricies nec, pellentesque eu.
-      Second paragraph if required.
+      I am a quantum and materials chemist by training. My research interests include, but not limited to,
+      quantum chemistry and molecular modeling of unconventional materials. I am also interested in expanding 
+      my research to the field of data-driven science. I humbly believe that the advances in computer simulations 
+      of science would change the way we live in the next few decades.
 education:
     - degree: MSc in Computer Science
       university: University of London
