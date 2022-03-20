@@ -118,24 +118,24 @@ projects:
 publications:
     title: Publications
     intro: |
-      You can list your publications in this section. Lorem ipsum dolor sit
-      amet, consectetur adipiscing elit. Vestibulum et ligula in nunc
-      bibendum fringilla a eu lectus.
+      You can find my full list of publications in [my Google Scholar](https://scholar.google.co.in/citations?user=VzztEMUAAAAJ&hl=en)
     papers:
-      - title: The Art of Computer Programming
-        link: "#"
-        authors: Donald E. Knuth
-        conference: Addison-Wesley, 1968
+      - title: Periodic Density Matrix Embedding Theory: A Wave Function Approach for Strongly Correlated Materials
+        link: "https://pubs.acs.org/doi/10.1021/acs.jctc.9b00939"
+        authors: H. Q. Pham et al.
+        conference: "J. Chem. Theory Comput. 2020, 16, 1, 130–140"
 
-      - title: "Genetic Programming III: Darwinian Invention &amp; Problem Solving"
-        link: "#"
-        authors: Koza, J.R., Andre, D., Bennett, F.H., Keane, M.A.
-        conference: "Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 1st edn. (1999)"
+      - title: "Topological Insulating Phase in Single-Layer Pentagonal Covalent Organic Frameworks: 
+                A Reticular Design using Metal-Phthalocyanine"
+        link: "https://pubs.acs.org/doi/abs/10.1021/acs.chemmater.1c00671"
+        authors: H. Q. Pham et al.
+        conference: "Chem. Mater. 2021, 33, 12, 4488–4499"
 
-      - title: A syntax directed compiler for Algol 60
-        link: "#"
-        authors: Edgar T. Irons
-        conference: "Comm. ACM 4 (1961), 51–55"
+      - title: Recent Developments in the PySCF Program Package
+        link: "https://aip.scitation.org/doi/10.1063/5.0006074"
+        authors: Sun et al.
+        conference: "J. Chem. Phys. 2020, 153, 024109"
+
 
 skills:
     title: Skills &amp; Proficiency
