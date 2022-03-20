@@ -64,43 +64,38 @@ education:
       details: |
         Thesis: Electronic structure and uptake performance of isoreticular MOFs
 experiences:
-    - role: Lead Developer
-      time: 2015 - Present
-      company: Startup Hubs, San Francisco
+    - role: Research Scientist
+      time: 2022 - Present
+      company: AI Lab Research at Bytedance, Mountain View
       details: |
-        Describe your role here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-        enim. Donec pede justo. Sed ut perspiciatis unde omnis iste natus
-        error sit voluptatem accusantium doloremque laudantium, totam rem
-        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-        architecto beatae vitae dicta sunt explicabo.
-          - Bullet point
-          - Bullet point
-    - role: Senior Software Engineer
-      time: 2014 - 2015
-      company: Google, London
+        I conduct fundamental research in the following fields of quantum chemistry:
+          - Large-scale and accurate quantum chemical simulations for challenging problems
+          - Data-driven chemisty with Machine learning
+    - role: Postdoc Research Scientist
+      time: 2021 - 2022
+      company: Columbia University, New York
       details: |
-        Describe your role here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem.
-          - Bullet point
-          - Bullet point
-    - role: UI Developer
-      time: 2012 - 2014
-      company: Amazon, London
+        I developed and applied auxiliary-field quantum Monte Carlo to periodic solids
+        of relevance to 
+          - Energy storage
+          - Superconducting materials
+    - role: Research Assistant
+      time: 2017 - 2021
+      company: University of Minnesota, Twin Cities
       details: |
-        Describe your role here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem.
-          - Bullet point
-          - Bullet point
+        I developed quantum chemical methods for solid-state materials
+          - Quantum embedding theories, for example, density matrix embedding
+          - 2D topological materials, for example, density matrix embedding
+          - Beyond-silicon materials for photovoltaics (halide perovskite, double perovskite) 
+    - role: Research Assistant
+      time: 2011 - 2015
+      company: VNUHCM - University of Science, ICST, MANAR.
+      details: |
+        I applied quantum chemical and molecular simulation methods to framework materials
+          - Periodic density functional theory
+          - Monte Carlo simulation
+          - Metal-organic and covalent-organic frameworks
+          - Crystal topology analysis
 projects:
     title: Projects
     intro: >
