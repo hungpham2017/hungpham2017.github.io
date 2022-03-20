@@ -1,0 +1,77 @@
+---
+title: "Density matrix embedding theory for strongly-correlated materials"
+layout: post
+date: 2019-08-28 17:00
+tag: 
+- DMET
+- periodic
+image: https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET.png
+headerImage: true
+research: true
+hidden: true # don't count this post in blog pagination
+description: "This is a description for my pDMET project."
+category: research
+author: hungpham
+externalLink: false
+---
+
+<!---
+![Screenshot](https://raw.githubusercontent.com/hungpham2017/hungpham2017.github.io/master/assets/images/pDMET_screenshot.png)
+--->
+
+---
+<h3>What is DMET?</h3>
+<p>
+Density matrix embedding theory (DMET) is a wave function-in-wave function embedding technique that allows one to treat extended systems
+at the cost that is proportional to the size of a small fragment.
+</p>
+
+<div class="breaker"></div>
+
+<h3>DMET for solid-state materials</h3>
+
+<div class="side-by-side">
+    <div class="toleft">
+        <img class="image" src="https://hungpham2017.github.io/assets/images/pDMET_cover.png" alt="Alt Text">
+        <figcaption class="caption">Electronic structure of 1D solids within periodic DMET</figcaption>
+    </div>
+	
+    <div class="toright">
+        <p>
+		DMET algorithm can be extended to periodic systems by using the Wannier functions.
+		<a href="https://github.com/hungpham2017/pDMET">pDMET</a> is a Python code to perform DMET calculation for solids.
+		One can obtain both ground-state energy and band structures. Future direction would be extending the algorithm 
+		to treat excitation and other type of interacting particles. 
+        </p>
+    </div>
+</div>
+
+<div class="breaker"></div>
+
+<h3>DMET with multireference solvers</h3>
+<div class="side-by-side">
+    <div class="toleft">
+        <p>
+        We have explored the use of completely actice space self-consistent field (CASSCF) solver in conjunction with DMET[1]. An active space is introduced inside different fragments, i.e., 
+        an DMET active space. The motivation is to limit the number of configurations of the impurity problem 
+        and avoid using the full configuration interaction (FCI) solver which is unaffordable for most of chemical systems. 
+        </p>
+    </div>
+    
+    <div class="toright">
+        <img class="image" src="https://hungpham2017.github.io/assets/images/CASDMET.png" alt="Alt Text">
+        <figcaption class="caption">An CASSCF active-space in DMET active-space</figcaption>
+    </div>
+</div>
+
+
+
+---
+
+<h4>Publications</h4>
+1. **H. Q. Pham**, V. Bernales, L. Gagliardi; Can Density Matrix Embedding Theory with the Complete Active Space Self-Consistent Field Solver Describe Single and Double Bond Breaking in Molecular Systems?, [**J. Chem. Theory Comput.**, **2018**](https://pubs.acs.org/doi/10.1021/acs.jctc.7b01248), 14, 1960.
+2. **H. Q. Pham**, M. R. Hermes, L. Gagliardi; Periodic Electronic Structure Calculations with the Density Matrix Embedding Theory, [**J. Chem. Theory Comput.**, **2019**](https://pubs.acs.org/doi/abs/10.1021/acs.jctc.9b00939), ASAP.
+
+---
+[Check it out](https://github.com/hungpham2017/pDMET/) here.
+If you need some help, just [tell me](https://github.com/hungpham2017/pDMET/issues).
