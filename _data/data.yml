@@ -3,191 +3,152 @@
 #
 
 sidebar:
-    about: True # set to False or comment line if you want to remove the "how to use?" in the sidebar
+    about: False # set to False or comment line if you want to remove the "how to use?" in the sidebar
     education: True # set to False if you want education in main section instead of in sidebar
 
     # Profile information
-    name: Alan Doe
-    tagline: Full Stack Developer
+    name: Hung Q. Pham
+    tagline: Reseach Scientist
     avatar: profile.png  #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
 
     # Sidebar links
-    email: hello@webjeda.com
-    phone: 012 345 6789
+    email: pqh3.14@gmail.com
+    phone:
     citizenship:
-    website: blog.webjeda.com #do not add http://
-    linkedin: alandoe
-    xing: alandoe
-    github: sharu725
-    telegram: # add your nickname without '@' sign
+    website: 
+    linkedin: hung-pham-4b46598b
+    xing:
+    github: hungpham2017
+    telegram: 
     gitlab:
     bitbucket:
-    twitter: '@webjeda'
+    twitter: '@hungpham314'
     stack-overflow: # Number/Username, e.g. 123456/alandoe
     codewars:
     goodreads: # Number-Username, e.g. 123456-alandoe
-    pdf: http://www.africau.edu/images/default/sample.pdf
+    pdf: # http://www.africau.edu/images/default/sample.pdf
 
     languages:
       - idiom: English
+        level: Fluent
+
+      - idiom: Vietnamese
         level: Native
 
-      - idiom: French
-        level: Professional
-
-      - idiom: Spanish
-        level: Professional
-
     interests:
-      - item: Climbing
+      - item: Reading
+        link:
+        
+      - item: Traveling
         link:
 
-      - item: Snowboarding
-        link:
-
-      - item: Cooking
+      - item: Shotokan
         link:
 
 career-profile:
-    title: Career Profile
+    title: About me
     summary: |
-      Summarise your career here lorem ipsum dolor sit amet, consectetuer
-      adipiscing elit. You can [download this free resume/CV template here]().
-      Aenean commodo ligula eget dolor aenean massa. Cum sociis natoque
-      penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      Donec quam felis, ultricies nec, pellentesque eu.
-      Second paragraph if required.
+      I am a quantum and materials chemist by training. My research interests include, but not limited to,
+      quantum chemistry and molecular modeling of unconventional materials. I am also interested in expanding 
+      my research to the field of data-driven science. I humbly believe that the advances in computer simulations 
+      of science would change the way we live in the next few decades.
 education:
-    - degree: MSc in Computer Science
-      university: University of London
-      time: 2011 - 2012
+    - degree: PhD in Quantum Chemistry
+      university: University of Minnesota, Twin Cities
+      time: 2015 - 2021
       details: |
-        Describe your study here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-        sociis natoque penatibus et magnis dis parturient montes, nascetur
-        ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-        pretium quis, sem.
-          - Bullet point
-          - Bullet point
-    - degree: BSc in Applied Mathematics
-      university: Bristol University
+        Thesis: Electronic Structure Theories for Periodic Systems
+    - degree: BSc in Physical Chemistry
+      university: VNUHCM - University of Science
       time: 2007 - 2011
       details: |
-        Describe your study here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-        sociis natoque penatibus et magnis dis parturient montes, nascetur
-        ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-        pretium quis, sem.
-          - Bullet point
-          - Bullet point
+        Thesis: Electronic structure and uptake performance of isoreticular MOFs
 experiences:
-    - role: Lead Developer
-      time: 2015 - Present
-      company: Startup Hubs, San Francisco
+    - role: Research Scientist
+      time: 2022 - Present
+      company: AI Lab Research at Bytedance, Mountain View, CA
       details: |
-        Describe your role here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-        enim. Donec pede justo. Sed ut perspiciatis unde omnis iste natus
-        error sit voluptatem accusantium doloremque laudantium, totam rem
-        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-        architecto beatae vitae dicta sunt explicabo.
-          - Bullet point
-          - Bullet point
-    - role: Senior Software Engineer
-      time: 2014 - 2015
-      company: Google, London
+        I conduct fundamental research in the following fields of quantum chemistry:
+          - Large-scale and accurate quantum chemical simulations for challenging problems
+          - Data-driven chemisty with Machine learning
+    - role: Postdoc Research Scientist
+      time: 2021 - 2022
+      company: Columbia University, New York, NY
       details: |
-        Describe your role here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem.
-          - Bullet point
-          - Bullet point
-    - role: UI Developer
-      time: 2012 - 2014
-      company: Amazon, London
+        I developed and applied auxiliary-field quantum Monte Carlo to periodic solids
+        of relevance to 
+          - Energy storage
+          - Superconducting materials
+    - role: Research Assistant
+      time: 2017 - 2021
+      company: University of Minnesota, Twin Cities
       details: |
-        Describe your role here lorem ipsum dolor sit amet, consectetuer
-        adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes,
-        nascetur ridiculus mus. Donec quam felis, ultricies nec,
-        pellentesque eu, pretium quis, sem.
-          - Bullet point
-          - Bullet point
+        I developed quantum chemical methods for solid-state materials
+          - Quantum embedding theories, for example, density matrix embedding
+          - 2D topological materials, for example, density matrix embedding
+          - Beyond-silicon materials for photovoltaics (halide perovskite, double perovskite) 
+    - role: Research Assistant
+      time: 2011 - 2015
+      company: VNUHCM - University of Science, ICST, MANAR.
+      details: |
+        I applied quantum chemical and molecular simulation methods to framework materials
+          - Periodic density functional theory
+          - Monte Carlo simulation
+          - Metal-organic and covalent-organic frameworks
+          - Crystal topology analysis
 projects:
     title: Projects
     intro: >
-      You can list your side projects or open source libraries in this
-      section. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Vestibulum et ligula in nunc bibendum fringilla a eu lectus.
+      I have been developing open-source library for computational materials and quantum chemistry
     assignments:
-      - title: Velocity
-        link: "#hook"
-        tagline: "A responsive website template designed to help startups promote, market and sell their products."
+      - title: pDMET
+        link: "https://github.com/hungpham2017/pDMET"
+        tagline: "A program to compute electronic structure of periodic systems and materials by means of density matrix embedding theory."
 
-      - title: DevStudio
-        link: "#"
-        tagline: "A responsive website template designed to help web developers/designers market their services."
+      - title: MCU
+        link: "https://github.com/hungpham2017/mcu"
+        tagline: "A Python library to analyze the periodic wave functions from DFT calculations."
 
-      - title: Tempo
-        link: "#"
-        tagline: "A responsive website template designed to help startups promote their products or services and to attract users &amp; investors"
-
-      - title: Atom
-        link: "#"
-        tagline: "A comprehensive website template solution for startups/developers to market their mobile apps."
-
-      - title: Delta
-        link: "#"
-        tagline: "A responsive Bootstrap one page theme designed to help app developers promote their mobile apps"
+      - title: pyWannier90
+        link: "https://github.com/hungpham2017/pywannier90"
+        tagline: "A Python program to construct the maximally-localized Wannier functions."
 
 publications:
     title: Publications
     intro: |
-      You can list your publications in this section. Lorem ipsum dolor sit
-      amet, consectetur adipiscing elit. Vestibulum et ligula in nunc
-      bibendum fringilla a eu lectus.
+      You can find my full list of publications in [my Google Scholar](https://scholar.google.co.in/citations?user=VzztEMUAAAAJ&hl=en)
+      Some selected papers:
     papers:
-      - title: The Art of Computer Programming
-        link: "#"
-        authors: Donald E. Knuth
-        conference: Addison-Wesley, 1968
+      - title: Periodic Density Matrix Embedding Theory&#58; A Wave Function Approach for Strongly Correlated Materials
+        link: "https://pubs.acs.org/doi/10.1021/acs.jctc.9b00939"
+        authors: H. Q. Pham et al.
+        conference: "J. Chem. Theory Comput. 2020, 16, 1, 130–140"
 
-      - title: "Genetic Programming III: Darwinian Invention &amp; Problem Solving"
-        link: "#"
-        authors: Koza, J.R., Andre, D., Bennett, F.H., Keane, M.A.
-        conference: "Morgan Kaufmann Publishers Inc., San Francisco, CA, USA, 1st edn. (1999)"
+      - title: "Topological Insulating Phase in Single-Layer Pentagonal Covalent Organic Frameworks&#58; 
+                A Reticular Design using Metal-Phthalocyanine"
+        link: "https://pubs.acs.org/doi/abs/10.1021/acs.chemmater.1c00671"
+        authors: H. Q. Pham et al.
+        conference: "Chem. Mater. 2021, 33, 12, 4488–4499"
 
-      - title: A syntax directed compiler for Algol 60
-        link: "#"
-        authors: Edgar T. Irons
-        conference: "Comm. ACM 4 (1961), 51–55"
+      - title: Recent Developments in the PySCF Program Package
+        link: "https://aip.scitation.org/doi/10.1063/5.0006074"
+        authors: Sun et al.
+        conference: "J. Chem. Phys. 2020, 153, 024109"
 
 skills:
     title: Skills &amp; Proficiency
 
     toolset:
-      - name: Python & Django
-        level: 98%
-
-      - name: Javascript & jQuery
-        level: 98%
-
-      - name: Angular
-        level: 98%
-
-      - name: HTML5 & CSS
+      - name: Python
         level: 95%
 
-      - name: Ruby on Rails
-        level: 85%
-
-      - name: Sketch & Photoshop
-        level: 60%
-
+      - name: C++
+        level: 80%
+        
+      - name: Fortran
+        level: 80%
+    
+      - name: Cupy, mpi4py
+        level: 80%    
 footer: >
     Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank" rel="nofollow">Xiaoying Riley</a>
