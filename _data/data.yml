@@ -97,11 +97,9 @@ experiences:
           - Metal-organic and covalent-organic frameworks
           - Crystal topology analysis
 projects:
-    title: Open-source library for computational materials
+    title: Open-source projects
     intro: >
-      You can list your side projects or open source libraries in this
-      section. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Vestibulum et ligula in nunc bibendum fringilla a eu lectus.
+      I have been developing open-source library for computational materials and quantum chemistry
     assignments:
       - title: pDMET
         link: "https://github.com/hungpham2017/pDMET"
