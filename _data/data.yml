@@ -1,0 +1,144 @@
+#
+# Be aware that even a small syntax error here can lead to failures in output.
+#
+
+sidebar:
+    about: False # set to False or comment line if you want to remove the "how to use?" in the sidebar
+    education: True # set to False if you want education in main section instead of in sidebar
+
+    # Profile information
+    name: Hung Q. Pham
+    tagline: Reseach Scientist
+    avatar: profile.png  #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
+
+    # Sidebar links
+    email: pqh3.14@gmail.com
+    # phone: 612 XXX XXXX
+    citizenship:
+    website: 
+    linkedin: hung-pham-4b46598b
+    xing: 
+    github: hungpham2017
+    telegram: # add your nickname without '@' sign
+    gitlab:
+    bitbucket:
+    twitter: '@hungpham314'
+    stack-overflow: # Number/Username, e.g. 123456/alandoe
+    codewars:
+    goodreads: # Number-Username, e.g. 123456-alandoe
+    pdf: # http://www.africau.edu/images/default/sample.pdf
+
+    languages:
+      - idiom: English
+        level: Fluent
+
+      - idiom: Vietnamese
+        level: Native
+
+    interests:
+      - item: Reading
+        link:
+        
+      - item: Traveling
+        link:
+
+      - item: Shotokan
+        link:
+
+career-profile:
+    title: About me
+    summary: |
+      I am a quantum and materials chemist by training. My research interests include, but not limited to,
+      quantum chemistry and molecular modeling of unconventional materials. I am also interested in expanding 
+      my research to the field of data-driven science. I humbly believe that the advances in computer simulations 
+      of science would change the way we live in the next few decades.
+education:
+    - degree: PhD in Quantum Chemistry
+      university: University of Minnesota, Twin Cities
+      time: 2015 - 2021
+      details: |
+        Thesis: Electronic Structure Theories for Periodic Systems
+    - degree: BSc in Physical Chemistry
+      university: VNUHCM - University of Science
+      time: 2007 - 2011
+      details: |
+        Thesis: Electronic structure and uptake performance of isoreticular MOFs
+experiences:
+    - role: Research Scientist
+      time: 2022 - Present
+      company: AI Lab Research at Bytedance, Mountain View
+      details: |
+        I conduct fundamental research in the following fields of quantum chemistry:
+          - Large-scale and accurate quantum chemical simulations for challenging problems
+          - Data-driven chemisty with Machine learning
+    - role: Postdoc Research Scientist
+      time: 2021 - 2022
+      company: Columbia University, New York
+      details: |
+        I developed and applied auxiliary-field quantum Monte Carlo to periodic solids
+        of relevance to 
+          - Energy storage
+          - Superconducting materials
+    - role: Research Assistant
+      time: 2017 - 2021
+      company: University of Minnesota, Twin Cities
+      details: |
+        I developed quantum chemical methods for solid-state materials
+          - Quantum embedding theories, for example, density matrix embedding
+          - 2D topological materials, for example, density matrix embedding
+          - Beyond-silicon materials for photovoltaics (halide perovskite, double perovskite) 
+    - role: Research Assistant
+      time: 2011 - 2015
+      company: VNUHCM - University of Science, ICST, MANAR.
+      details: |
+        I applied quantum chemical and molecular simulation methods to framework materials
+          - Periodic density functional theory
+          - Monte Carlo simulation
+          - Metal-organic and covalent-organic frameworks
+          - Crystal topology analysis
+# projects:
+    # title: Density matrix embedding for periodic systems
+    # intro: >
+      # pDMET is a program to compute electronic structure of periodic systems and materials 
+      # by means of density matrix embedding theory.
+    # assignments:
+      # - title: Velocity
+        # link: "#hook"
+        # tagline: 
+
+publications:
+    title: Publications
+    intro: |
+      You can find my full list of publications in [my Google Scholar](https://scholar.google.co.in/citations?user=VzztEMUAAAAJ&hl=en)
+    selected papers:
+      - title: Periodic Density Matrix Embedding Theory: A Wave Function Approach for Strongly Correlated Materials
+        link: "https://pubs.acs.org/doi/10.1021/acs.jctc.9b00939"
+        authors: H. Q. Pham et al.
+        conference: "J. Chem. Theory Comput. 2020, 16, 1, 130–140"
+
+      - title: "Topological Insulating Phase in Single-Layer Pentagonal Covalent Organic Frameworks: 
+                A Reticular Design using Metal-Phthalocyanine"
+        link: "https://pubs.acs.org/doi/abs/10.1021/acs.chemmater.1c00671"
+        authors: H. Q. Pham et al.
+        conference: "Chem. Mater. 2021, 33, 12, 4488–4499"
+
+      - title: Recent Developments in the PySCF Program Package
+        link: "https://aip.scitation.org/doi/10.1063/5.0006074"
+        authors: Sun et al.
+        conference: "J. Chem. Phys. 2020, 153, 024109"
+
+skills:
+    title: Skills &amp; Proficiency
+
+    toolset:
+      - name: Python
+        level: 95%
+
+      - name: Scientific Programming
+        level: 95%
+        
+      - name: C++
+        level: 70%
+
+footer: >
+    Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank" rel="nofollow">Xiaoying Riley</a>
