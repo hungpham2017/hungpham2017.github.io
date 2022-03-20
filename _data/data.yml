@@ -66,14 +66,14 @@ education:
 experiences:
     - role: Research Scientist
       time: 2022 - Present
-      company: AI Lab Research at Bytedance, Mountain View
+      company: AI Lab Research at Bytedance, Mountain View, CA
       details: |
         I conduct fundamental research in the following fields of quantum chemistry:
           - Large-scale and accurate quantum chemical simulations for challenging problems
           - Data-driven chemisty with Machine learning
     - role: Postdoc Research Scientist
       time: 2021 - 2022
-      company: Columbia University, New York
+      company: Columbia University, New York, NY
       details: |
         I developed and applied auxiliary-field quantum Monte Carlo to periodic solids
         of relevance to 
@@ -117,6 +117,7 @@ publications:
     title: Publications
     intro: |
       You can find my full list of publications in [my Google Scholar](https://scholar.google.co.in/citations?user=VzztEMUAAAAJ&hl=en)
+      Some selected papers:
     papers:
       - title: Periodic Density Matrix Embedding Theory&#58; A Wave Function Approach for Strongly Correlated Materials
         link: "https://pubs.acs.org/doi/10.1021/acs.jctc.9b00939"
