@@ -120,7 +120,7 @@ publications:
     intro: |
       You can find my full list of publications in [my Google Scholar](https://scholar.google.co.in/citations?user=VzztEMUAAAAJ&hl=en)
     papers:
-      - title: Periodic Density Matrix Embedding Theory: A Wave Function Approach for Strongly Correlated Materials
+      - title: Periodic Density Matrix Embedding Theory&#58; A Wave Function Approach for Strongly Correlated Materials
         link: "https://pubs.acs.org/doi/10.1021/acs.jctc.9b00939"
         authors: H. Q. Pham et al.
         conference: "J. Chem. Theory Comput. 2020, 16, 1, 130–140"
