@@ -9,9 +9,14 @@
 
 <body>
   <div class="wrapper">
+    <div class="main-wrapper">
     {% include sidebar.html %}
+    </div>
 
 
+    <div class="sidebar-wrapper">
+        {{ content }}
+    </div>
   </div>
 
   {% include footer.html %}
