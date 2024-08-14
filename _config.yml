@@ -55,6 +55,8 @@ about_profile_image: images/hp.jpeg
 about_content: | # this will include new lines to allow paragraphs
   I specialize in developing advanced and scalable quantum chemical algorithms rooted in electronic structure theory for ab initio simulations on both high-performance classical and quantum computers. My experience in both creating and utilizing quantum chemical software allows me to translate theoretical concepts into powerful tools that deliver simulations with enhanced precision and efficiency. With deep expertise in electronic structure for chemistry and materials science, and extensive experience applying computational chemistry across key industries—such as quantum technology, energy, pharmaceuticals, chemical sciences, and materials—I bring a unique perspective on how quantum chemistry can enhance fundamental understanding, deliver high-quality data for AI4Science, and drive transformative innovations across industrial sectors.
 
+  <a href="https://hungqpham.com/assets/resume.pdf" target="_blank">View My Resume</a>
+
 #  You can even add paragraphs by using empty lines like this and add anything else [markdown](https://www.markdownguide.org/getting-started#what-is-markdown) supports such as
 #    - Lists
 # ges/landscape-trees.jpg "Trees")
