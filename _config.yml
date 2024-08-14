@@ -1,36 +1,225 @@
-#Update all the sections by editing the data.yml file inside _data folder.
+# Site
+repository: Git repository where your resume will be hosted, only required if you are hosting on GitHub (eg. sproogen/modern-resume-theme)
+# favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
 
-# Site Settings
-title: Hung Pham's resume
-url: 'http://webjeda.com'
+# Content configuration version
+version: 2
 
-#change it according to your repository name
-# disabling since we are using a custom domain
-#baseurl: '/online-cv' 
+# Personal info
+name: Hung Q. Pham,
+title: Research Scientist | Ph.D. in Quantum Chemistry
+email: pqh3.14@gmail.com
+# email_title: Email (Email title override)
+phone: 612-231-6Nine8Nine
+# phone_title: Phone (Phone title override)
+website: hungqpham.com
+# website_title: Web (Website title override)
 
-description: Hung Pham's resume
-# Style will be applied only after restarting the build or serve. Just choose one of the options.
-theme_skin: blue # blue turquoise green berry orange ceramic
-chrome_mobile_color: #use hex colors (ex:#1976d2) or leave empty if you don't want a color for chrome mobile searchbar
+# Dark Mode (true/false/never)
+darkmode: false
 
-# Tracker
-analytics: UA-83979019-1
+# Social links
+twitter_username: hungpham314
+github_username:  hungpham2017
+# stackoverflow_username: "00000001"
+# dribbble_username: jekyll
+# facebook_username: jekyll
+# flickr_username: jekyll
+instagram_username: thequguy
+linkedin_username: hung-q-pham-4b46598b
+# xing_username: jekyll
+# pinterest_username: jekyll
+# youtube_username: jekyll
+orcid_username: /0000-0003-3608-1298
+googlescholar_username: MIe6vYUAAAAJ
 
-# Sass/SCSS
-sass:
-  sass_dir: _sass
-  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+# Additional icon links
+# additional_links:
+# - title: Link name
+#   icon: fab fa-google-scholar
+#   url: Link url (eg. https://google.com)
+
+# - title: another link
+#   icon: font awesome brand icon name (eg. fab fa-twitter) (https://fontawesome.com/icons?d=gallery&s=brands&m=free)
+#   url: Link url (eg. https://google.com)
+
+# Google Analytics and Tag Manager
+# Using more than one of these may cause issues with reporting
+# gtm: "GTM-0000000"
+# gtag: "UA-00000000-0"
+# google_analytics: "UA-00000000-0"
+
+# About Section
+# about_title: About Me (Use this to override about section title)
+about_profile_image: images/hp.jpeg
+about_content: | # this will include new lines to allow paragraphs
+  I specialize in developing advanced and scalable quantum chemical algorithms rooted in electronic structure theory for ab initio simulations on both high-performance classical and quantum computers. My experience in both creating and utilizing quantum chemical software allows me to translate theoretical concepts into powerful tools that deliver simulations with enhanced precision and efficiency. With deep expertise in electronic structure for chemistry and materials science, and extensive experience applying computational chemistry across key industries—such as quantum technology, energy, pharmaceuticals, chemical sciences, and materials—I bring a unique perspective on how quantum chemistry can enhance fundamental understanding, deliver high-quality data for AI4Science, and drive transformative innovations across industrial sectors.
+
+#  You can even add paragraphs by using empty lines like this and add anything else [markdown](https://www.markdownguide.org/getting-started#what-is-markdown) supports such as
+#    - Lists
+# ges/landscape-trees.jpg "Trees")
+
+content:
+  - title: Projects # Title for the section
+    layout: list # Type of content section (list/text)
+    content:
+      - layout: left
+        border: weak  # Value of `weak` will display a weak border below this item. # Any
+                      # other value (or no value) means no border will be displayed
+        title: Quantum Embedding
+        # link: https://github.com/hungpham2017/pDMET
+        # link_text: Link Text
+        additional_links:
+          - title:  pDMET
+            icon: fab fa-github
+            url: https://github.com/hungpham2017/pDMET
+        quote: >
+          Scalable Quantum Embedding and Quantum Algorithms for Material Simulation
+        description: | # this will include new lines to allow paragraphs
+          I have developed novel quantum embedding algorithms (DMET, PET, ASET, etc) designed for accurate and efficient ab initio simulations of materials on classical and quantum computer. My work has broadened quantum chemistry's industrial impact across various sectors, including surface chemistry, homogeneous catalysis, superconducting materials, and defective systems as qubits.
+      - layout: left
+        border: weak  # Value of `weak` will display a weak border below this item. # Any
+                      # other value (or no value) means no border will be displayed
+        title: Quantum Monte Carlo
+        # link: https://github.com/hungpham2017/pDMET
+        # link_text: Link Text
+        additional_links:
+          - title:  pDMET
+            icon: fab fa-github
+            url: https://github.com/hungpham2017/pDMET
+        quote: >
+          Precise Quantum Monte Carlo for Quantum Chemistry
+        description: | # this will include new lines to allow paragraphs
+          Leveraging locality and modern GPUs, I have developed advanced algorithms and applied AFQMC methods to scale quantum chemistry for large-scale, real-world applications while maintaining its predictive power.
+      - layout: left
+        border: weak  # Value of `weak` will display a weak border below this item. # Any
+                      # other value (or no value) means no border will be displayed
+        title: Applied Quantum Chemistry
+        # link: https://github.com/hungpham2017/pDMET
+        # link_text: Link Text
+        additional_links:
+          - title:  MCU
+            icon: fab fa-github
+            url: https://github.com/hungpham2017/mcu
+          - title:  pWannier90
+            icon: fab fa-github
+            url: https://github.com/hungpham2017/pyWannier90
+        quote: >
+          Computational chemistry applied to Topological Insulator | Perovskites | MOFs | COFs
+        description: | # this will include new lines to allow paragraphs
+          I have applied advanced computational techniques — periodic quantum chemistry, Wannier-based tight-binding models, and Grand Canonical Monte Carlo simulations — to study materials like reticular frameworks, topological materials, and photovoltaics. My research identifies new materials with exotic properties for potential industrial use.
+      - layout: left
+        border: weak  # Value of `weak` will display a weak border below this item. # Any
+                      # other value (or no value) means no border will be displayed
+        title: Quantum Chemistry with GPU
+        # link: https://github.com/hungpham2017/pDMET
+        # link_text: Link Text
+        # additional_links:
+        #   - title:  MCU
+        #     icon: fab fa-github
+        quote: >
+          Fast Quantum Chemistry on GPU
+        description: | # this will include new lines to allow paragraphs
+          To position quantum chemistry as a key industrial technology, especially beyond widely-used DFT, speed is critical. Leveraging GPUs can accelerate quantum chemistry, making it more practical for real-world applications. I am focused on optimizing advanced methods, like random phase approximation and quantum embedding, to bring quantum chemistry closer to industrial use by harnessing GPU power
+  - title: Experience
+    layout: list
+    content:
+      - layout: top-right
+        title: ByteDance Research
+        sub_title: Research Scientist
+        caption: March 2022 - Current
+        link: https://www.bytedance.com/en/
+        # quote: >
+        #    Short description of the company (optional)
+        # description: | # this will include new lines to allow paragraphs
+        #   Scalable Quantum Chemical Solutions for Industry
+      - layout: top-right
+        title: Columbia University
+        sub_title: Postdoctoral Research Scientist
+        caption: June 2021 - March 2022
+        link: "Advisor: David Reichman"
+        # quote: >
+        #    Short description of the company (optional)
+        # description: | # this will include new lines to allow paragraphs
+        #   Quantum Monte Carlo for quantum chemistry
+      - layout: top-right
+        title: University of Minnesota, Twin Cities
+        sub_title: Research Assistant
+        caption: Jan 2017 - May 2021
+        link: "Advisor: Laura Gagliardi"
+        # quote: >
+        #    Short description of the company (optional)
+        # description: | # this will include new lines to allow paragraphs
+        #   Quantum embedding, Computational materials science, Photovoltaics
+      - layout: top-right
+        title: Center for Molecular and NanoArchitecture (MANAR)
+        sub_title: Research Assistant
+        caption: Oct 2011 - Jul 2015
+        # link: "Advisor: Nguyen-Nguyen Pham-Tran"
+        # quote: >
+        #    Short description of the company (optional)
+        # description: | # this will include new lines to allow paragraphs
+        #   Periodic DFT, Grand canonical Monte Carlo, Reticular chemistry
+      - layout: top-right
+        title: Institute for Computational Science and Technology
+        sub_title: Research Assistant
+        caption: Oct 2011 - Jul 2015
+        link: "Advisor: Nguyen-Nguyen Pham-Tran"
+        # quote: >
+        #    Short description of the company (optional)
+        # description: | # this will include new lines to allow paragraphs
+        #   Periodic DFT, Grand canonical Monte Carlo, Reticular chemistry
+
+  - title: Education
+    layout: list
+    content:
+      - layout: top-right
+        title: University of Minnesota, Twin Cities
+        sub_title: Ph.D. in Chemistry
+        caption: Aug 2015 - May 2021
+        # quote: >
+        #  Short institution or course description (optional)
+        # description: | # this will include new lines to allow paragraphs
+        #   Description of qualification
+
+      - layout: top-right
+        title: VNUHCM - University of Science
+        sub_title: B.S. in Chemistry
+        caption: Sep 2007 - Sep 2011
+        # quote: >
+        #  Short institution or course description (optional)
+        # description: | # this will include new lines to allow paragraphs
+        #   Description of qualification
+
+  - title: A Little More About Me
+    layout: text
+    content: | # this will include new lines to allow paragraphs
+      I’m passionate about exploring science, especially when it comes to quantum topics and cool technology. I love discussing futuristic visions and staying on top of the latest innovations. On weekends, I recharge at EDM festivals, catching my favorite DJs. I balance being both an introvert and extrovert—focused and ambitious during the workweek, but always ready to relax with good music and great conversations. I’m also active on social media, where I enjoy sharing ideas about science and technology. Whether at a cocktail bar or a coffee shop, a cold brew always keeps me inspired.
+
+# Footer
+footer_show_references: true
+# references_title: References on request (Override references text)
 
 # Build settings
-compress-site: yes
+# theme: modern-resume-theme (Use this is you are hosting your resume yourself)
+# remote_theme: sproogen/modern-resume-theme (Use this if you are hosting your resume on GitHub)
 
-encoding: "utf-8"
-compress_html: # - http://jch.penibelst.de/
-  clippings: all
-  ignore:
-    envs: development
+sass:
+  sass_dir: _sass
+  style: compressed
 
-# Development Settings
-port: 4000
-host: 0.0.0.0
-safe: false
+plugins:
+ - jekyll-seo-tag
+
+exclude : [
+  "Gemfile",
+  "Gemfile.lock",
+  "node_modules",
+  "vendor/bundle/",
+  "vendor/cache/",
+  "vendor/gems/",
+  "vendor/ruby/",
+  "lib/",
+  "scripts/",
+  "docker-compose.yml",
+  ]
