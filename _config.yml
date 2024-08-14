@@ -6,7 +6,7 @@ repository: Git repository where your resume will be hosted, only required if yo
 version: 2
 
 # Personal info
-name: Hung Q. Pham,
+name: Hung Q. Pham
 title: Research Scientist | Ph.D. in Quantum Chemistry
 email: pqh3.14@gmail.com
 # email_title: Email (Email title override)
@@ -127,8 +127,8 @@ content:
       - layout: top-right
         title: ByteDance Research
         sub_title: Research Scientist
-        caption: March 2022 - Current
-        link: https://www.bytedance.com/en/
+        # caption: March 2022 - Current
+        link: March 2022 - Current
         # quote: >
         #    Short description of the company (optional)
         # description: | # this will include new lines to allow paragraphs
@@ -136,8 +136,8 @@ content:
       - layout: top-right
         title: Columbia University
         sub_title: Postdoctoral Research Scientist
-        caption: June 2021 - March 2022
-        link: "Advisor: David Reichman"
+        caption: "Advisor: David Reichman"
+        link: June 2021 - March 2022
         # quote: >
         #    Short description of the company (optional)
         # description: | # this will include new lines to allow paragraphs
@@ -145,8 +145,8 @@ content:
       - layout: top-right
         title: University of Minnesota, Twin Cities
         sub_title: Research Assistant
-        caption: Jan 2017 - May 2021
-        link: "Advisor: Laura Gagliardi"
+        caption: "Advisor: Laura Gagliardi"
+        link: Jan 2017 - May 2021
         # quote: >
         #    Short description of the company (optional)
         # description: | # this will include new lines to allow paragraphs
@@ -154,8 +154,8 @@ content:
       - layout: top-right
         title: Center for Molecular and NanoArchitecture (MANAR)
         sub_title: Research Assistant
-        caption: Oct 2011 - Jul 2015
-        # link: "Advisor: Nguyen-Nguyen Pham-Tran"
+        # caption: Oct 2011 - Jul 2015
+        link: Oct 2011 - Jul 2015
         # quote: >
         #    Short description of the company (optional)
         # description: | # this will include new lines to allow paragraphs
@@ -163,8 +163,8 @@ content:
       - layout: top-right
         title: Institute for Computational Science and Technology
         sub_title: Research Assistant
-        caption: Oct 2011 - Jul 2015
-        link: "Advisor: Nguyen-Nguyen Pham-Tran"
+        caption: "Advisor: Nguyen-Nguyen Pham-Tran"
+        link: Oct 2011 - Jul 2015
         # quote: >
         #    Short description of the company (optional)
         # description: | # this will include new lines to allow paragraphs
@@ -176,8 +176,8 @@ content:
       - layout: top-right
         title: University of Minnesota, Twin Cities
         sub_title: Ph.D. in Chemistry
-        caption: Aug 2015 - May 2021
-        # quote: >
+        link: Aug 2015 - May 2021
+        # quote:Aug 2015 - May 2021
         #  Short institution or course description (optional)
         # description: | # this will include new lines to allow paragraphs
         #   Description of qualification
@@ -185,7 +185,7 @@ content:
       - layout: top-right
         title: VNUHCM - University of Science
         sub_title: B.S. in Chemistry
-        caption: Sep 2007 - Sep 2011
+        link: Sep 2007 - Sep 2011
         # quote: >
         #  Short institution or course description (optional)
         # description: | # this will include new lines to allow paragraphs
