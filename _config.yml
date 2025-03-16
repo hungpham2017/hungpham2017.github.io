@@ -1,5 +1,5 @@
 # Site
-repository: Git repository where your resume will be hosted, only required if you are hosting on GitHub (eg. sproogen/modern-resume-theme)
+repository: hungpham2017/hungpham2017.github.io
 # favicon: Directory of your favicon (eg. images/favicon.ico)(optional)
 
 # Content configuration version
@@ -38,7 +38,7 @@ googlescholar_username: MIe6vYUAAAAJ
 # - title: Link name
 #   icon: fab fa-google-scholar
 #   url: Link url (eg. https://google.com)
-
+#
 # - title: another link
 #   icon: font awesome brand icon name (eg. fab fa-twitter) (https://fontawesome.com/icons?d=gallery&s=brands&m=free)
 #   url: Link url (eg. https://google.com)
@@ -61,9 +61,8 @@ about_content: | # this will include new lines to allow paragraphs
 
   <a href="https://hungqpham.com/assets/resume.pdf" target="_blank">View My Resume</a>
 
-#  You can even add paragraphs by using empty lines like this and add anything else [markdown](https://www.markdownguide.org/getting-started#what-is-markdown) supports such as
+# You can even add paragraphs by using empty lines like this and add anything else [markdown](https://www.markdownguide.org/getting-started#what-is-markdown) supports such as
 #    - Lists
-# ges/landscape-trees.jpg "Trees")
 
 content:
   - title: Projects # Title for the section
@@ -72,14 +71,13 @@ content:
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
-        title: Quantum AI: Science to Finance
+        title: Applied Quantum + AI
         # link: https://github.com/hungpham2017/pDMET
         # link_text: Link Text
-        additional_links:
         quote: >
-        I’m boldly diving into AI/ML applications, leveraging techniques such as classical ML, deep learning, and large language models to revolutionize materials discovery through high-fidelity quantum chemical data, while also exploring their potential to address FinTech challenges in portfolio optimization, risk management, and financial modeling. Through independent side projects, I’m honing a dynamic skill set in computational science, numerical simulations, high-performance computing, and statistical algorithms. This expertise is primed for quantum technologies, data science, and AI-driven innovation across industries.
+          From Science to Finance
         description: | # this will include new lines to allow paragraphs
-        I ha
+          I’m boldly diving into AI/ML applications, leveraging techniques such as classical ML, deep learning, and large language models to revolutionize materials discovery through high-fidelity quantum chemical data, while also exploring their potential to address FinTech challenges in portfolio optimization, risk management, and financial modeling. Through independent side projects, I’m honing a dynamic skill set in computational science, numerical simulations, high-performance computing, and statistical algorithms. This expertise is primed for quantum technologies, data science, and AI-driven innovation across industries.
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
@@ -87,13 +85,13 @@ content:
         # link: https://github.com/hungpham2017/pDMET
         # link_text: Link Text
         additional_links:
-          - title:  pDMET
+          - title: pDMET
             icon: fab fa-github
             url: https://github.com/hungpham2017/pDMET
         quote: >
           Scalable Quantum Embedding and Quantum Algorithms for Material Simulation
         description: | # this will include new lines to allow paragraphs
-        I have contributed to developing quantum embedding algorithms for efficient, 1 kcal/mol-accurate ab initio simulations of strongly correlated and metallic systems on classical and quantum platforms, advancing quantum chemistry applications in areas like catalysis, superconductors, and quantum computing. My work has honed a versatile skill set, including mathematical modeling (with expertise in linear algebra), scientific computing, and software engineering—spanning theory to production code in Python, C/C++, and legacy Fortran. These skills, bridging theoretical insights and practical implementation, are highly transferable to quantum technologies and data science, enabling impactful solutions across diverse challenges.
+          I have contributed to developing quantum embedding algorithms for efficient, 1 kcal/mol-accurate ab initio simulations of strongly correlated and metallic systems on classical and quantum platforms, advancing quantum chemistry applications in areas like catalysis, superconductors, and quantum computing. My work has honed a versatile skill set, including mathematical modeling (with expertise in linear algebra), scientific computing, and software engineering—spanning theory to production code in Python, C/C++, and legacy Fortran. These skills, bridging theoretical insights and practical implementation, are highly transferable to quantum technologies and data science, enabling impactful solutions across diverse challenges.
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
@@ -101,13 +99,13 @@ content:
         # link: https://github.com/hungpham2017/pDMET
         # link_text: Link Text
         additional_links:
-          - title:  pDMET
+          - title: pDMET
             icon: fab fa-github
             url: https://github.com/hungpham2017/pDMET
         quote: >
           Large-scale Quantum Monte Carlo
         description: | # this will include new lines to allow paragraphs
-        Leveraging locality and modern GPUs, I have contributed to developing advanced algorithms and applying AFQMC methods, enabling scalable, chemically accurate quantum chemistry simulations for large systems, including strongly correlated molecules and metallic surfaces. This work has expanded my expertise into stochastic methods, particularly Monte Carlo simulations, which are fundamentally distinct from deterministic quantum chemistry approaches.
+          Leveraging locality and modern GPUs, I have contributed to developing advanced algorithms and applying AFQMC methods, enabling scalable, chemically accurate quantum chemistry simulations for large systems, including strongly correlated molecules and metallic surfaces. This work has expanded my expertise into stochastic methods, particularly Monte Carlo simulations, which are fundamentally distinct from deterministic quantum chemistry approaches.
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
@@ -115,16 +113,16 @@ content:
         # link: https://github.com/hungpham2017/pDMET
         # link_text: Link Text
         additional_links:
-          - title:  MCU
+          - title: MCU
             icon: fab fa-github
             url: https://github.com/hungpham2017/mcu
-          - title:  pWannier90
+          - title: pWannier90
             icon: fab fa-github
             url: https://github.com/hungpham2017/pyWannier90
         quote: >
           Computational chemistry applied to Topological Insulator | Perovskites | MOFs | COFs
         description: | # this will include new lines to allow paragraphs
-        I have applied advanced and cusotmzized computational techniques and analysis based on quantum chemistry, including periodic quantum chemistry vand DFT, Wannier-based tight-binding models, and Grand Canonical Monte Carlo simulations, to investigate materials such as reticular frameworks, topological systems, and photovoltaics, identifying novel materials with unique properties for industrial applications. This work has strengthened my versatile skill set in bring theories to actual problems where innovative solution is needed to solve these fundamental appklcaitions changles
+          I have applied advanced and customized computational techniques and analysis based on quantum chemistry, including periodic quantum chemistry and DFT, Wannier-based tight-binding models, and Grand Canonical Monte Carlo simulations, to investigate materials such as reticular frameworks, topological systems, and photovoltaics, identifying novel materials with unique properties for industrial applications. This work has strengthened my versatile skill set in bringing theories to actual problems where innovative solutions are needed to solve these fundamental application challenges.
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
@@ -132,12 +130,12 @@ content:
         # link: https://github.com/hungpham2017/pDMET
         # link_text: Link Text
         # additional_links:
-        #   - title:  MCU
+        #   - title: MCU
         #     icon: fab fa-github
         quote: >
           Fast Quantum Chemistry on GPU
         description: | # this will include new lines to allow paragraphs
-        To elevate quantum chemistry as a vital industrial technology beyond standard DFT, computational speed is essential. I have contributed to accelerating quantum chemistry by leveraging GPUs, enhancing its practicality for real-world applications. My efforts focus on optimizing advanced methods, such as random phase approximation and quantum embedding, harnessing GPU power to drive industrial adoption.
+          To elevate quantum chemistry as a vital industrial technology beyond standard DFT, computational speed is essential. I have contributed to accelerating quantum chemistry by leveraging GPUs, enhancing its practicality for real-world applications. My efforts focus on optimizing advanced methods, such as random phase approximation and quantum embedding, harnessing GPU power to drive industrial adoption.
   - title: Experience
     layout: list
     content:
@@ -186,7 +184,6 @@ content:
         #    Short description of the company (optional)
         # description: | # this will include new lines to allow paragraphs
         #   Periodic DFT, Grand canonical Monte Carlo, Reticular chemistry
-
   - title: Education
     layout: list
     content:
@@ -198,7 +195,6 @@ content:
         #  Short institution or course description (optional)
         # description: | # this will include new lines to allow paragraphs
         #   Description of qualification
-
       - layout: top-right
         title: VNUHCM - University of Science
         sub_title: B.S. in Chemistry
@@ -207,7 +203,6 @@ content:
         #  Short institution or course description (optional)
         # description: | # this will include new lines to allow paragraphs
         #   Description of qualification
-
   - title: A Little More About Me
     layout: text
     content: | # this will include new lines to allow paragraphs
@@ -226,17 +221,16 @@ sass:
   style: compressed
 
 plugins:
- - jekyll-seo-tag
+  - jekyll-seo-tag
 
-exclude : [
-  "Gemfile",
-  "Gemfile.lock",
-  "node_modules",
-  "vendor/bundle/",
-  "vendor/cache/",
-  "vendor/gems/",
-  "vendor/ruby/",
-  "lib/",
-  "scripts/",
-  "docker-compose.yml",
-  ]
+exclude:
+  - "Gemfile"
+  - "Gemfile.lock"
+  - "node_modules"
+  - "vendor/bundle/"
+  - "vendor/cache/"
+  - "vendor/gems/"
+  - "vendor/ruby/"
+  - "lib/"
+  - "scripts/"
+  - "docker-compose.yml"
