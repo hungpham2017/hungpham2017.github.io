@@ -72,6 +72,17 @@ content:
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
+        title: Quantum AI: Science to Finance
+        # link: https://github.com/hungpham2017/pDMET
+        # link_text: Link Text
+        additional_links:
+        quote: >
+        I’m boldly diving into AI/ML applications, leveraging techniques such as classical ML, deep learning, and large language models to revolutionize materials discovery through high-fidelity quantum chemical data, while also exploring their potential to address FinTech challenges in portfolio optimization, risk management, and financial modeling. Through independent side projects, I’m honing a dynamic skill set in computational science, numerical simulations, high-performance computing, and statistical algorithms. This expertise is primed for quantum technologies, data science, and AI-driven innovation across industries.
+        description: | # this will include new lines to allow paragraphs
+        I ha
+      - layout: left
+        border: weak  # Value of `weak` will display a weak border below this item. # Any
+                      # other value (or no value) means no border will be displayed
         title: Quantum Embedding
         # link: https://github.com/hungpham2017/pDMET
         # link_text: Link Text
