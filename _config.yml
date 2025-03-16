@@ -53,11 +53,11 @@ googlescholar_username: MIe6vYUAAAAJ
 # about_title: About Me (Use this to override about section title)
 about_profile_image: images/hp.jpeg
 about_content: | # this will include new lines to allow paragraphs
-  *Quantum chemistry is more than just equations and codes—it has the potential to be a transformative tool in fields like energy, pharmaceuticals, and materials. Yet, a gap exists between academic research and real-world applications, and I aim to bridge that gap to drive innovative solutions across these industries.*
+  *Quantum chemistry isn’t just equations and code — it’s a gateway to revolutionize energy, pharmaceuticals, and materials. I’m passionate about closing the gap between academic research and real-world impact, crafting innovative tools and solutions that transform industries.*
 
-  I am a research scientist at ByteDance Research. I specialize in developing advanced and scalable quantum chemical algorithms rooted in electronic structure theory for ab initio simulations on both high-performance classical and quantum computers. My experience in both creating and utilizing quantum chemical software allows me to translate theoretical concepts into powerful tools that deliver simulations with enhanced precision and efficiency. With deep expertise in electronic structure for chemistry and materials science, and extensive experience applying computational chemistry across key industries—such as quantum technology, energy, pharmaceuticals, chemical sciences, and materials—I bring a unique perspective on how quantum chemistry can enhance fundamental understanding, deliver high-quality data for AI4Science, and drive transformative innovations across industrial sectors.
+  I am a research scientist at ByteDance Research, where I design cutting-edge quantum chemical algorithms grounded in electronic structure theory. My work delivers scalable, high-precision ab initio simulations on both classical high-performance systems and emerging quantum computers. With a knack for turning complex theory into practical software, I’ve optimized simulations—like scaling computations to over 20,000 orbitals and achieving 10–100x speed-ups—pushing the boundaries of efficiency and accuracy. My expertise spans computational chemistry and materials science, with applications in quantum technology, renewable energy, pharmaceuticals, and beyond, driving high-quality data for AI+Science and sparking transformative industrial innovations. During my Ph.D. at the University of Minnesota, Twin Cities, under Professor Laura Gagliardi, I pioneered quantum embedding techniques using density matrix and multiconfigurational methods for molecules and periodic solids. As a postdoctoral researcher at Columbia University with Professor David Reichman, I advanced auxiliary-field quantum Monte Carlo methods, expanding their reach with novel algorithmic breakthroughs.
 
-  During my Ph.D. at the University of Minnesota, Twin Cities, under the guidance of Professor Laura Gagliardi, I developed quantum embedding techniques based on density matrix and multiconfigurational methods for both molecules and periodic solids. My postdoctoral research at Columbia University with Professor David Reichman focused on advancing auxiliary-field quantum Monte Carlo techniques in quantum chemistry, aiming to broaden their application beyond conventional methods.
+  Years of tackling computational science have forged my diverse skill set in software development, mathematical modeling, convex optimization, and data analysis, sharpened on HPC and cloud platforms. I’ve built numerical models and simulations for quantum chemistry, wielding both deterministic and stochastic algorithms to span classical and quantum realms—a journey that’s honed my research prowess and given me a wide-angle view of complex systems. This versatile toolkit, rooted in rigorous problem-solving, seamlessly transfers to software engineering, data science, and quantitative research, where I’m poised to drive innovation and deliver results.
 
   <a href="https://hungqpham.com/assets/resume.pdf" target="_blank">View My Resume</a>
 
@@ -82,7 +82,7 @@ content:
         quote: >
           Scalable Quantum Embedding and Quantum Algorithms for Material Simulation
         description: | # this will include new lines to allow paragraphs
-          I have developed novel quantum embedding algorithms (DMET, PET, ASET, etc) designed for accurate and efficient ab initio simulations of materials on classical and quantum computer. My work has broadened quantum chemistry's industrial impact across various sectors, including surface chemistry, homogeneous catalysis, superconducting materials, and defective systems as qubits.
+        I have contributed to developing quantum embedding algorithms for efficient, 1 kcal/mol-accurate ab initio simulations of strongly correlated and metallic systems on classical and quantum platforms, advancing quantum chemistry applications in areas like catalysis, superconductors, and quantum computing. My work has honed a versatile skill set, including mathematical modeling (with expertise in linear algebra), scientific computing, and software engineering—spanning theory to production code in Python, C/C++, and legacy Fortran. These skills, bridging theoretical insights and practical implementation, are highly transferable to quantum technologies and data science, enabling impactful solutions across diverse challenges.
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
@@ -94,13 +94,13 @@ content:
             icon: fab fa-github
             url: https://github.com/hungpham2017/pDMET
         quote: >
-          Precise Quantum Monte Carlo for Quantum Chemistry
+          Large-scale Quantum Monte Carlo
         description: | # this will include new lines to allow paragraphs
-          Leveraging locality and modern GPUs, I have developed advanced algorithms and applied AFQMC methods to scale quantum chemistry for large-scale, real-world applications while maintaining its predictive power.
+        Leveraging locality and modern GPUs, I have contributed to developing advanced algorithms and applying AFQMC methods, enabling scalable, chemically accurate quantum chemistry simulations for large systems, including strongly correlated molecules and metallic surfaces. This work has expanded my expertise into stochastic methods, particularly Monte Carlo simulations, which are fundamentally distinct from deterministic quantum chemistry approaches.
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
-        title: Applied Quantum Chemistry
+        title: Computational Design of Novel Materials
         # link: https://github.com/hungpham2017/pDMET
         # link_text: Link Text
         additional_links:
@@ -113,11 +113,11 @@ content:
         quote: >
           Computational chemistry applied to Topological Insulator | Perovskites | MOFs | COFs
         description: | # this will include new lines to allow paragraphs
-          I have applied advanced computational techniques — periodic quantum chemistry, Wannier-based tight-binding models, and Grand Canonical Monte Carlo simulations — to study materials like reticular frameworks, topological materials, and photovoltaics. My research identifies new materials with exotic properties for potential industrial use.
+        I have applied advanced and cusotmzized computational techniques and analysis based on quantum chemistry, including periodic quantum chemistry vand DFT, Wannier-based tight-binding models, and Grand Canonical Monte Carlo simulations, to investigate materials such as reticular frameworks, topological systems, and photovoltaics, identifying novel materials with unique properties for industrial applications. This work has strengthened my versatile skill set in bring theories to actual problems where innovative solution is needed to solve these fundamental appklcaitions changles
       - layout: left
         border: weak  # Value of `weak` will display a weak border below this item. # Any
                       # other value (or no value) means no border will be displayed
-        title: Quantum Chemistry with GPU
+        title: GPU-Accelerated Quantum Chemistry
         # link: https://github.com/hungpham2017/pDMET
         # link_text: Link Text
         # additional_links:
@@ -126,7 +126,7 @@ content:
         quote: >
           Fast Quantum Chemistry on GPU
         description: | # this will include new lines to allow paragraphs
-          To position quantum chemistry as a key industrial technology, especially beyond widely-used DFT, speed is critical. Leveraging GPUs can accelerate quantum chemistry, making it more practical for real-world applications. I am focused on optimizing advanced methods, like random phase approximation and quantum embedding, to bring quantum chemistry closer to industrial use by harnessing GPU power
+        To elevate quantum chemistry as a vital industrial technology beyond standard DFT, computational speed is essential. I have contributed to accelerating quantum chemistry by leveraging GPUs, enhancing its practicality for real-world applications. My efforts focus on optimizing advanced methods, such as random phase approximation and quantum embedding, harnessing GPU power to drive industrial adoption.
   - title: Experience
     layout: list
     content:
