@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Theme Definitions ===== */
+:root {
+  --color-primary: 56 189 248;
+  --bg-base: 8 15 40;
+  --bg-card: 15 23 55;
+  --border-main: 30 58 95;
+  --border-dim: 45 75 120;
+  --text-bright: 226 232 240;
+  --text-muted: 148 163 184;
+  --text-faint: 100 116 139;
+  --text-fainter: 71 85 105;
+}
+
+/* ===== Base Styles ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-950 text-gray-200 font-sans;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-950;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-700 rounded-full;
+  }
+}
+
+/* ===== Scroll Reveal Animations ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 0.5s; }
+
+.stagger-children.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Glow Card ===== */
+.glow-card {
+  @apply relative overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/50 backdrop-blur-sm;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.5s ease;
+}
+
+.glow-card:hover {
+  border-color: rgb(var(--color-primary) / 0.4);
+  box-shadow: 0 0 30px rgb(var(--color-primary) / 0.1);
+}
+
+/* ===== Timeline ===== */
+.timeline-line {
+  @apply absolute left-4 top-0 bottom-0 w-px;
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--color-primary) / 0.5),
+    rgb(var(--color-primary) / 0.2),
+    transparent
+  );
+}
+
+.timeline-dot {
+  @apply absolute left-2.5 w-3 h-3 rounded-full ring-4;
+  background-color: rgb(var(--color-primary));
+  ring-color: rgb(var(--bg-base));
+  --tw-ring-color: rgb(var(--bg-base));
+}
+
+/* ===== Particle Canvas ===== */
+#tsparticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: auto;
+}

@@ -1,0 +1,84 @@
+---
+const projects = [
+  {
+    title: 'AI-Augmented Science',
+    tagline: 'AI + Chemistry for Real-World Impact',
+    description: "Applying deep learning, generative models, and agentic AI to quantum chemical data to accelerate downstream applications — drug discovery, materials design, catalysis, and energy solutions.",
+    tags: ['Deep Learning', 'Agentic AI', 'Drug Discovery', 'Materials Design'],
+    links: [],
+  },
+  {
+    title: 'Quantum Embedding',
+    tagline: 'Scalable Quantum Embedding for Material Simulation',
+    description: "Developing quantum embedding algorithms for efficient, 1 kcal/mol-accurate ab initio simulations of strongly correlated and metallic systems on classical and quantum platforms, advancing quantum chemistry applications in catalysis, superconductors, and quantum computing.",
+    tags: ['Python', 'C/C++', 'Fortran', 'Linear Algebra'],
+    links: [{ label: 'pDMET', url: 'https://github.com/hungpham2017/pDMET' }],
+  },
+  {
+    title: 'Quantum Monte Carlo',
+    tagline: 'Large-scale Quantum Monte Carlo',
+    description: "Developing advanced AFQMC algorithms leveraging locality and modern GPUs, enabling scalable, chemically accurate quantum chemistry simulations for large systems, including strongly correlated molecules and metallic surfaces.",
+    tags: ['AFQMC', 'GPU', 'Stochastic Methods'],
+    links: [],
+  },
+  {
+    title: 'Novel Materials Design',
+    tagline: 'Topological Insulators | Perovskites | MOFs | COFs',
+    description: "Applying advanced computational techniques — periodic DFT, Wannier tight-binding models, and Grand Canonical Monte Carlo — to investigate reticular frameworks, topological systems, and photovoltaics.",
+    tags: ['DFT', 'Wannier90', 'GCMC'],
+    links: [
+      { label: 'MCU', url: 'https://github.com/hungpham2017/mcu' },
+      { label: 'pyWannier90', url: 'https://github.com/hungpham2017/pyWannier90' },
+    ],
+  },
+  {
+    title: 'GPU-Accelerated QC',
+    tagline: 'Fast Quantum Chemistry on GPU',
+    description: "Accelerating quantum chemistry methods like random phase approximation and quantum embedding by leveraging GPUs, making advanced simulations practical for real-world industrial applications beyond standard DFT.",
+    tags: ['GPU', 'RPA', 'HPC'],
+    links: [],
+  },
+];
+---
+<section id="projects" class="relative z-10 py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-white mb-12 reveal">
+      <span class="text-primary">//</span> Projects
+    </h2>
+    <div class="grid md:grid-cols-2 gap-6 stagger-children">
+      {projects.map((project) => (
+        <div class="glow-card p-6 group">
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <h3 class="text-xl font-semibold text-white group-hover:text-primary transition-colors">
+                {project.title}
+              </h3>
+              <p class="text-sm text-primary/70 font-mono mt-1">{project.tagline}</p>
+            </div>
+            {project.links.length > 0 && (
+              <div class="flex gap-2">
+                {project.links.map((link) => (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    class="text-xs px-3 py-1 rounded-full border border-gray-700 text-gray-400 hover:border-primary hover:text-primary transition-all"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+          <p class="text-gray-400 text-sm leading-relaxed mb-4">{project.description}</p>
+          <div class="flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span class="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary/80">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

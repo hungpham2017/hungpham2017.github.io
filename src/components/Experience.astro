@@ -1,0 +1,57 @@
+---
+const experiences = [
+  {
+    title: 'ByteDance Research',
+    role: 'Research Scientist',
+    period: 'March 2022 — Present',
+  },
+  {
+    title: 'Columbia University',
+    role: 'Postdoctoral Research Scientist',
+    period: 'June 2021 — March 2022',
+    advisor: 'David Reichman',
+  },
+  {
+    title: 'University of Minnesota, Twin Cities',
+    role: 'Research Assistant',
+    period: 'Jan 2017 — May 2021',
+    advisor: 'Laura Gagliardi',
+  },
+  {
+    title: 'Center for Molecular and NanoArchitecture (MANAR)',
+    role: 'Research Assistant',
+    period: 'Oct 2011 — Jul 2015',
+  },
+  {
+    title: 'Institute for Computational Science and Technology',
+    role: 'Research Assistant',
+    period: 'Oct 2011 — Jul 2015',
+    advisor: 'Nguyen-Nguyen Pham-Tran',
+  },
+];
+---
+<section id="experience" class="relative z-10 py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-white mb-12 reveal">
+      <span class="text-primary">//</span> Experience
+    </h2>
+    <div class="relative pl-10 stagger-children">
+      <div class="timeline-line"></div>
+      {experiences.map((exp, i) => (
+        <div class="relative mb-10 last:mb-0">
+          <div class="timeline-dot" style={`top: 6px;`}></div>
+          <div class="glow-card p-6">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
+              <h3 class="text-lg font-semibold text-white">{exp.title}</h3>
+              <span class="text-sm text-primary/70 font-mono whitespace-nowrap">{exp.period}</span>
+            </div>
+            <p class="text-gray-400">{exp.role}</p>
+            {exp.advisor && (
+              <p class="text-sm text-gray-500 mt-1">Advisor: {exp.advisor}</p>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
