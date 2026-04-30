@@ -4,29 +4,34 @@ const experiences = [
     title: 'ByteDance Research',
     role: 'Research Scientist',
     period: 'March 2022 — Present',
+    focus: 'AI for science, quantum chemistry, and GPU-accelerated chemistry software',
   },
   {
     title: 'Columbia University',
     role: 'Postdoctoral Research Scientist',
     period: 'June 2021 — March 2022',
     advisor: 'David Reichman',
+    focus: 'Auxiliary-field quantum Monte Carlo for periodic solids',
   },
   {
     title: 'University of Minnesota, Twin Cities',
     role: 'Research Assistant',
     period: 'Jan 2017 — May 2021',
     advisor: 'Laura Gagliardi',
+    focus: 'Electronic structure theory, quantum embedding, and materials design',
   },
   {
     title: 'Center for Molecular and NanoArchitecture (MANAR)',
     role: 'Research Assistant',
     period: 'Oct 2011 — Jul 2015',
+    focus: 'Periodic DFT and Monte Carlo for gas-storage materials',
   },
   {
     title: 'Institute for Computational Science and Technology',
     role: 'Research Assistant',
     period: 'Oct 2011 — Jul 2015',
     advisor: 'Nguyen-Nguyen Pham-Tran',
+    focus: 'Periodic DFT and Monte Carlo for gas-storage materials',
   },
 ];
 ---
@@ -46,6 +51,9 @@ const experiences = [
               <span class="text-sm text-primary/70 font-mono whitespace-nowrap">{exp.period}</span>
             </div>
             <p class="text-gray-400">{exp.role}</p>
+            {exp.focus && (
+              <p class="text-sm text-gray-400/80 italic mt-1">{exp.focus}</p>
+            )}
             {exp.advisor && (
               <p class="text-sm text-gray-500 mt-1">Advisor: {exp.advisor}</p>
             )}
