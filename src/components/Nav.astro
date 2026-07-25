@@ -7,7 +7,7 @@ const links = [
 ];
 ---
 <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gray-950/70 border-b border-gray-800/50">
-  <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+  <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
     <a href="#" class="text-lg font-semibold text-white hover:text-primary transition-colors">
       HQP
     </a>
@@ -15,13 +15,14 @@ const links = [
       {links.map(({ href, label }) => (
         <a
           href={href}
-          class="text-sm text-gray-400 hover:text-white transition-colors"
+          data-nav-link
+          class="nav-link text-sm text-gray-400 hover:text-white transition-colors"
         >
           {label}
         </a>
       ))}
       <a
-        href="https://hungqpham.com/assets/resume.pdf"
+        href="/assets/resume.pdf"
         target="_blank"
         class="text-sm px-4 py-2 rounded-full border border-primary/50 text-primary hover:bg-primary/10 transition-all"
       >
@@ -46,7 +47,7 @@ const links = [
       </a>
     ))}
     <a
-      href="https://hungqpham.com/assets/resume.pdf"
+      href="/assets/resume.pdf"
       target="_blank"
       class="block text-sm text-primary"
     >
@@ -65,4 +66,27 @@ const links = [
   menu?.querySelectorAll('a').forEach((a) => {
     a.addEventListener('click', () => menu?.classList.add('hidden'));
   });
+
+  // Mark the nav link for whichever section is currently in view.
+  const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]')];
+  const byId = new Map(navLinks.map((a) => [a.getAttribute('href')?.slice(1), a]));
+  const sections = [...byId.keys()]
+    .map((id) => id && document.getElementById(id))
+    .filter((el): el is HTMLElement => Boolean(el));
+
+  const spy = new IntersectionObserver(
+    (entries) => {
+      entries
+        .filter((e) => e.isIntersecting)
+        .forEach((e) => {
+          navLinks.forEach((a) => a.classList.remove('nav-link-active'));
+          byId.get(e.target.id)?.classList.add('nav-link-active');
+        });
+    },
+    // Trip when a section crosses the upper third, so the highlight
+    // changes as that section takes over the viewport.
+    { rootMargin: '-30% 0px -60% 0px' }
+  );
+
+  sections.forEach((el) => spy.observe(el));
 </script>

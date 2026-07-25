@@ -1,7 +1,9 @@
 ---
+import { isOrphan, CENTER_ORPHAN } from '../lib/card-grid';
+
 const projects = [
   {
-    title: 'AI-Augmented Science',
+    title: 'AI + Science',
     tagline: 'AI + Chemistry for Real-World Impact',
     description: "Applying deep learning, generative models, and agentic AI to quantum chemical data to accelerate downstream applications — drug discovery, materials design, catalysis, and energy solutions.",
     tags: ['Deep Learning', 'Agentic AI', 'Drug Discovery', 'Materials Design'],
@@ -32,7 +34,7 @@ const projects = [
     ],
   },
   {
-    title: 'GPU-Accelerated QC',
+    title: 'GPU-Accelerated Quantum Chemistry',
     tagline: 'Fast Quantum Chemistry on GPU',
     description: "Accelerating quantum chemistry methods like random phase approximation and quantum embedding by leveraging GPUs, making advanced simulations practical for real-world industrial applications beyond standard DFT.",
     tags: ['GPU', 'RPA', 'HPC'],
@@ -41,14 +43,20 @@ const projects = [
 ];
 ---
 <section id="projects" class="relative z-10 py-24 px-6">
-  <div class="max-w-5xl mx-auto">
+  <div class="max-w-4xl mx-auto">
     <h2 class="text-3xl font-bold text-white mb-12 reveal">
       <span class="text-primary">//</span> Projects
     </h2>
     <div class="grid md:grid-cols-2 gap-6 stagger-children">
-      {projects.map((project) => (
-        <div class="glow-card p-6 group">
-          <div class="flex items-start justify-between mb-3">
+      {projects.map((project, i) => (
+        <div
+          style={`--i: ${i}`}
+          class:list={[
+            'glow-card p-6 group flex flex-col',
+            isOrphan(i, projects.length) && CENTER_ORPHAN,
+          ]}
+        >
+          <div class="flex items-start justify-between gap-4 mb-3">
             <div>
               <h3 class="text-xl font-semibold text-white group-hover:text-primary transition-colors">
                 {project.title}
@@ -56,7 +64,7 @@ const projects = [
               <p class="text-sm text-primary/70 font-mono mt-1">{project.tagline}</p>
             </div>
             {project.links.length > 0 && (
-              <div class="flex gap-2">
+              <div class="flex flex-wrap justify-end gap-2 shrink-0">
                 {project.links.map((link) => (
                   <a
                     href={link.url}
@@ -70,7 +78,7 @@ const projects = [
             )}
           </div>
           <p class="text-gray-400 text-sm leading-relaxed mb-4">{project.description}</p>
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-2 mt-auto">
             {project.tags.map((tag) => (
               <span class="text-xs px-2.5 py-1 rounded-full bg-primary/10 text-primary/80">
                 {tag}

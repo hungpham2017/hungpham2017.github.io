@@ -1,11 +1,17 @@
 ---
+import { Image } from 'astro:assets';
+import photo from '../assets/photo.jpg';
 ---
 <section class="relative min-h-screen flex items-center justify-center px-6 pt-20">
   <div class="relative z-10 max-w-4xl mx-auto text-center">
     <div class="mb-8 reveal">
-      <img
-        src="/images/photo.jpg"
+      <Image
+        src={photo}
         alt="Hung Q. Pham"
+        width={352}
+        format="webp"
+        quality={80}
+        loading="eager"
         class="w-44 h-44 rounded-full mx-auto ring-2 ring-primary/50 ring-offset-4 ring-offset-gray-950 object-cover"
       />
     </div>
@@ -16,7 +22,7 @@
       Research Scientist
     </p>
     <p class="text-lg text-primary/80 font-mono mb-10 reveal">
-      AI-Augmented Science &bull; Quantum Chemistry
+      AI + Science &bull; Quantum Chemistry
     </p>
     <div class="flex items-center justify-center gap-5 reveal">
       <a href="mailto:pqh3.14@gmail.com" class="text-gray-400 hover:text-white transition-colors" aria-label="Email">

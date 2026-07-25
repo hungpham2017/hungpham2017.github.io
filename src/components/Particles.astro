@@ -8,6 +8,9 @@
 
   const PARTICLE_COLOR = '#38bdf8';
 
+  // Drifting dots are exactly what reduced-motion users are asking to avoid.
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   async function loadParticles() {
     await loadSlim(tsParticles);
 
@@ -27,11 +30,11 @@
           shape: { type: "circle" },
           opacity: {
             value: { min: 0.2, max: 0.6 },
-            animation: { enable: true, speed: 0.8, sync: false },
+            animation: { enable: !reducedMotion, speed: 0.8, sync: false },
           },
           size: {
             value: { min: 1, max: 3 },
-            animation: { enable: true, speed: 2, sync: false },
+            animation: { enable: !reducedMotion, speed: 2, sync: false },
           },
           links: {
             enable: true,
@@ -41,7 +44,7 @@
             width: 1,
           },
           move: {
-            enable: true,
+            enable: !reducedMotion,
             speed: 0.8,
             direction: "none",
             random: true,

@@ -43,7 +43,7 @@ const experiences = [
     <div class="relative pl-10 stagger-children">
       <div class="timeline-line"></div>
       {experiences.map((exp, i) => (
-        <div class="relative mb-10 last:mb-0">
+        <div class="relative mb-10 last:mb-0" style={`--i: ${i}`}>
           <div class="timeline-dot" style={`top: 6px;`}></div>
           <div class="glow-card p-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-1">
