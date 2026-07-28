@@ -137,7 +137,7 @@ export const experiences = [
 export const education = [
   {
     school: 'University of Minnesota, Twin Cities',
-    degree: 'Ph.D. in Chemistry',
+    degree: 'Ph.D. in Quantum Chemistry',
     period: 'Aug 2015 — May 2021',
   },
   {
