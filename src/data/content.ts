@@ -165,7 +165,6 @@ export const about = {
   paragraphs: [
     "I build at that intersection — using modern deep learning techniques and agentic AI combined with ab initio high-fidelity data from quantum chemistry to reveal hidden chemical transformations that can drive progress in drug development, materials design, energy, and beyond.",
     "Beyond fundamental research, I bring the same AI + Science mindset to real-world problems — building systems and models that integrate AI into different fields to boost productivity and efficiency. From agentic workflows to intelligent tools, if there's a way AI can make something faster, smarter, or more impactful, I want to build it.",
-    "I'm interested in how science and technology shape the way we live. Outside of work, you'll find me at a music festival, on the dance floor, or over a good cocktail — I also used to train in Shotokan karate.",
   ],
 };
 
