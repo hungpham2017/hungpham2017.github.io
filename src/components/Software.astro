@@ -1,0 +1,40 @@
+---
+import { software } from '../data/content';
+
+const internal = software.filter((pkg) => !pkg.url).length;
+---
+<section id="software" class="relative z-10 py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-white mb-4 reveal">
+      <span class="text-primary">//</span> Software
+    </h2>
+    <p class="mb-10 text-sm text-gray-500 reveal">
+      Scientific packages I lead or contribute to.
+      {internal > 0 && ` ${internal === 1 ? 'One is' : `${internal} are`} internal, with no public repository.`}
+    </p>
+
+    <div class="glow-card divide-y divide-gray-800/70 reveal">
+      {software.map((pkg) => (
+        <article class="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 py-4 group">
+          {pkg.url ? (
+            <a
+              href={pkg.url}
+              target="_blank"
+              rel="noopener"
+              class="font-mono text-white group-hover:text-primary transition-colors"
+            >
+              {pkg.name}
+            </a>
+          ) : (
+            <span class="font-mono text-white">{pkg.name}</span>
+          )}
+          <span class="text-[11px] uppercase tracking-wide px-2 py-0.5 rounded-full bg-primary/10 text-primary/80">
+            {pkg.role}
+          </span>
+          <span class="text-sm text-gray-400 basis-full sm:basis-auto">{pkg.note}</span>
+          <span class="ml-auto text-xs font-mono text-gray-600">{pkg.language ?? 'Internal'}</span>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -12,6 +12,7 @@ import photo from '../assets/photo.jpg';
 import { getPublications, ORCID_URL, SCHOLAR_URL } from '../lib/publications';
 import {
   projects,
+  software,
   experiences,
   education,
   identity,
@@ -24,6 +25,7 @@ const { publications } = await getPublications();
 const sections = [
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
+  { id: 'software', label: 'Software' },
   { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },
   { id: 'publications', label: 'Publications' },
@@ -104,8 +106,31 @@ const sections = [
         </div>
       </section>
 
+      <section id="software" class="sec">
+        <div class="rail"><span class="num">§3</span><span class="rail-label">Software</span></div>
+        <div class="body">
+          <p class="source">Scientific packages I lead or contribute to.{software.filter((pkg) => !pkg.url).length > 0 && ` ${software.filter((pkg) => !pkg.url).length === 1 ? 'One is' : `${software.filter((pkg) => !pkg.url).length} are`} internal, with no public repository.`}</p>
+          <ol class="record">
+            {software.map((pkg) => (
+              <li>
+                <span class="period">{pkg.role}</span>
+                <span class="entry">
+                  <strong>
+                    {pkg.url ? (
+                      <a class="repo-name" href={pkg.url} target="_blank" rel="noopener">{pkg.name} ↗</a>
+                    ) : pkg.name}
+                  </strong>
+                  <span class="role">{pkg.note}</span>
+                  <span class="note">{pkg.language ?? 'Internal'}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       <section id="experience" class="sec">
-        <div class="rail"><span class="num">§3</span><span class="rail-label">Experience</span></div>
+        <div class="rail"><span class="num">§4</span><span class="rail-label">Experience</span></div>
         <div class="body">
           <ol class="record">
             {experiences.map((exp) => (
@@ -124,7 +149,7 @@ const sections = [
       </section>
 
       <section id="education" class="sec">
-        <div class="rail"><span class="num">§4</span><span class="rail-label">Education</span></div>
+        <div class="rail"><span class="num">§5</span><span class="rail-label">Education</span></div>
         <div class="body">
           <ol class="record">
             {education.map((edu) => (
@@ -141,7 +166,7 @@ const sections = [
       </section>
 
       <section id="publications" class="sec">
-        <div class="rail"><span class="num">§5</span><span class="rail-label">Publications</span></div>
+        <div class="rail"><span class="num">§6</span><span class="rail-label">Publications</span></div>
         <div class="body">
           <p class="source">
             Synced from <a href={ORCID_URL} target="_blank" rel="noopener">ORCID</a> at
@@ -446,6 +471,9 @@ const sections = [
   }
   .repo:hover { border-color: var(--brass); }
 
+  .repo-name { text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .repo-name:hover { color: var(--brass); border-color: var(--brass); }
+
   .work dd { margin: 0.45rem 0 0; }
 
   .tagline {
@@ -470,7 +498,7 @@ const sections = [
 
   .record li {
     display: grid;
-    grid-template-columns: 10.5rem minmax(0, 1fr);
+    grid-template-columns: 11rem minmax(0, 1fr);
     gap: 1.5rem;
     padding: 1.5rem 0;
     border-top: 1px solid var(--rule);

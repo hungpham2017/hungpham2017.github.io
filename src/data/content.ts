@@ -3,53 +3,69 @@
  * Copied verbatim out of the components; nothing here is rewritten.
  */
 
+/**
+ * Descriptions lead with the application rather than the method, and the two
+ * many-body method threads (embedding and AFQMC) are one entry instead of two.
+ * Every fact and nearly all the wording is carried over from the originals —
+ * only the order of emphasis changed.
+ */
 export const projects = [
   {
     title: 'AI + Science',
-    tagline: 'AI + Chemistry for Real-World Impact',
-    description: "Applying deep learning, generative models, and agentic AI to quantum chemical data to accelerate downstream applications — drug discovery, materials design, catalysis, and energy solutions.",
+    tagline: 'Drug discovery, materials, catalysis, energy',
+    description: "Accelerating downstream applications — drug discovery, materials design, catalysis, and energy solutions — by applying deep learning, generative models, and agentic AI to quantum chemical data.",
     tags: ['Deep Learning', 'Agentic AI', 'Drug Discovery', 'Materials Design'],
     links: [],
   },
   {
-    title: 'Quantum Embedding',
-    tagline: 'Scalable Quantum Embedding for Material Simulation',
-    description: "Developing quantum embedding algorithms for efficient, 1 kcal/mol-accurate ab initio simulations of strongly correlated and metallic systems on classical and quantum platforms, advancing quantum chemistry applications in catalysis, superconductors, and quantum computing.",
-    tags: ['Python', 'C/C++', 'Fortran', 'Linear Algebra'],
+    title: 'GPU-Accelerated Quantum Chemistry',
+    tagline: 'Simulation fast enough for industry',
+    description: "Making advanced simulation practical for real-world industrial applications beyond standard DFT, by rebuilding methods like the random phase approximation and quantum embedding to run on GPUs.",
+    tags: ['GPU', 'RPA', 'HPC'],
+    links: [{ label: 'ByteQC', url: 'https://github.com/bytedance/byteqc' }],
+  },
+  {
+    title: 'Correlated Electronic Structure',
+    tagline: 'Catalysis, superconductors, quantum computing',
+    description: "Advancing quantum chemistry applications in catalysis, superconductors, and quantum computing through 1 kcal/mol-accurate ab initio simulation of strongly correlated and metallic systems — quantum embedding on classical and quantum platforms, and AFQMC algorithms that exploit locality and modern GPUs to reach large molecules and metallic surfaces.",
+    tags: ['Quantum Embedding', 'AFQMC', 'Python', 'C/C++', 'Fortran'],
     links: [{ label: 'pDMET', url: 'https://github.com/hungpham2017/pDMET' }],
   },
   {
-    title: 'Quantum Monte Carlo',
-    tagline: 'Large-scale Quantum Monte Carlo',
-    description: "Developing advanced AFQMC algorithms leveraging locality and modern GPUs, enabling scalable, chemically accurate quantum chemistry simulations for large systems, including strongly correlated molecules and metallic surfaces.",
-    tags: ['AFQMC', 'GPU', 'Stochastic Methods'],
-    links: [],
-  },
-  {
     title: 'Novel Materials Design',
-    tagline: 'Topological Insulators | Perovskites | MOFs | COFs',
-    description: "Applying advanced computational techniques — periodic DFT, Wannier tight-binding models, and Grand Canonical Monte Carlo — to investigate reticular frameworks, topological systems, and photovoltaics.",
+    tagline: 'Topological insulators, perovskites, MOFs, COFs',
+    description: "Investigating reticular frameworks, topological systems, and photovoltaics with periodic DFT, Wannier tight-binding models, and Grand Canonical Monte Carlo.",
     tags: ['DFT', 'Wannier90', 'GCMC'],
     links: [
       { label: 'MCU', url: 'https://github.com/hungpham2017/mcu' },
       { label: 'pyWannier90', url: 'https://github.com/hungpham2017/pyWannier90' },
     ],
   },
-  {
-    title: 'GPU-Accelerated Quantum Chemistry',
-    tagline: 'Fast Quantum Chemistry on GPU',
-    description: "Accelerating quantum chemistry methods like random phase approximation and quantum embedding by leveraging GPUs, making advanced simulations practical for real-world industrial applications beyond standard DFT.",
-    tags: ['GPU', 'RPA', 'HPC'],
-    links: [],
-  },
+];
+
+/**
+ * Scientific software. Anything without a `url` is internal and is listed
+ * without a link rather than pointed anywhere; the section caption counts
+ * those itself so it cannot go stale.
+ */
+export const software = [
+  { name: 'ByteQC', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc' },
+  { name: 'PySCF', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf' },
+  { name: 'ipie', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie' },
+  { name: 'pDMET', role: 'Lead developer', note: 'Periodic density matrix embedding theory', language: 'Python', url: 'https://github.com/hungpham2017/pDMET' },
+  { name: 'MCU', role: 'Lead developer', note: 'Modeling and crystallographic utilities', language: 'Python', url: 'https://github.com/hungpham2017/mcu' },
+  { name: 'pyWannier90', role: 'Lead developer', note: 'Wannier90 interface for periodic systems', language: 'Python', url: 'https://github.com/hungpham2017/pyWannier90' },
+  // ByteQEmbed and cuRPA were folded into FEMION, which is not being open
+  // sourced — hence no link and no language badge.
+  { name: 'FEMION', role: 'Lead developer', note: 'Quantum embedding for metals, GPU random phase approximation', language: null, url: null },
 ];
 
 export const experiences = [
   {
-    title: 'ByteDance Research',
+    title: 'ByteDance',
     role: 'Research Scientist',
     period: 'March 2022 — Present',
-    focus: 'AI for science, quantum chemistry, and GPU-accelerated chemistry software',
+    focus: 'AI for science and quantum chemistry',
   },
   {
     title: 'Columbia University',
@@ -90,8 +106,13 @@ export const education = [
 /** Hero identity block. */
 export const identity = {
   name: 'Hung Q. Pham',
-  role: 'Research Scientist',
-  tagline: 'AI + Science • Quantum Chemistry',
+  /** How the page introduces him. The employment title stays 'Research
+      Scientist' in the structured data, where it needs to be literal. */
+  role: 'Scientist + Tech Builder',
+  // Ordered by where the work is now, not by how it started: AI + Science is
+  // the day job, software is what gets shipped, quantum chemistry is the
+  // training underneath both. Previously QC shared top billing with AI.
+  tagline: 'AI + Science • Scientific Software • Quantum Chemistry',
 };
 
 /** About copy, in order. The first line is set as a standfirst. */

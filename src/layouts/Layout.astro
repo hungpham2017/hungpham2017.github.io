@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title,
-  description = 'Hung Q. Pham — Research Scientist working at the intersection of AI and quantum chemistry: deep learning, agentic AI, quantum embedding, and GPU-accelerated simulation.',
+  description = 'Hung Q. Pham — scientist and tech builder working at the intersection of AI and quantum chemistry: deep learning, agentic AI, scientific software, and GPU-accelerated simulation.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -20,8 +20,10 @@ const person = {
   name: 'Hung Q. Pham',
   url: Astro.site?.href,
   image: ogImage.href,
+  // Literal employment title — schema.org jobTitle is not the place for
+  // positioning language. The page itself says 'Scientist + Tech Builder'.
   jobTitle: 'Research Scientist',
-  worksFor: { '@type': 'Organization', name: 'ByteDance Research' },
+  worksFor: { '@type': 'Organization', name: 'ByteDance' },
   alumniOf: [
     { '@type': 'CollegeOrUniversity', name: 'University of Minnesota, Twin Cities' },
     { '@type': 'CollegeOrUniversity', name: 'VNUHCM — University of Science' },
