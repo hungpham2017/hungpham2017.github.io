@@ -1,0 +1,30 @@
+---
+// The previous design, kept for reference at /classic and marked noindex so it
+// does not compete with the live page in search results.
+import Layout from '../layouts/Layout.astro';
+import Particles from '../components/Particles.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Projects from '../components/Projects.astro';
+import Software from '../components/Software.astro';
+import Publications from '../components/Publications.astro';
+import Experience from '../components/Experience.astro';
+import Education from '../components/Education.astro';
+import Footer from '../components/Footer.astro';
+import { identity } from '../data/content';
+import '../styles/global.css';
+---
+
+<Layout title={`${identity.name} — ${identity.role}`} noindex>
+  <Particles />
+  <Nav />
+  <Hero />
+  <About />
+  <Projects />
+  <Software />
+  <Experience />
+  <Education />
+  <Publications />
+  <Footer />
+</Layout>

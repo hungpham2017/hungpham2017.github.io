@@ -32,6 +32,16 @@ const internal = software.filter((pkg) => !pkg.url).length;
             {pkg.role}
           </span>
           <span class="text-sm text-gray-400 basis-full sm:basis-auto">{pkg.note}</span>
+          {pkg.paper && (
+            <a
+              href={pkg.paper}
+              target="_blank"
+              rel="noopener"
+              class="text-xs font-mono text-primary/70 hover:text-primary transition-colors"
+            >
+              Paper ↗
+            </a>
+          )}
           <span class="ml-auto text-xs font-mono text-gray-600">{pkg.language ?? 'Internal'}</span>
         </article>
       ))}

@@ -17,7 +17,9 @@ export const PROJECT_GROUPS = [
 
 export const projects = [
   {
-    title: 'AI + Science',
+    // Titled for the method, not the field — the group heading already says
+    // "AI + Science", so repeating it here said nothing.
+    title: 'Generative & Agentic AI',
     group: 'AI + Science',
     tagline: 'Drug discovery, materials, catalysis, energy',
     description: "Accelerating downstream applications — drug discovery, materials design, catalysis, and energy solutions — by applying deep learning, generative models, and agentic AI to quantum chemical data.",
@@ -33,12 +35,20 @@ export const projects = [
     links: [{ label: 'ByteQC', url: 'https://github.com/bytedance/byteqc' }],
   },
   {
-    title: 'Correlated Electronic Structure',
+    title: 'Quantum Embedding',
     group: 'Quantum Chemistry Methods',
     tagline: 'Catalysis, superconductors, quantum computing',
-    description: "Advancing quantum chemistry applications in catalysis, superconductors, and quantum computing through 1 kcal/mol-accurate ab initio simulation of strongly correlated and metallic systems — quantum embedding on classical and quantum platforms, and AFQMC algorithms that exploit locality and modern GPUs to reach large molecules and metallic surfaces.",
-    tags: ['Quantum Embedding', 'AFQMC', 'Python', 'C/C++', 'Fortran'],
+    description: "Advancing quantum chemistry applications in catalysis, superconductors, and quantum computing through efficient, 1 kcal/mol-accurate ab initio simulation of strongly correlated and metallic systems, on classical and quantum platforms.",
+    tags: ['Python', 'C/C++', 'Fortran', 'Linear Algebra'],
     links: [{ label: 'pDMET', url: 'https://github.com/hungpham2017/pDMET' }],
+  },
+  {
+    title: 'Quantum Monte Carlo',
+    group: 'Quantum Chemistry Methods',
+    tagline: 'Large-scale AFQMC',
+    description: "Enabling scalable, chemically accurate quantum chemistry simulations for large systems — including strongly correlated molecules and metallic surfaces — with advanced AFQMC algorithms that leverage locality and modern GPUs.",
+    tags: ['AFQMC', 'GPU', 'Stochastic Methods'],
+    links: [],
   },
   {
     title: 'Novel Materials Design',
@@ -56,18 +66,19 @@ export const projects = [
 /**
  * Scientific software. Anything without a `url` is internal and is listed
  * without a link rather than pointed anywhere; the section caption counts
- * those itself so it cannot go stale.
+ * those itself so it cannot go stale. `paper` points at the publication a
+ * package produced, which is how an internal tool can still show evidence.
  */
 export const software = [
-  { name: 'ByteQC', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc' },
-  { name: 'PySCF', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf' },
-  { name: 'ipie', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie' },
-  { name: 'pDMET', role: 'Lead developer', note: 'Periodic density matrix embedding theory', language: 'Python', url: 'https://github.com/hungpham2017/pDMET' },
-  { name: 'MCU', role: 'Lead developer', note: 'Modeling and crystallographic utilities', language: 'Python', url: 'https://github.com/hungpham2017/mcu' },
-  { name: 'pyWannier90', role: 'Lead developer', note: 'Wannier90 interface for periodic systems', language: 'Python', url: 'https://github.com/hungpham2017/pyWannier90' },
+  { name: 'ByteQC', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc', paper: null },
+  { name: 'PySCF', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf', paper: null },
+  { name: 'ipie', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie', paper: null },
+  { name: 'pDMET', role: 'Lead developer', note: 'Periodic density matrix embedding theory', language: 'Python', url: 'https://github.com/hungpham2017/pDMET', paper: null },
+  { name: 'MCU', role: 'Lead developer', note: 'Modeling and crystallographic utilities', language: 'Python', url: 'https://github.com/hungpham2017/mcu', paper: null },
+  { name: 'pyWannier90', role: 'Lead developer', note: 'Wannier90 interface for periodic systems', language: 'Python', url: 'https://github.com/hungpham2017/pyWannier90', paper: null },
   // ByteQEmbed and cuRPA were folded into FEMION, which is not being open
   // sourced — hence no link and no language badge.
-  { name: 'FEMION', role: 'Lead developer', note: 'Quantum embedding for metals, GPU random phase approximation', language: null, url: null },
+  { name: 'FEMION', role: 'Lead developer', note: 'Quantum embedding for metals, GPU random phase approximation', language: null, url: null, paper: 'https://arxiv.org/abs/2508.13036' },
 ];
 
 export const experiences = [

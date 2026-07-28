@@ -4,10 +4,13 @@ import { sameAs, links } from '../data/content';
 interface Props {
   title: string;
   description?: string;
+  /** Keeps a page out of search results — used by the archived design. */
+  noindex?: boolean;
 }
 
 const {
   title,
+  noindex = false,
   description = 'Hung Q. Pham — scientist and tech builder working at the intersection of AI and quantum chemistry: deep learning, agentic AI, scientific software, and GPU-accelerated simulation.',
 } = Astro.props;
 
@@ -52,6 +55,10 @@ const person = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <title>{title}</title>
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <!-- Pages add their own font links or preloads here. -->
+    <slot name="head" />
 
     <!-- Link previews (LinkedIn, Slack, X, iMessage) -->
     <meta property="og:type" content="profile" />
