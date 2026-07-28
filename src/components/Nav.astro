@@ -1,9 +1,12 @@
 ---
+import { links as urls } from '../data/content';
+
 const links = [
   { href: '#about', label: 'About' },
   { href: '#projects', label: 'Projects' },
   { href: '#experience', label: 'Experience' },
   { href: '#education', label: 'Education' },
+  { href: '#publications', label: 'Publications' },
 ];
 ---
 <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-gray-950/70 border-b border-gray-800/50">
@@ -22,7 +25,7 @@ const links = [
         </a>
       ))}
       <a
-        href="/assets/resume.pdf"
+        href={urls.resume}
         target="_blank"
         class="text-sm px-4 py-2 rounded-full border border-primary/50 text-primary hover:bg-primary/10 transition-all"
       >
@@ -47,7 +50,7 @@ const links = [
       </a>
     ))}
     <a
-      href="/assets/resume.pdf"
+      href={urls.resume}
       target="_blank"
       class="block text-sm text-primary"
     >

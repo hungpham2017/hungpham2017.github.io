@@ -1,0 +1,47 @@
+---
+import { getPublications, ORCID_URL, SCHOLAR_URL } from '../lib/publications';
+
+const { publications, source } = await getPublications();
+---
+<section id="publications" class="relative z-10 py-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-white mb-4 reveal">
+      <span class="text-primary">//</span> Publications
+    </h2>
+
+    <p class="mb-10 text-sm text-gray-500 reveal">
+      Synced from
+      <a href={ORCID_URL} target="_blank" rel="noopener" class="text-primary/80 hover:text-primary transition-colors">ORCID</a>
+      at build time. Full record on
+      <a href={SCHOLAR_URL} target="_blank" rel="noopener" class="text-primary/80 hover:text-primary transition-colors">Google Scholar</a>.
+      {source === 'cache' && <span class="text-gray-600"> (showing last cached copy)</span>}
+    </p>
+
+    <div class="glow-card divide-y divide-gray-800/70 reveal">
+      {publications.map((pub) => (
+        <article class="flex gap-5 px-6 py-4 group">
+          <span class="text-sm font-mono text-primary/60 pt-0.5 w-12 shrink-0 tabular-nums">
+            {pub.year ?? '—'}
+          </span>
+          <div class="min-w-0">
+            {pub.doi ? (
+              <a
+                href={`https://doi.org/${pub.doi}`}
+                target="_blank"
+                rel="noopener"
+                class="text-gray-200 group-hover:text-primary transition-colors"
+              >
+                {pub.title}
+              </a>
+            ) : (
+              <span class="text-gray-200">{pub.title}</span>
+            )}
+            {pub.journal && (
+              <p class="text-sm text-gray-500 italic mt-1">{pub.journal}</p>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,4 +1,6 @@
 ---
+import { sameAs, links } from '../data/content';
+
 interface Props {
   title: string;
   description?: string;
@@ -31,17 +33,11 @@ const person = {
     'Quantum Monte Carlo',
     'GPU computing',
   ],
-  sameAs: [
-    'https://scholar.google.com/citations?user=MIe6vYUAAAAJ',
-    'https://orcid.org/0000-0003-3608-1298',
-    'https://github.com/hungpham2017',
-    'https://linkedin.com/in/hung-q-pham-4b46598b',
-    'https://twitter.com/hungpham314',
-  ],
+  sameAs,
   identifier: {
     '@type': 'PropertyValue',
     propertyID: 'ORCID',
-    value: 'https://orcid.org/0000-0003-3608-1298',
+    value: links.orcid,
   },
 };
 ---

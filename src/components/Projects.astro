@@ -1,46 +1,6 @@
 ---
 import { isOrphan, CENTER_ORPHAN } from '../lib/card-grid';
-
-const projects = [
-  {
-    title: 'AI + Science',
-    tagline: 'AI + Chemistry for Real-World Impact',
-    description: "Applying deep learning, generative models, and agentic AI to quantum chemical data to accelerate downstream applications — drug discovery, materials design, catalysis, and energy solutions.",
-    tags: ['Deep Learning', 'Agentic AI', 'Drug Discovery', 'Materials Design'],
-    links: [],
-  },
-  {
-    title: 'Quantum Embedding',
-    tagline: 'Scalable Quantum Embedding for Material Simulation',
-    description: "Developing quantum embedding algorithms for efficient, 1 kcal/mol-accurate ab initio simulations of strongly correlated and metallic systems on classical and quantum platforms, advancing quantum chemistry applications in catalysis, superconductors, and quantum computing.",
-    tags: ['Python', 'C/C++', 'Fortran', 'Linear Algebra'],
-    links: [{ label: 'pDMET', url: 'https://github.com/hungpham2017/pDMET' }],
-  },
-  {
-    title: 'Quantum Monte Carlo',
-    tagline: 'Large-scale Quantum Monte Carlo',
-    description: "Developing advanced AFQMC algorithms leveraging locality and modern GPUs, enabling scalable, chemically accurate quantum chemistry simulations for large systems, including strongly correlated molecules and metallic surfaces.",
-    tags: ['AFQMC', 'GPU', 'Stochastic Methods'],
-    links: [],
-  },
-  {
-    title: 'Novel Materials Design',
-    tagline: 'Topological Insulators | Perovskites | MOFs | COFs',
-    description: "Applying advanced computational techniques — periodic DFT, Wannier tight-binding models, and Grand Canonical Monte Carlo — to investigate reticular frameworks, topological systems, and photovoltaics.",
-    tags: ['DFT', 'Wannier90', 'GCMC'],
-    links: [
-      { label: 'MCU', url: 'https://github.com/hungpham2017/mcu' },
-      { label: 'pyWannier90', url: 'https://github.com/hungpham2017/pyWannier90' },
-    ],
-  },
-  {
-    title: 'GPU-Accelerated Quantum Chemistry',
-    tagline: 'Fast Quantum Chemistry on GPU',
-    description: "Accelerating quantum chemistry methods like random phase approximation and quantum embedding by leveraging GPUs, making advanced simulations practical for real-world industrial applications beyond standard DFT.",
-    tags: ['GPU', 'RPA', 'HPC'],
-    links: [],
-  },
-];
+import { projects } from '../data/content';
 ---
 <section id="projects" class="relative z-10 py-24 px-6">
   <div class="max-w-4xl mx-auto">

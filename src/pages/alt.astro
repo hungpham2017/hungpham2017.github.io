@@ -1,0 +1,553 @@
+---
+/**
+ * Alternative design direction — comparison mockup, not wired into the site.
+ * Visit /alt alongside / to compare.
+ *
+ * Every string comes from src/data/content.ts, the same module the live page
+ * renders from. Only the template differs: type, colour, and structure. No
+ * copy is rewritten here, and no section is renamed.
+ */
+import { Image } from 'astro:assets';
+import photo from '../assets/photo.jpg';
+import { getPublications, ORCID_URL, SCHOLAR_URL } from '../lib/publications';
+import {
+  projects,
+  experiences,
+  education,
+  identity,
+  about,
+  profiles,
+} from '../data/content';
+
+const { publications } = await getPublications();
+
+const sections = [
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
+  { id: 'publications', label: 'Publications' },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{identity.name} — {identity.role} (alternative direction)</title>
+    <meta name="robots" content="noindex" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap"
+    />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="#top" class="wordmark">{identity.name}</a>
+      <div class="topbar-right">
+        <nav>
+          {sections.map((s, i) => (
+            <a href={`#${s.id}`}><span class="num">§{i + 1}</span> {s.label}</a>
+          ))}
+        </nav>
+        <button id="theme-toggle" type="button" aria-label="Switch colour scheme">Dark</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="masthead">
+        <div class="masthead-text">
+          <p class="eyebrow">{identity.role}</p>
+          <h1>{identity.name}</h1>
+          <p class="lede">{identity.tagline}</p>
+          <ul class="profiles">
+            {profiles.map((p) => (
+              <li><a href={p.url} target="_blank" rel="noopener">{p.label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div class="portrait">
+          <Image src={photo} alt={identity.name} width={420} format="webp" quality={82} loading="eager" />
+        </div>
+      </section>
+
+      <section id="about" class="sec">
+        <div class="rail"><span class="num">§1</span><span class="rail-label">About</span></div>
+        <div class="body">
+          <p class="standfirst">{about.standfirst}</p>
+          {about.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </section>
+
+      <section id="projects" class="sec">
+        <div class="rail"><span class="num">§2</span><span class="rail-label">Projects</span></div>
+        <div class="body">
+          <dl class="work">
+            {projects.map((project) => (
+              <div class="work-item">
+                <dt>
+                  {project.title}
+                  {project.links.map((link) => (
+                    <a class="repo" href={link.url} target="_blank" rel="noopener">{link.label} ↗</a>
+                  ))}
+                </dt>
+                <dd>
+                  <p class="tagline">{project.tagline}</p>
+                  <p>{project.description}</p>
+                  <p class="tools">{project.tags.join('  ·  ')}</p>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section id="experience" class="sec">
+        <div class="rail"><span class="num">§3</span><span class="rail-label">Experience</span></div>
+        <div class="body">
+          <ol class="record">
+            {experiences.map((exp) => (
+              <li>
+                <span class="period">{exp.period}</span>
+                <span class="entry">
+                  <strong>{exp.title}</strong>
+                  <span class="role">{exp.role}</span>
+                  {exp.focus && <span class="note">{exp.focus}</span>}
+                  {exp.advisor && <span class="note">Advisor: {exp.advisor}</span>}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section id="education" class="sec">
+        <div class="rail"><span class="num">§4</span><span class="rail-label">Education</span></div>
+        <div class="body">
+          <ol class="record">
+            {education.map((edu) => (
+              <li>
+                <span class="period">{edu.period}</span>
+                <span class="entry">
+                  <strong>{edu.school}</strong>
+                  <span class="role">{edu.degree}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section id="publications" class="sec">
+        <div class="rail"><span class="num">§5</span><span class="rail-label">Publications</span></div>
+        <div class="body">
+          <p class="source">
+            Synced from <a href={ORCID_URL} target="_blank" rel="noopener">ORCID</a> at
+            build time. Full record on
+            <a href={SCHOLAR_URL} target="_blank" rel="noopener">Google Scholar</a>.
+          </p>
+          <ol class="bib">
+            {publications.map((pub) => (
+              <li>
+                {pub.doi ? (
+                  <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener">{pub.title}</a>
+                ) : (
+                  <span>{pub.title}</span>
+                )}
+                <span class="cite">{pub.journal && <em>{pub.journal}</em>}{pub.journal && pub.year ? `, ${pub.year}` : pub.year}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p class="colophon">© {new Date().getFullYear()} {identity.name} · References on request</p>
+    </footer>
+    <script is:inline>
+      const root = document.documentElement;
+      const button = document.getElementById('theme-toggle');
+      button?.addEventListener('click', () => {
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        button.textContent = next === 'dark' ? 'Light' : 'Dark';
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  /* --ink is the surface, --paper the text on it. Light is the default;
+     brass is darkened here so it holds contrast against paper. */
+  :root {
+    --ink: #f6f5f2;
+    --rule: #dcd9d2;
+    --paper: #16171b;
+    --muted: #55585f;
+    --faint: #7b7f86;
+    --brass: #8a5a12;
+
+    --measure: 64ch;
+    --gutter: clamp(1.5rem, 5vw, 6rem);
+  }
+
+  :root[data-theme='dark'] {
+    --ink: #0b0c0e;
+    --rule: #23262c;
+    --paper: #ece9e3;
+    --muted: #9a9da4;
+    --faint: #61656d;
+    --brass: #d9a441;
+  }
+
+  .portrait img { filter: grayscale(0.15) contrast(1.02); }
+  :root[data-theme='dark'] .portrait img { filter: grayscale(1) contrast(1.05); }
+
+  *,
+  *::before,
+  *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 3px;
+  }
+
+  .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ===== Top bar ===== */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.1rem var(--gutter);
+    background: color-mix(in srgb, var(--ink) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .wordmark {
+    font-family: 'Newsreader', serif;
+    font-size: 1.1rem;
+    text-decoration: none;
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .topbar nav {
+    display: flex;
+    gap: 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .topbar nav a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+
+  #theme-toggle {
+    font: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.15rem 0.7rem;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  #theme-toggle:hover { border-color: var(--brass); }
+  .topbar nav a:hover { color: var(--paper); }
+  .topbar nav .num { color: var(--brass); margin-right: 0.15em; }
+
+  @media (max-width: 900px) { .topbar nav { display: none; } }
+
+  /* ===== Masthead ===== */
+  /* The masthead and every section share one centred measure, so the rail,
+     the headline and the body text all sit on the same two vertical axes. */
+  .masthead {
+    display: grid;
+    grid-template-columns: minmax(0, 30rem) minmax(0, 11rem);
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    padding: clamp(4rem, 12vh, 9rem) var(--gutter) clamp(3rem, 8vh, 6rem);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eyebrow {
+    margin: 0 0 1.6rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+
+  .masthead h1 {
+    margin: 0;
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6vw, 4.4rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+
+  .lede {
+    margin: 1.6rem 0 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.3rem;
+    margin: 2.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.73rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .profiles a {
+    color: var(--muted);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .profiles a:hover { color: var(--brass); border-color: var(--brass); }
+
+  .portrait img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    height: auto;
+    object-fit: cover;
+    object-position: 50% 12%;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--rule);
+  }
+
+  @media (max-width: 900px) {
+    .masthead {
+      grid-template-columns: minmax(0, 34rem);
+      justify-content: start;
+      align-items: start;
+    }
+    .portrait { order: -1; margin-bottom: 0.5rem; }
+    .portrait img { width: 7.5rem; }
+  }
+
+  /* ===== Sections ===== */
+  .sec {
+    display: grid;
+    grid-template-columns: 8rem minmax(0, 40rem);
+    justify-content: center;
+    gap: 2.5rem;
+    padding: clamp(3.5rem, 9vh, 6.5rem) var(--gutter);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rail {
+    position: sticky;
+    top: 5.5rem;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .rail .num { color: var(--brass); }
+  .rail-label { color: var(--faint); }
+
+  .body p { margin: 0 0 1.2rem; color: color-mix(in srgb, var(--paper) 78%, transparent); }
+  .body p:last-child { margin-bottom: 0; }
+
+  .standfirst {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.12rem, 2vw, 1.4rem);
+    line-height: 1.45;
+    color: var(--paper) !important;
+    margin-bottom: 1.8rem !important;
+  }
+
+  @media (max-width: 900px) {
+    .sec { grid-template-columns: minmax(0, 40rem); justify-content: start; }
+    .rail { position: static; flex-direction: row; gap: 0.6rem; margin-bottom: 1.5rem; }
+    footer { justify-content: start; }
+  }
+
+  /* ===== Projects ===== */
+  .work { margin: 0; }
+
+  .work-item { padding: 1.8rem 0; border-top: 1px solid var(--rule); }
+  .work-item:first-child { border-top: 0; padding-top: 0; }
+  .work-item:last-child { padding-bottom: 0; }
+
+  .work dt {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.9rem;
+    font-family: 'Newsreader', serif;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .repo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .repo:hover { border-color: var(--brass); }
+
+  .work dd { margin: 0.45rem 0 0; }
+
+  .tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--muted) !important;
+    margin-bottom: 0.7rem !important;
+  }
+
+  .tools {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint) !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ===== Experience / Education ===== */
+  .record { margin: 0; padding: 0; list-style: none; }
+
+  .record li {
+    display: grid;
+    grid-template-columns: 10.5rem minmax(0, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .record li:first-child { border-top: 0; padding-top: 0; }
+  .record li:last-child { padding-bottom: 0; }
+
+  .period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--brass);
+    padding-top: 0.35rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .entry { display: flex; flex-direction: column; gap: 0.15rem; }
+  .entry strong { font-weight: 500; font-size: 1.05rem; }
+  .role { color: var(--muted); }
+  .note { font-size: 0.9rem; color: var(--faint); }
+
+  @media (max-width: 620px) {
+    .record li { grid-template-columns: 1fr; gap: 0.4rem; }
+    .period { padding-top: 0; }
+  }
+
+  /* ===== Publications ===== */
+  .source { font-size: 0.85rem; color: var(--faint) !important; margin-bottom: 2rem !important; }
+  .source a { color: var(--brass); text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .source a:hover { border-color: var(--brass); }
+
+  .bib { margin: 0; padding: 0; list-style: none; counter-reset: ref; }
+
+  .bib li {
+    counter-increment: ref;
+    position: relative;
+    padding: 0.9rem 0 0.9rem 3.2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .bib li:first-child { border-top: 0; }
+
+  .bib li::before {
+    content: '[' counter(ref) ']';
+    position: absolute;
+    left: 0;
+    top: 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--faint);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bib a { text-decoration: none; border-bottom: 1px solid var(--rule); transition: color 0.2s, border-color 0.2s; }
+  .bib a:hover { color: var(--brass); border-color: var(--brass); }
+
+  .cite { display: block; margin-top: 0.2rem; font-size: 0.85rem; color: var(--faint); }
+  .cite em { font-family: 'Newsreader', serif; font-size: 0.95rem; }
+
+  /* ===== Footer ===== */
+  footer {
+    display: grid;
+    grid-template-columns: minmax(0, 50.5rem);
+    justify-content: center;
+    padding: clamp(3rem, 8vh, 5rem) var(--gutter);
+  }
+  footer p { margin: 0; color: var(--muted); }
+
+  .colophon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint) !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+</style>
