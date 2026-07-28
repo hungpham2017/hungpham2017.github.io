@@ -1,7 +1,12 @@
 ---
-import { getPublications, ORCID_URL, SCHOLAR_URL } from '../lib/publications';
-
-const { publications, source } = await getPublications();
+import {
+  publications,
+  preprintCount,
+  publicationUrl,
+  ORCID_URL,
+  SCHOLAR_URL,
+  ARXIV_URL,
+} from '../lib/publications';
 ---
 <section id="publications" class="relative z-10 py-24 px-6">
   <div class="max-w-4xl mx-auto">
@@ -10,11 +15,10 @@ const { publications, source } = await getPublications();
     </h2>
 
     <p class="mb-10 text-sm text-gray-500 reveal">
-      Synced from
+      {`${publications.length} works including ${preprintCount} preprint${preprintCount === 1 ? '' : 's'}`}, from
       <a href={ORCID_URL} target="_blank" rel="noopener" class="text-primary/80 hover:text-primary transition-colors">ORCID</a>
-      at build time. Full record on
+      and <a href={ARXIV_URL} target="_blank" rel="noopener" class="text-primary/80 hover:text-primary transition-colors">arXiv</a>. Full record on
       <a href={SCHOLAR_URL} target="_blank" rel="noopener" class="text-primary/80 hover:text-primary transition-colors">Google Scholar</a>.
-      {source === 'cache' && <span class="text-gray-600"> (showing last cached copy)</span>}
     </p>
 
     <div class="glow-card divide-y divide-gray-800/70 reveal">
@@ -24,9 +28,9 @@ const { publications, source } = await getPublications();
             {pub.year ?? '—'}
           </span>
           <div class="min-w-0">
-            {pub.doi ? (
+            {publicationUrl(pub) ? (
               <a
-                href={`https://doi.org/${pub.doi}`}
+                href={publicationUrl(pub)}
                 target="_blank"
                 rel="noopener"
                 class="text-gray-200 group-hover:text-primary transition-colors"
@@ -36,9 +40,15 @@ const { publications, source } = await getPublications();
             ) : (
               <span class="text-gray-200">{pub.title}</span>
             )}
-            {pub.journal && (
-              <p class="text-sm text-gray-500 italic mt-1">{pub.journal}</p>
-            )}
+            <p class="flex flex-wrap items-center gap-x-2 gap-y-1 mt-1">
+              {pub.journal && <span class="text-sm text-gray-500 italic">{pub.journal}</span>}
+              {!pub.doi && pub.arxivId && (
+                <>
+                  <span class="text-[11px] uppercase tracking-wide px-2 py-0.5 rounded-full bg-primary/10 text-primary/80">Preprint</span>
+                  <span class="text-sm font-mono text-gray-600">arXiv:{pub.arxivId}</span>
+                </>
+              )}
+            </p>
           </div>
         </article>
       ))}

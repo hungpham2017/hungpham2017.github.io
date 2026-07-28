@@ -9,7 +9,7 @@
  */
 import { Image } from 'astro:assets';
 import photo from '../assets/photo.jpg';
-import { getPublications, ORCID_URL, SCHOLAR_URL } from '../lib/publications';
+import { publications, publicationUrl, ORCID_URL, SCHOLAR_URL, ARXIV_URL } from '../lib/publications';
 import {
   projects,
   software,
@@ -20,7 +20,6 @@ import {
   profiles,
 } from '../data/content';
 
-const { publications } = await getPublications();
 
 const sections = [
   { id: 'about', label: 'About' },
@@ -169,19 +168,19 @@ const sections = [
         <div class="rail"><span class="num">§6</span><span class="rail-label">Publications</span></div>
         <div class="body">
           <p class="source">
-            Synced from <a href={ORCID_URL} target="_blank" rel="noopener">ORCID</a> at
-            build time. Full record on
-            <a href={SCHOLAR_URL} target="_blank" rel="noopener">Google Scholar</a>.
+            Synced at build time from <a href={ORCID_URL} target="_blank" rel="noopener">ORCID</a>
+            and <a href={ARXIV_URL} target="_blank" rel="noopener">arXiv</a>.
+            Full record on <a href={SCHOLAR_URL} target="_blank" rel="noopener">Google Scholar</a>.
           </p>
           <ol class="bib">
             {publications.map((pub) => (
               <li>
-                {pub.doi ? (
-                  <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener">{pub.title}</a>
+                {publicationUrl(pub) ? (
+                  <a href={publicationUrl(pub)} target="_blank" rel="noopener">{pub.title}</a>
                 ) : (
                   <span>{pub.title}</span>
                 )}
-                <span class="cite">{pub.journal && <em>{pub.journal}</em>}{pub.journal && pub.year ? `, ${pub.year}` : pub.year}</span>
+                <span class="cite">{pub.journal ? <em>{pub.journal}</em> : <em>Preprint, arXiv:{pub.arxivId}</em>}{pub.year ? `, ${pub.year}` : ''}</span>
               </li>
             ))}
           </ol>

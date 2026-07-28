@@ -9,9 +9,16 @@
  * Every fact and nearly all the wording is carried over from the originals —
  * only the order of emphasis changed.
  */
+export const PROJECT_GROUPS = [
+  'AI + Science',
+  'Scientific Computing at Scale',
+  'Quantum Chemistry Methods',
+] as const;
+
 export const projects = [
   {
     title: 'AI + Science',
+    group: 'AI + Science',
     tagline: 'Drug discovery, materials, catalysis, energy',
     description: "Accelerating downstream applications — drug discovery, materials design, catalysis, and energy solutions — by applying deep learning, generative models, and agentic AI to quantum chemical data.",
     tags: ['Deep Learning', 'Agentic AI', 'Drug Discovery', 'Materials Design'],
@@ -19,6 +26,7 @@ export const projects = [
   },
   {
     title: 'GPU-Accelerated Quantum Chemistry',
+    group: 'Scientific Computing at Scale',
     tagline: 'Simulation fast enough for industry',
     description: "Making advanced simulation practical for real-world industrial applications beyond standard DFT, by rebuilding methods like the random phase approximation and quantum embedding to run on GPUs.",
     tags: ['GPU', 'RPA', 'HPC'],
@@ -26,6 +34,7 @@ export const projects = [
   },
   {
     title: 'Correlated Electronic Structure',
+    group: 'Quantum Chemistry Methods',
     tagline: 'Catalysis, superconductors, quantum computing',
     description: "Advancing quantum chemistry applications in catalysis, superconductors, and quantum computing through 1 kcal/mol-accurate ab initio simulation of strongly correlated and metallic systems — quantum embedding on classical and quantum platforms, and AFQMC algorithms that exploit locality and modern GPUs to reach large molecules and metallic surfaces.",
     tags: ['Quantum Embedding', 'AFQMC', 'Python', 'C/C++', 'Fortran'],
@@ -33,6 +42,7 @@ export const projects = [
   },
   {
     title: 'Novel Materials Design',
+    group: 'Quantum Chemistry Methods',
     tagline: 'Topological insulators, perovskites, MOFs, COFs',
     description: "Investigating reticular frameworks, topological systems, and photovoltaics with periodic DFT, Wannier tight-binding models, and Grand Canonical Monte Carlo.",
     tags: ['DFT', 'Wannier90', 'GCMC'],

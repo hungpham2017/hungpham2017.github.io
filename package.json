@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "sync:pubs": "node scripts/sync-publications.mjs"
+    "update:pubs": "node scripts/update-publications.mjs"
   },
   "dependencies": {
     "@astrojs/tailwind": "^5.1.4",

@@ -3,10 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master]
-  # Publications are fetched from ORCID at build time, so a periodic rebuild
-  # picks up new papers without anyone pushing a commit.
-  schedule:
-    - cron: '0 6 * * 1'
   workflow_dispatch:
 
 permissions:

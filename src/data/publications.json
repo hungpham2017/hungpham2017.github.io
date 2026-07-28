@@ -1,0 +1,184 @@
+[
+  {
+    "title": "A Unified Generative Framework for Scalable Chemical Reaction Network Exploration",
+    "journal": null,
+    "year": 2026,
+    "doi": null,
+    "arxivId": "2606.21002"
+  },
+  {
+    "title": "The Python Simulations of Chemistry Framework: 10 years of an open-source quantum chemistry project",
+    "journal": null,
+    "year": 2026,
+    "doi": null,
+    "arxivId": "2603.14155"
+  },
+  {
+    "title": "A multi-resolution systematically improvable quantum embedding scheme for large-scale surface chemistry calculations",
+    "journal": "Nature Communications",
+    "year": 2025,
+    "doi": "10.1038/s41467-025-64374-2",
+    "arxivId": null
+  },
+  {
+    "title": "ByteQC: GPU‐Accelerated Quantum Chemistry Package for Large‐Scale Systems",
+    "journal": "WIREs Computational Molecular Science",
+    "year": 2025,
+    "doi": "10.1002/wcms.70034",
+    "arxivId": "2502.17963"
+  },
+  {
+    "title": "Neural Scaling Laws Surpass Chemical Accuracy for the Many-Electron Schrödinger Equation",
+    "journal": null,
+    "year": 2025,
+    "doi": null,
+    "arxivId": "2508.02570"
+  },
+  {
+    "title": "Quantum Many-Body Simulations of Catalytic Metal Surfaces",
+    "journal": null,
+    "year": 2025,
+    "doi": null,
+    "arxivId": "2508.13036"
+  },
+  {
+    "title": "Advancing Surface Chemistry with Large-Scale Ab-Initio Quantum Many-Body Simulations",
+    "journal": null,
+    "year": 2024,
+    "doi": null,
+    "arxivId": "2412.18553"
+  },
+  {
+    "title": "GPU-accelerated Auxiliary-field quantum Monte Carlo with multi-Slater determinant trial states",
+    "journal": null,
+    "year": 2024,
+    "doi": null,
+    "arxivId": "2406.08314"
+  },
+  {
+    "title": "Scalable Quantum Monte Carlo with Direct-Product Trial Wave Functions",
+    "journal": "Journal of Chemical Theory and Computation",
+    "year": 2024,
+    "doi": "10.1021/acs.jctc.3c00769",
+    "arxivId": "2306.15186"
+  },
+  {
+    "title": "Ab initio quantum simulation of strongly correlated materials with quantum embedding",
+    "journal": "npj Computational Materials",
+    "year": 2023,
+    "doi": "10.1038/s41524-023-01045-0",
+    "arxivId": "2209.03202"
+  },
+  {
+    "title": "Twenty Years of Auxiliary-Field Quantum Monte Carlo in Quantum Chemistry: An Overview and Assessment on Main Group Chemistry and Bond-Breaking",
+    "journal": "Journal of Chemical Theory and Computation",
+    "year": 2022,
+    "doi": "10.1021/acs.jctc.2c00802",
+    "arxivId": "2208.01280"
+  },
+  {
+    "title": "Excited States of Crystalline Point Defects with Multireference Density Matrix Embedding Theory",
+    "journal": "The Journal of Physical Chemistry Letters",
+    "year": 2021,
+    "doi": "10.1021/acs.jpclett.1c03229",
+    "arxivId": null
+  },
+  {
+    "title": "Topological Insulating Phase in Single-Layer Pentagonal Covalent Organic Frameworks: A Reticular Design Using Metal Phthalocyanine",
+    "journal": "Chemistry of Materials",
+    "year": 2021,
+    "doi": "10.1021/acs.chemmater.1c00671",
+    "arxivId": null
+  },
+  {
+    "title": "Periodic Electronic Structure Calculations with the Density Matrix Embedding Theory",
+    "journal": "Journal of Chemical Theory and Computation",
+    "year": 2020,
+    "doi": "10.1021/acs.jctc.9b00939",
+    "arxivId": null
+  },
+  {
+    "title": "Phosphorescent heteroleptic iridium(III) cyclometallates: Improved syntheses of acetylacetonate complexes and quantum chemical studies of their excited state properties",
+    "journal": "Polyhedron",
+    "year": 2020,
+    "doi": "10.1016/j.poly.2019.114256",
+    "arxivId": null
+  },
+  {
+    "title": "Recent developments in the PySCF program package",
+    "journal": null,
+    "year": 2020,
+    "doi": null,
+    "arxivId": "2002.12531"
+  },
+  {
+    "title": "Electron delocalization in single-layer phthalocyanine-based covalent organic frameworks: a first principle study",
+    "journal": "RSC Advances",
+    "year": 2019,
+    "doi": "10.1039/C9RA05159G",
+    "arxivId": null
+  },
+  {
+    "title": "Highly efficient phosphorescence from cyclometallated iridium(III) compounds: Improved syntheses of picolinate complexes and quantum chemical studies of their electronic structures",
+    "journal": "Inorganica Chimica Acta",
+    "year": 2019,
+    "doi": "10.1016/j.ica.2019.119040",
+    "arxivId": null
+  },
+  {
+    "title": "Lead-free double perovskites Cs2InCuCl6 and (CH3NH3)2InCuCl6: electronic, optical, and electrical properties",
+    "journal": "Nanoscale",
+    "year": 2019,
+    "doi": "10.1039/C9NR01645G",
+    "arxivId": null
+  },
+  {
+    "title": "Periodic Electronic Structure Calculations With Density Matrix Embedding Theory",
+    "journal": null,
+    "year": 2019,
+    "doi": null,
+    "arxivId": "1909.08783"
+  },
+  {
+    "title": "Can Density Matrix Embedding Theory with the Complete Activate Space Self-Consistent Field Solver Describe Single and Double Bond Breaking in Molecular Systems?",
+    "journal": "Journal of Chemical Theory and Computation",
+    "year": 2018,
+    "doi": "10.1021/acs.jctc.7b01248",
+    "arxivId": "1712.07245"
+  },
+  {
+    "title": "Computational Study of Structural and Electronic Properties of Lead-Free CsMI3 Perovskites (M = Ge, Sn, Pb, Mg, Ca, Sr, and Ba)",
+    "journal": "The Journal of Physical Chemistry C",
+    "year": 2018,
+    "doi": "10.1021/acs.jpcc.8b00226",
+    "arxivId": null
+  },
+  {
+    "title": "Effect of chemical functionalization groups on Zr<inf>6</inf>-AzoBDC to enhance H<inf>2</inf>, CH<inf>4</inf> storage and CO<inf>2</inf> capture: A theoretical investigation",
+    "journal": "Advances in Natural Sciences: Nanoscience and Nanotechnology",
+    "year": 2015,
+    "doi": "10.1088/2043-6262/6/3/035011",
+    "arxivId": null
+  },
+  {
+    "title": "Synthesis and Selective CO2 Capture Properties of a Series of Hexatopic Linker-Based Metal–Organic Frameworks",
+    "journal": "Inorganic Chemistry",
+    "year": 2015,
+    "doi": "10.1021/acs.inorgchem.5b01900",
+    "arxivId": null
+  },
+  {
+    "title": "Tailoring the Optical Absorption of Water-Stable ZrIV- and HfIV-Based Metal-Organic Framework Photocatalysts",
+    "journal": "Chemistry - An Asian Journal",
+    "year": 2015,
+    "doi": "10.1002/asia.201500641",
+    "arxivId": null
+  },
+  {
+    "title": "Engineering of Band Gap in Metal–Organic Frameworks by Functionalizing Organic Linker: A Systematic Density Functional Theory Investigation",
+    "journal": "The Journal of Physical Chemistry C",
+    "year": 2014,
+    "doi": "10.1021/jp405997r",
+    "arxivId": null
+  }
+]
