@@ -47,7 +47,8 @@ const sections = [
   { id: 'focus', label: 'Focus' },
   { id: 'software', label: 'Software' },
   { id: 'publications', label: 'Publications' },
-  { id: 'background', label: 'Background' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'education', label: 'Education' },
 ];
 ---
 <Layout title={`${identity.name} — ${identity.role}`}>
@@ -181,9 +182,9 @@ const sections = [
       </section>
 
       <!-- Background -->
-      <section id="background" class="sec">
+      <section id="experience" class="sec">
         <div class="wrap">
-          <p class="label">Background</p>
+          <p class="label">Experience</p>
           <ol class="record">
             {experiences.map((exp) => (
               <li>
@@ -198,7 +199,12 @@ const sections = [
             ))}
           </ol>
 
-          <p class="label label-inline">Education</p>
+        </div>
+      </section>
+
+      <section id="education" class="sec">
+        <div class="wrap">
+          <p class="label">Education</p>
           <ol class="record">
             {education.map((edu) => (
               <li>
@@ -216,7 +222,7 @@ const sections = [
 
     <footer>
       <div class="wrap">
-        <p class="colophon">© {new Date().getFullYear()} {identity.name} · References on request</p>
+        <p class="colophon">© {new Date().getFullYear()} {identity.name}</p>
       </div>
     </footer>
 
@@ -255,6 +261,15 @@ const sections = [
     --faint: #676b72;
     --rule: #e0ddd6;
     --accent: #8a5a12;
+
+    /* Type scale. Three families, three jobs:
+       Newsreader — identity and the one-line thesis, nothing else.
+       Plex Sans  — every title and every piece of prose.
+       Plex Mono  — labels and data, at exactly two sizes.
+       Six near-identical mono sizes had accumulated between 0.65 and 0.85rem,
+       which reads as drift rather than hierarchy. */
+    --t-label: 0.78rem;
+    --t-meta: 0.7rem;
 
     --measure: 52rem;
     --gutter: clamp(1.25rem, 5vw, 4rem);
@@ -295,14 +310,12 @@ const sections = [
   .label {
     margin: 0 0 1.5rem;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: var(--t-label);
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--accent);
   }
-
-  .label-inline { margin-top: 3rem; }
 
   /* ===== Top bar ===== */
   .topbar {
@@ -331,7 +344,7 @@ const sections = [
 
   .topbar nav a {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: var(--t-meta);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
@@ -357,7 +370,7 @@ const sections = [
 
   #theme-toggle {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: var(--t-meta);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
@@ -385,7 +398,7 @@ const sections = [
   .eyebrow {
     margin: 0 0 1.2rem;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
+    font-size: var(--t-meta);
     font-weight: 500;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -420,7 +433,7 @@ const sections = [
 
   .profiles a {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: var(--t-meta);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--muted);
@@ -458,9 +471,8 @@ const sections = [
   .standfirst {
     margin: 0 0 1.5rem;
     font-family: 'Newsreader', serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    font-weight: 400;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
     line-height: 1.4;
   }
 
@@ -487,7 +499,7 @@ const sections = [
     border-bottom: 1px solid var(--rule);
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 500;
-    font-size: 0.78rem;
+    font-size: var(--t-label);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--fg);
@@ -502,15 +514,15 @@ const sections = [
     align-items: baseline;
     gap: 0.8rem;
     margin: 0;
-    font-family: 'Newsreader', serif;
-    font-weight: 400;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-weight: 500;
     font-size: 1.15rem;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.005em;
   }
 
   .repo {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
+    font-size: var(--t-meta);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent);
@@ -522,7 +534,7 @@ const sections = [
   .project-tagline {
     margin: 0.3rem 0 0.6rem;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
+    font-size: var(--t-meta);
     letter-spacing: 0.04em;
     color: var(--faint);
   }
@@ -532,7 +544,7 @@ const sections = [
   .tags {
     margin: 0.6rem 0 0;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
+    font-size: var(--t-meta);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--faint);
@@ -552,7 +564,7 @@ const sections = [
 
   .meta {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
+    font-size: var(--t-meta);
     letter-spacing: 0.04em;
     color: var(--faint);
     padding-top: 0.28rem;
@@ -565,7 +577,7 @@ const sections = [
 
   .entry > a,
   .entry-title {
-    font-size: 0.98rem;
+    font-size: 1rem;
     font-weight: 400;
     color: var(--fg);
     text-decoration: none;
@@ -574,7 +586,7 @@ const sections = [
   .entry > a { border-bottom: 1px solid transparent; width: fit-content; }
   .entry > a:hover { color: var(--accent); border-color: var(--accent); }
 
-  .sub { font-size: 0.82rem; color: var(--muted); }
+  .sub { font-size: 0.85rem; color: var(--muted); }
   .sub.faint { color: var(--faint); }
 
   @media (max-width: 620px) {
@@ -588,7 +600,7 @@ const sections = [
   .colophon {
     margin: 0;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
+    font-size: var(--t-meta);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--faint);

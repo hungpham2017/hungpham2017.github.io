@@ -34,6 +34,24 @@ const BIB = new URL('scholar.bib', DATA_DIR);
 
 const norm = (title) => (title ?? '').toLowerCase().replace(/[^a-z0-9]/g, '');
 
+/**
+ * ORCID stores some titles with inline markup — <inf>6</inf> for subscripts,
+ * occasionally <i> or <sup>. Rendered as text it shows up literally, e.g.
+ * "Zr<inf>6</inf>-AzoBDC". Keep the inner text, drop the tags.
+ */
+function clean(value) {
+  if (!value) return value;
+  return value
+    .replace(/<\/?(?:inf|sub|sup|i|b|em|strong|span)>/gi, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 async function fromOrcid() {
   const res = await fetch(`https://pub.orcid.org/v3.0/${ORCID_ID}/works`, {
     headers: { Accept: 'application/json' },
@@ -136,7 +154,11 @@ results.forEach((r, i) => {
 });
 
 const scholar = fromScholarBib();
-const merged = merge([orcid, arxiv, scholar]);
+const merged = merge([orcid, arxiv, scholar]).map((p) => ({
+  ...p,
+  title: clean(p.title),
+  journal: clean(p.journal),
+}));
 
 if (!merged.length) {
   console.error('No publications resolved — refusing to overwrite with an empty list.');

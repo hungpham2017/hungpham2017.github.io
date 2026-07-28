@@ -9,26 +9,38 @@
  * Every fact and nearly all the wording is carried over from the originals —
  * only the order of emphasis changed.
  */
-export const PROJECT_GROUPS = [
-  'AI + Science',
-  'Scientific Computing at Scale',
-  'Quantum Chemistry Methods',
-] as const;
+/**
+ * Two groups, not four. Single-card groups made the headings read as noise,
+ * and "AI + Science" next to "Applied AI" said the same word twice. These two
+ * are the actual threads, and each holds several cards.
+ */
+export const PROJECT_GROUPS = ['AI', 'Quantum Chemistry'] as const;
 
 export const projects = [
   {
     // Titled for the method, not the field — the group heading already says
     // "AI + Science", so repeating it here said nothing.
-    title: 'Generative & Agentic AI',
-    group: 'AI + Science',
+    title: 'Generative Modeling for Chemistry',
+    group: 'AI',
     tagline: 'Drug discovery, materials, catalysis, energy',
-    description: "Accelerating downstream applications — drug discovery, materials design, catalysis, and energy solutions — by applying deep learning, generative models, and agentic AI to quantum chemical data.",
-    tags: ['Deep Learning', 'Agentic AI', 'Drug Discovery', 'Materials Design'],
+    description: "Accelerating downstream applications — drug discovery, materials design, catalysis, and energy solutions — by applying deep learning and generative models to quantum chemical data.",
+    tags: ['Deep Learning', 'Generative Models', 'Drug Discovery', 'Materials Design'],
+    links: [],
+  },
+  {
+    // Split out of the card above so agentic work reads as its own thread.
+    // The description is assembled from the second About paragraph rather
+    // than newly written — replace it with your own wording when you have it.
+    title: 'Agentic AI',
+    group: 'AI',
+    tagline: 'Workflows and intelligent tools',
+    description: "Building systems and models that integrate AI into different fields to boost productivity and efficiency — from agentic workflows to intelligent tools.",
+    tags: ['Agentic AI', 'Workflows', 'Tooling'],
     links: [],
   },
   {
     title: 'GPU-Accelerated Quantum Chemistry',
-    group: 'Scientific Computing at Scale',
+    group: 'Quantum Chemistry',
     tagline: 'Simulation fast enough for industry',
     description: "Making advanced simulation practical for real-world industrial applications beyond standard DFT, by rebuilding methods like the random phase approximation and quantum embedding to run on GPUs.",
     tags: ['GPU', 'RPA', 'HPC'],
@@ -36,7 +48,7 @@ export const projects = [
   },
   {
     title: 'Quantum Embedding',
-    group: 'Quantum Chemistry Methods',
+    group: 'Quantum Chemistry',
     tagline: 'Catalysis, superconductors, quantum computing',
     description: "Advancing quantum chemistry applications in catalysis, superconductors, and quantum computing through efficient, 1 kcal/mol-accurate ab initio simulation of strongly correlated and metallic systems, on classical and quantum platforms.",
     tags: ['Python', 'C/C++', 'Fortran', 'Linear Algebra'],
@@ -44,7 +56,7 @@ export const projects = [
   },
   {
     title: 'Quantum Monte Carlo',
-    group: 'Quantum Chemistry Methods',
+    group: 'Quantum Chemistry',
     tagline: 'Large-scale AFQMC',
     description: "Enabling scalable, chemically accurate quantum chemistry simulations for large systems — including strongly correlated molecules and metallic surfaces — with advanced AFQMC algorithms that leverage locality and modern GPUs.",
     tags: ['AFQMC', 'GPU', 'Stochastic Methods'],
@@ -52,7 +64,7 @@ export const projects = [
   },
   {
     title: 'Novel Materials Design',
-    group: 'Quantum Chemistry Methods',
+    group: 'Quantum Chemistry',
     tagline: 'Topological insulators, perovskites, MOFs, COFs',
     description: "Investigating reticular frameworks, topological systems, and photovoltaics with periodic DFT, Wannier tight-binding models, and Grand Canonical Monte Carlo.",
     tags: ['DFT', 'Wannier90', 'GCMC'],
