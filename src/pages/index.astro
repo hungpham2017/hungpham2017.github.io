@@ -24,6 +24,7 @@ import {
   projects,
   PROJECT_GROUPS,
   software,
+  SOFTWARE_GROUPS,
   experiences,
   education,
   identity,
@@ -34,6 +35,11 @@ import {
 const grouped = PROJECT_GROUPS.map((group) => ({
   group,
   items: projects.filter((p) => p.group === group),
+})).filter(({ items }) => items.length > 0);
+
+const softwareGrouped = SOFTWARE_GROUPS.map((group) => ({
+  group,
+  items: software.filter((pkg) => pkg.group === group),
 })).filter(({ items }) => items.length > 0);
 
 const sections = [
@@ -124,31 +130,31 @@ const sections = [
       <section id="software" class="sec">
         <div class="wrap">
           <p class="label">Software</p>
-          <p class="section-note">
-            Scientific packages I lead or contribute to.
-            {software.filter((pkg) => !pkg.url).length > 0 &&
-              ` ${software.filter((pkg) => !pkg.url).length} internal, with no public repository.`}
-          </p>
-          <ol class="record">
-            {software.map((pkg) => (
-              <li>
-                <span class:list={['meta', pkg.role === 'Lead developer' && 'meta-strong']}>
-                  {pkg.role === 'Lead developer' ? 'Lead' : 'Contributor'}
-                </span>
-                <span class="entry">
-                  {pkg.url
-                    ? <a href={pkg.url} target="_blank" rel="noopener">{pkg.name}</a>
-                    : <span class="entry-title">{pkg.name}</span>}
-                  <span class="sub">
-                    {pkg.note} · {pkg.language ?? 'Internal'}
-                    {pkg.paper && (
-                      <> · <a class="repo" href={pkg.paper} target="_blank" rel="noopener">Paper ↗</a></>
-                    )}
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ol>
+          {softwareGrouped.map(({ group, items }) => (
+            <div class="group">
+              <h2 class="group-title">{group}</h2>
+              <ol class="record">
+                {items.map((pkg) => (
+                  <li>
+                    <span class:list={['meta', pkg.role !== 'Contributor' && 'meta-strong']}>
+                      {pkg.role === 'Lead developer' ? 'Lead' : pkg.role}
+                    </span>
+                    <span class="entry">
+                      {pkg.url
+                        ? <a href={pkg.url} target="_blank" rel="noopener">{pkg.name}</a>
+                        : <span class="entry-title">{pkg.name}</span>}
+                      <span class="sub">
+                        {pkg.note}
+                        {pkg.language && <> · {pkg.language}</>}
+                        {!pkg.url && <> · Internal</>}
+                        {pkg.paper && <> · <a class="repo" href={pkg.paper} target="_blank" rel="noopener">Paper ↗</a></>}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -476,13 +482,14 @@ const sections = [
 
   .group-title {
     max-width: 62ch;
-    margin: 0 0 1.4rem;
-    padding-bottom: 0.6rem;
+    margin: 0 0 1.3rem;
+    padding-bottom: 0.55rem;
     border-bottom: 1px solid var(--rule);
-    font-family: 'Newsreader', serif;
-    font-weight: 400;
-    font-size: 1.5rem;
-    letter-spacing: -0.015em;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--fg);
   }
 

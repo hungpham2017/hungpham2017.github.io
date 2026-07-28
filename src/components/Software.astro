@@ -5,14 +5,9 @@ const internal = software.filter((pkg) => !pkg.url).length;
 ---
 <section id="software" class="relative z-10 py-24 px-6">
   <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold text-white mb-4 reveal">
+    <h2 class="text-3xl font-bold text-white mb-10 reveal">
       <span class="text-primary">//</span> Software
     </h2>
-    <p class="mb-10 text-sm text-gray-500 reveal">
-      Scientific packages I lead or contribute to.
-      {internal > 0 && ` ${internal === 1 ? 'One is' : `${internal} are`} internal, with no public repository.`}
-    </p>
-
     <div class="glow-card divide-y divide-gray-800/70 reveal">
       {software.map((pkg) => (
         <article class="flex flex-wrap items-baseline gap-x-3 gap-y-1 px-6 py-4 group">

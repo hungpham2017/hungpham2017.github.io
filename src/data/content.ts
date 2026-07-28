@@ -63,22 +63,33 @@ export const projects = [
   },
 ];
 
+export const SOFTWARE_GROUPS = ['Scientific packages', 'Side projects'] as const;
+
 /**
- * Scientific software. Anything without a `url` is internal and is listed
- * without a link rather than pointed anywhere; the section caption counts
- * those itself so it cannot go stale. `paper` points at the publication a
- * package produced, which is how an internal tool can still show evidence.
+ * Everything built and shipped. Anything without a `url` is internal and is
+ * listed without a link rather than pointed anywhere. `paper` points at the
+ * publication a package produced, which is how an internal tool can still
+ * show evidence.
  */
 export const software = [
-  { name: 'ByteQC', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc', paper: null },
-  { name: 'PySCF', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf', paper: null },
-  { name: 'ipie', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie', paper: null },
-  { name: 'pDMET', role: 'Lead developer', note: 'Periodic density matrix embedding theory', language: 'Python', url: 'https://github.com/hungpham2017/pDMET', paper: null },
-  { name: 'MCU', role: 'Lead developer', note: 'Modeling and crystallographic utilities', language: 'Python', url: 'https://github.com/hungpham2017/mcu', paper: null },
-  { name: 'pyWannier90', role: 'Lead developer', note: 'Wannier90 interface for periodic systems', language: 'Python', url: 'https://github.com/hungpham2017/pyWannier90', paper: null },
+  { name: 'ByteQC', group: 'Scientific packages', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc', paper: null },
+  { name: 'PySCF', group: 'Scientific packages', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf', paper: null },
+  { name: 'ipie', group: 'Scientific packages', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie', paper: null },
+  { name: 'pDMET', group: 'Scientific packages', role: 'Lead developer', note: 'Periodic density matrix embedding theory', language: 'Python', url: 'https://github.com/hungpham2017/pDMET', paper: null },
+  { name: 'MCU', group: 'Scientific packages', role: 'Lead developer', note: 'Modeling and crystallographic utilities', language: 'Python', url: 'https://github.com/hungpham2017/mcu', paper: null },
+  { name: 'pyWannier90', group: 'Scientific packages', role: 'Lead developer', note: 'Wannier90 interface for periodic systems', language: 'Python', url: 'https://github.com/hungpham2017/pyWannier90', paper: null },
   // ByteQEmbed and cuRPA were folded into FEMION, which is not being open
   // sourced — hence no link and no language badge.
-  { name: 'FEMION', role: 'Lead developer', note: 'Quantum embedding for metals, GPU random phase approximation', language: null, url: null, paper: 'https://arxiv.org/abs/2508.13036' },
+  { name: 'FEMION', group: 'Scientific packages', role: 'Lead developer', note: 'Quantum embedding for metals, GPU random phase approximation', language: null, url: null, paper: 'https://arxiv.org/abs/2508.13036' },
+  {
+    name: 'My Raver Life',
+    group: 'Side projects',
+    role: 'Solo build',
+    note: 'Set-time planner for EDC Las Vegas 2026: lineup search, personal schedule, stage map, shared crew plans. ~5,100 users and 30,000 page views around the festival.',
+    language: 'Web app',
+    url: 'https://myraver.life',
+    paper: null,
+  },
 ];
 
 export const experiences = [
