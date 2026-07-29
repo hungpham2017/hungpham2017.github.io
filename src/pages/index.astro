@@ -369,7 +369,7 @@ const sections = [
     text-decoration: none;
   }
 
-  .topbar nav { order: 2; display: flex; gap: 1.5rem; }
+  .topbar nav { order: 2; display: flex; flex-wrap: nowrap; gap: 1.5rem; }
 
   .topbar nav a {
     font-family: 'IBM Plex Mono', monospace;
@@ -424,6 +424,9 @@ const sections = [
     .topbar nav {
       order: 3;
       width: 100%;
+      /* One line, always: it slides sideways and never reflows vertically,
+         so the header height never changes as the viewport narrows. */
+      flex-wrap: nowrap;
       gap: 1.15rem;
       overflow-x: auto;
       scrollbar-width: none;
@@ -488,22 +491,16 @@ const sections = [
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
-    gap: 0.2rem 0.5rem;
+    gap: 0.35rem 1.35rem;
     margin: 1.8rem 0 0;
     padding: 0;
     list-style: none;
   }
 
-  .profiles li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-  }
-
-  .profiles li:not(:last-child)::after {
-    content: '·';
-    color: var(--faint);
-  }
+  /* No separators. A dot belongs to the item before it, so whenever the row
+     wraps the last one on a line is stranded at the end and the line reads
+     off-centre. Spacing alone carries the rhythm at every width. */
+  .profiles li { display: flex; }
 
   .profiles a {
     font-family: 'IBM Plex Mono', monospace;
@@ -541,9 +538,11 @@ const sections = [
   @media (max-width: 720px) {
     .portrait img { width: 6.5rem; }
     .lede { text-wrap: balance; }
-    /* Shrink the row so the links split evenly instead of stranding the last
-       one alone under a dangling separator. */
-    .profiles { max-width: 20rem; column-gap: 0.45rem; }
+    /* Once the row wraps, the separators are what break the centring: the
+       dot belonging to the last item on a line stays behind on that line, so
+       it reads wider on one side. Drop them and let spacing do the work —
+       every line is then clean text, centred on its own. */
+    .profiles { column-gap: 1.1rem; }
   }
 
   /* ===== Sections ===== */
