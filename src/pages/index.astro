@@ -427,12 +427,20 @@ const sections = [
       /* One line, always: it slides sideways and never reflows vertically,
          so the header height never changes as the viewport narrows. */
       flex-wrap: nowrap;
+      /* Dragging the strip should pan it, not scroll the page. Without this a
+         touch with any vertical component scrolls the document instead, so the
+         nav feels like it moves up and down. `contain` also stops a horizontal
+         overscroll chaining into the browser's back gesture. */
+      touch-action: pan-x;
+      overscroll-behavior-x: contain;
       gap: 1.15rem;
       overflow-x: auto;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
-      mask-image: linear-gradient(to right, #000 90%, transparent);
-      -webkit-mask-image: linear-gradient(to right, #000 90%, transparent);
+      /* Fade both edges so a clipped label reads as "there is more" rather
+         than as broken text. One-sided, the left edge cut hard once scrolled. */
+      mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 92%, transparent 100%);
     }
     .topbar nav::-webkit-scrollbar { display: none; }
     .topbar nav a { white-space: nowrap; }
