@@ -81,7 +81,7 @@ export const SOFTWARE_GROUPS = ['Scientific packages', 'Side projects'] as const
  * Everything built and shipped. Anything without a `url` is internal and is
  * listed without a link rather than pointed anywhere. `paper` points at the
  * publication a package produced, which is how an internal tool can still
- * show evidence.
+ * show evidence — an internal package links to its paper instead of a repo.
  */
 export const software = [
   { name: 'ByteQC', group: 'Scientific packages', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc', paper: null },
@@ -96,7 +96,7 @@ export const software = [
   {
     name: 'My Raver Life',
     group: 'Side projects',
-    role: 'Solo build',
+    role: 'Creator',
     note: 'Set-time planner for EDC Las Vegas 2026: lineup search, personal schedule, stage map, shared crew plans. ~5,100 users and 30,000 page views around the festival.',
     language: 'Web app',
     url: 'https://myraver.life',

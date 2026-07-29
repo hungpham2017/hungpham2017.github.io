@@ -139,14 +139,15 @@ const sections = [
                       {pkg.role === 'Lead developer' ? 'Lead' : pkg.role}
                     </span>
                     <span class="entry">
-                      {pkg.url
-                        ? <a href={pkg.url} target="_blank" rel="noopener">{pkg.name}</a>
+                      {/* One link per row: the repository, or the paper when
+                          the package is internal and has no repository. */}
+                      {(pkg.url ?? pkg.paper)
+                        ? <a href={pkg.url ?? pkg.paper} target="_blank" rel="noopener">{pkg.name}</a>
                         : <span class="entry-title">{pkg.name}</span>}
                       <span class="sub">
                         {pkg.note}
                         {pkg.language && <> · {pkg.language}</>}
                         {!pkg.url && <> · Internal</>}
-                        {pkg.paper && <> · <a class="repo" href={pkg.paper} target="_blank" rel="noopener">Paper ↗</a></>}
                       </span>
                     </span>
                   </li>
