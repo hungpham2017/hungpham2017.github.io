@@ -604,10 +604,10 @@ const sections = [
     gap: 0.8rem;
     margin: 0;
     font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    /* Same size as every other named thing on the page — package, paper,
-       appointment. Weight alone marks a project as the larger unit; a size
-       jump as well made it read as a different system. */
-    font-weight: 500;
+    /* Identical to every other named item — package, paper, appointment.
+       The group heading above already says which section you are in, so the
+       title does not need extra weight to mark itself out. */
+    font-weight: 400;
     font-size: 1rem;
     letter-spacing: -0.005em;
   }
@@ -623,12 +623,12 @@ const sections = [
   }
   .repo:hover { border-color: var(--accent); }
 
+  /* The line under a title is sans everywhere else on the page; in mono it
+     was the odd one out. Mono stays for labels, meta and tags. */
   .project-tagline {
-    margin: 0.3rem 0 0.6rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    letter-spacing: 0.04em;
-    color: var(--faint);
+    margin: 0.25rem 0 0.6rem;
+    font-size: 0.85rem;
+    color: var(--muted);
   }
 
   .project-body { margin: 0; color: var(--muted); }
