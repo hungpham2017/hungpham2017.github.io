@@ -188,7 +188,7 @@ export const profiles = [
   { label: 'GitHub', url: links.github },
   { label: 'LinkedIn', url: links.linkedin },
   { label: 'Twitter', url: links.twitter },
-  { label: 'Google Scholar', url: links.scholar },
+  { label: 'Scholar', url: links.scholar },
   { label: 'ORCID', url: links.orcid },
   { label: 'Resume', url: links.resume },
 ];
