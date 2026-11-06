@@ -67,11 +67,11 @@ const resume = '/assets/resume.pdf';
     <h2><small>About</small></h2>
     <div>
     <div class="about-body">
+      <Image class="portrait" src={photo} alt={identity.name} width={336} format="webp" quality={82} />
       <div>
         <p class="lead">{about.standfirst}</p>
         <div class="prose">{about.paragraphs.map((p) => <p>{p}</p>)}</div>
       </div>
-      <Image class="portrait" src={photo} alt={identity.name} width={336} format="webp" quality={82} />
     </div>
       <dl class="stats">
         <div><dt>{publications.length}</dt><dd>publications, incl. Nature Portfolio journals</dd></div>
@@ -469,7 +469,7 @@ main{max-width:1180px;margin:0 auto}
 .sec h2 small{display:block;font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .lead{font-size:clamp(18px,1.7vw,21px);line-height:1.4;margin:0 0 20px;max-width:none;font-family:var(--display);font-weight:400;letter-spacing:-.01em}
 .prose p{color:var(--muted);max-width:62ch;margin:0 0 14px;font-size:16px}
-.about-body{display:grid;grid-template-columns:minmax(0,1fr) 168px;gap:40px;align-items:start}
+.about-body{display:grid;grid-template-columns:168px minmax(0,1fr);gap:40px;align-items:start}
 .portrait{display:block;width:100%;height:auto;aspect-ratio:240/283;object-fit:cover;border-radius:6px;filter:grayscale(.25) contrast(1.02);opacity:.95}
 #about .prose p{max-width:66ch}
 .threads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
