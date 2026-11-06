@@ -1,17 +1,24 @@
 [
   {
+    "title": "Reinforcement learning amortizes transition-state physics into one-step flow models",
+    "journal": null,
+    "year": 2026,
+    "doi": null,
+    "arxivId": "2609.32073"
+  },
+  {
+    "title": "The Python Simulations of Chemistry Framework: 10 years of an open-source quantum chemistry project",
+    "journal": "The Journal of Chemical Physics",
+    "year": 2026,
+    "doi": null,
+    "arxivId": "2603.14155"
+  },
+  {
     "title": "A Unified Generative Framework for Scalable Chemical Reaction Network Exploration",
     "journal": null,
     "year": 2026,
     "doi": null,
     "arxivId": "2606.21002"
-  },
-  {
-    "title": "The Python Simulations of Chemistry Framework: 10 years of an open-source quantum chemistry project",
-    "journal": null,
-    "year": 2026,
-    "doi": null,
-    "arxivId": "2603.14155"
   },
   {
     "title": "A multi-resolution systematically improvable quantum embedding scheme for large-scale surface chemistry calculations",
@@ -21,11 +28,11 @@
     "arxivId": null
   },
   {
-    "title": "ByteQC: GPU‐Accelerated Quantum Chemistry Package for Large‐Scale Systems",
-    "journal": "WIREs Computational Molecular Science",
+    "title": "Quantum Many-Body Simulations of Catalytic Metal Surfaces",
+    "journal": null,
     "year": 2025,
-    "doi": "10.1002/wcms.70034",
-    "arxivId": "2502.17963"
+    "doi": null,
+    "arxivId": "2508.13036"
   },
   {
     "title": "Neural Scaling Laws Surpass Chemical Accuracy for the Many-Electron Schrödinger Equation",
@@ -35,11 +42,11 @@
     "arxivId": "2508.02570"
   },
   {
-    "title": "Quantum Many-Body Simulations of Catalytic Metal Surfaces",
-    "journal": null,
+    "title": "ByteQC: GPU‐Accelerated Quantum Chemistry Package for Large‐Scale Systems",
+    "journal": "WIREs Computational Molecular Science",
     "year": 2025,
-    "doi": null,
-    "arxivId": "2508.13036"
+    "doi": "10.1002/wcms.70034",
+    "arxivId": "2502.17963"
   },
   {
     "title": "Advancing Surface Chemistry with Large-Scale Ab-Initio Quantum Many-Body Simulations",
@@ -54,6 +61,13 @@
     "year": 2024,
     "doi": null,
     "arxivId": "2406.08314"
+  },
+  {
+    "title": "Phaseless auxiliary-field quantum Monte Carlo with direct product multi-Slater determinants trial",
+    "journal": "US Patent App. 18/185,760",
+    "year": 2024,
+    "doi": null,
+    "arxivId": null
   },
   {
     "title": "Scalable Quantum Monte Carlo with Direct-Product Trial Wave Functions",
@@ -91,11 +105,11 @@
     "arxivId": null
   },
   {
-    "title": "Periodic Electronic Structure Calculations with the Density Matrix Embedding Theory",
-    "journal": "Journal of Chemical Theory and Computation",
+    "title": "Recent developments in the PySCF program package",
+    "journal": null,
     "year": 2020,
-    "doi": "10.1021/acs.jctc.9b00939",
-    "arxivId": null
+    "doi": null,
+    "arxivId": "2002.12531"
   },
   {
     "title": "Phosphorescent heteroleptic iridium(III) cyclometallates: Improved syntheses of acetylacetonate complexes and quantum chemical studies of their excited state properties",
@@ -105,17 +119,10 @@
     "arxivId": null
   },
   {
-    "title": "Recent developments in the PySCF program package",
-    "journal": null,
+    "title": "Periodic Electronic Structure Calculations with the Density Matrix Embedding Theory",
+    "journal": "Journal of Chemical Theory and Computation",
     "year": 2020,
-    "doi": null,
-    "arxivId": "2002.12531"
-  },
-  {
-    "title": "Electron delocalization in single-layer phthalocyanine-based covalent organic frameworks: a first principle study",
-    "journal": "RSC Advances",
-    "year": 2019,
-    "doi": "10.1039/C9RA05159G",
+    "doi": "10.1021/acs.jctc.9b00939",
     "arxivId": null
   },
   {
@@ -126,6 +133,20 @@
     "arxivId": null
   },
   {
+    "title": "Electron delocalization in single-layer phthalocyanine-based covalent organic frameworks: a first principle study",
+    "journal": "RSC Advances",
+    "year": 2019,
+    "doi": "10.1039/C9RA05159G",
+    "arxivId": null
+  },
+  {
+    "title": "Electronic Structure of Strongly Correlated Materials within Density Matrix Embedding Theory",
+    "journal": null,
+    "year": 2019,
+    "doi": null,
+    "arxivId": "1909.08783"
+  },
+  {
     "title": "Lead-free double perovskites Cs2InCuCl6 and (CH3NH3)2InCuCl6: electronic, optical, and electrical properties",
     "journal": "Nanoscale",
     "year": 2019,
@@ -133,18 +154,18 @@
     "arxivId": null
   },
   {
-    "title": "Periodic Electronic Structure Calculations With Density Matrix Embedding Theory",
-    "journal": null,
+    "title": "Density Matrix Embedding Theory for Strongly Correlated Solids",
+    "journal": "APS March Meeting Abstracts 2019, C31.002",
     "year": 2019,
     "doi": null,
-    "arxivId": "1909.08783"
+    "arxivId": null
   },
   {
-    "title": "Can Density Matrix Embedding Theory with the Complete Activate Space Self-Consistent Field Solver Describe Single and Double Bond Breaking in Molecular Systems?",
-    "journal": "Journal of Chemical Theory and Computation",
+    "title": "Multiconfigurational wave function methods for periodic systems via density matrix embedding theory",
+    "journal": "Abstracts of Papers of the American Chemical Society 256",
     "year": 2018,
-    "doi": "10.1021/acs.jctc.7b01248",
-    "arxivId": "1712.07245"
+    "doi": null,
+    "arxivId": null
   },
   {
     "title": "Computational Study of Structural and Electronic Properties of Lead-Free CsMI3 Perovskites (M = Ge, Sn, Pb, Mg, Ca, Sr, and Ba)",
@@ -154,10 +175,17 @@
     "arxivId": null
   },
   {
-    "title": "Effect of chemical functionalization groups on Zr6-AzoBDC to enhance H2, CH4 storage and CO2 capture: A theoretical investigation",
-    "journal": "Advances in Natural Sciences: Nanoscience and Nanotechnology",
+    "title": "Can Density Matrix Embedding Theory with the Complete Activate Space Self-Consistent Field Solver Describe Single and Double Bond Breaking in Molecular Systems?",
+    "journal": "Journal of Chemical Theory and Computation",
+    "year": 2018,
+    "doi": "10.1021/acs.jctc.7b01248",
+    "arxivId": "1712.07245"
+  },
+  {
+    "title": "Tailoring the Optical Absorption of Water-Stable ZrIV- and HfIV-Based Metal-Organic Framework Photocatalysts",
+    "journal": "Chemistry - An Asian Journal",
     "year": 2015,
-    "doi": "10.1088/2043-6262/6/3/035011",
+    "doi": "10.1002/asia.201500641",
     "arxivId": null
   },
   {
@@ -168,10 +196,10 @@
     "arxivId": null
   },
   {
-    "title": "Tailoring the Optical Absorption of Water-Stable ZrIV- and HfIV-Based Metal-Organic Framework Photocatalysts",
-    "journal": "Chemistry - An Asian Journal",
+    "title": "Effect of chemical functionalization groups on Zr6-AzoBDC to enhance H2, CH4 storage and CO2 capture: A theoretical investigation",
+    "journal": "Advances in Natural Sciences: Nanoscience and Nanotechnology",
     "year": 2015,
-    "doi": "10.1002/asia.201500641",
+    "doi": "10.1088/2043-6262/6/3/035011",
     "arxivId": null
   },
   {

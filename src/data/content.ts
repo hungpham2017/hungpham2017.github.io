@@ -85,6 +85,7 @@ export const SOFTWARE_GROUPS = ['Scientific packages', 'Side projects'] as const
  */
 export const software = [
   { name: 'ByteQC', group: 'Scientific packages', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc', paper: null },
+  { name: 'ByteCRN', group: 'Scientific packages', role: 'Lead developer', note: 'Generative exploration of chemical reaction networks at scale', language: null, url: 'https://bytedance-seed.github.io/ByteCRN-page/', paper: null },
   { name: 'PySCF', group: 'Scientific packages', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf', paper: null },
   { name: 'ipie', group: 'Scientific packages', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie', paper: null },
   { name: 'pDMET', group: 'Scientific packages', role: 'Lead developer', note: 'Periodic density matrix embedding theory', language: 'Python', url: 'https://github.com/hungpham2017/pDMET', paper: null },
@@ -200,4 +201,50 @@ export const sameAs = [
   links.github,
   links.linkedin,
   links.twitter,
+];
+
+/* ---------------------------------------------------------------------------
+ * The sky design (src/pages/index.astro).
+ * ------------------------------------------------------------------------- */
+
+/** The line under the name. `a` and `b` are coloured. */
+export const heroLine = { a: 'AI', b: 'Quantum', rest: ', for chemistry and beyond.' };
+
+/** From the Google Scholar profile; update by hand when it changes. */
+export const scholarStats = { citations: '2,861', hIndex: 13 };
+
+/**
+ * The four work areas. `papers` are title prefixes matched against
+ * publications.json, so each card's fold-out list stays in step with it.
+ */
+export const workAreas = [
+  {
+    kind: 'AI',
+    title: 'Generative modeling for chemistry',
+    text: 'Deep generative models trained on ab initio data for drug discovery, materials, catalysis and energy.',
+    papers: ['Reinforcement learning amortizes', 'A Unified Generative', 'Neural Scaling Laws'],
+  },
+  {
+    kind: 'AI',
+    title: 'Agentic AI',
+    text: 'Workflows and tools that put AI into research and engineering work.',
+    papers: [],
+  },
+  {
+    kind: 'Quantum chemistry',
+    title: 'Quantum many-body methods',
+    text: 'Quantum embedding and quantum Monte Carlo for strongly correlated and metallic systems, at 1 kcal/mol accuracy.',
+    papers: [
+      'A multi-resolution', 'Quantum Many-Body Simulations of Catalytic', 'Advancing Surface Chemistry',
+      'Ab initio quantum simulation', 'Excited States of Crystalline', 'Periodic Electronic Structure Calculations with the Density',
+      'Electronic Structure of Strongly', 'Density Matrix Embedding Theory for Strongly', 'Multiconfigurational wave',
+      'Can Density Matrix', 'Phaseless auxiliary', 'Scalable Quantum Monte Carlo', 'Twenty Years of Auxiliary',
+    ],
+  },
+  {
+    kind: 'Quantum chemistry',
+    title: 'GPU-accelerated quantum chemistry',
+    text: 'Rebuilding many-body methods to run on GPUs, so accurate simulation works at industrial scale.',
+    papers: ['ByteQC', 'GPU-accelerated Auxiliary'],
+  },
 ];

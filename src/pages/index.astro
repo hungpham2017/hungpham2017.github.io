@@ -1,708 +1,570 @@
 ---
 import Layout from '../layouts/Layout.astro';
 /**
- * Concept: two records, one practice. Software and Publications are typeset in
- * an identical row grammar — a monospaced left column and a title with meta on
- * the right — so shipping and publishing read as equal halves of one body of
- * work. That is the whole positioning argument made visible, and it replaces
- * the earlier "portfolio as manuscript" idea, which resolved the dual identity
- * entirely toward Scientist.
- *
- * Light by default, dark on toggle. No section numbering, no bibliography
- * markers: those were the parts that read as academic.
+ * The sky design. A night sky of twinkling stars, some of them small
+ * molecules (neurotransmitters) drawn as star clusters. A shining star travels
+ * between four of them in a never-ending loop (serotonin, dopamine,
+ * adrenaline, melatonin) and each one it reaches is generated from noise to
+ * full structure, then folds back into its cluster.
  *
  * All content comes from src/data/content.ts and src/data/publications.json.
- * The previous design is archived at /classic.
+ * The previous designs are archived at /previous and /classic.
  */
 import { Image } from 'astro:assets';
 import photo from '../assets/photo.jpg';
+import { publications, publicationUrl, SCHOLAR_URL, type Publication } from '../lib/publications';
 import {
-  publications,
-  publicationUrl,
-} from '../lib/publications';
-import {
-  projects,
-  PROJECT_GROUPS,
-  software,
-  SOFTWARE_GROUPS,
-  experiences,
-  education,
-  identity,
-  about,
-  profiles,
+  software, experiences, education, identity, about, links,
+  heroLine, scholarStats, workAreas,
 } from '../data/content';
 
-const grouped = PROJECT_GROUPS.map((group) => ({
-  group,
-  items: projects.filter((p) => p.group === group),
-})).filter(({ items }) => items.length > 0);
+const norm = (t: string | null) => (t ?? '').toLowerCase().replace(/[^a-z0-9]/g, '');
+const pubsFor = (prefixes: string[]) =>
+  publications.filter((p) => prefixes.some((pre) => norm(p.title).startsWith(norm(pre))));
 
-const softwareGrouped = SOFTWARE_GROUPS.map((group) => ({
-  group,
-  items: software.filter((pkg) => pkg.group === group),
-})).filter(({ items }) => items.length > 0);
+// Recent papers: at least five, and always every paper from the latest year.
+const latest = Math.max(...publications.map((p) => p.year ?? 0));
+const shown = Math.max(5, publications.filter((p) => p.year === latest).length);
+const recent = publications.slice(0, shown);
+const older = publications.slice(shown);
+const venue = (p: Publication) => p.journal ?? (p.arxivId ? `arXiv:${p.arxivId}` : 'Preprint');
 
-const sections = [
-  { id: 'about', label: 'About' },
-  { id: 'focus', label: 'Focus' },
-  { id: 'software', label: 'Software' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'education', label: 'Education' },
-  { id: 'publications', label: 'Publications' },
-];
+const roleLabel = (r: string) => r;
+
+// "March 2022 — Present" -> "2022–now"
+const shortPeriod = (period: string) => {
+  const years = period.match(/\d{4}/g) ?? [];
+  const end = /present/i.test(period) ? 'now' : years[1] ?? '';
+  return end ? `${years[0]}–${end}` : years[0] ?? '';
+};
+const resume = '/assets/resume.pdf';
 ---
-<Layout title={`${identity.name} — ${identity.role}`}>
+<Layout title={`${identity.name} — AI × Quantum, for chemistry and beyond`}
+  description="Hung Q. Pham — research scientist working at AI × quantum chemistry: generative models for chemistry, quantum many-body methods and GPU-accelerated simulation, plus AI products.">
   <Fragment slot="head">
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" />
   </Fragment>
 
-    <header class="topbar">
-      <a href="#top" class="wordmark">{identity.name}</a>
-      <nav id="site-nav">
-          {sections.map((s) => <a href={`#${s.id}`} data-nav-link>{s.label}</a>)}
-      </nav>
-      <button id="theme-toggle" type="button" aria-label="Switch colour scheme">Dark</button>
-    </header>
+<header class="hero">
+  <canvas id="cloud" aria-label="A night sky where some stars are small molecules; a shining star travels between them and each one it reaches is generated in full."></canvas>
+  <div class="hero-in gutter">
+    <div class="bar">
+      <span class="mark">hungqpham.com</span>
+      <nav><a href="#about">About</a><a href="#work">Work</a><a href="#software">Software</a><a href="#papers">Papers</a><a href="#experience">CV</a><a href="#contact">Contact</a></nav>
+    </div>
+    <div class="title">
+      <h1>{identity.name.replace(' Pham', ' Pham')}</h1>
+      <p><b>{heroLine.a}</b> × <i>{heroLine.b}</i>{heroLine.rest}</p>
+    </div>
+    <div class="spec"><div class="readout" id="readout" hidden></div></div>
+  </div>
+</header>
 
-    <main id="top">
-      <!-- Masthead -->
-      <section class="masthead">
-        <div class="wrap masthead-grid">
-          <div>
-            <p class="eyebrow">{identity.role}</p>
-            <h1>{identity.name}</h1>
-            <p class="lede">{identity.tagline}</p>
-            <ul class="profiles">
-              {profiles.map((p) => (
-                <li><a href={p.url} target="_blank" rel="noopener">{p.label}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div class="portrait">
-            <Image src={photo} alt={identity.name} width={420} format="webp" quality={82} loading="eager" />
-          </div>
-        </div>
-      </section>
-
-      <!-- About -->
-      <section id="about" class="sec">
-        <div class="wrap">
-          <p class="label">About</p>
-          <p class="standfirst">{about.standfirst}</p>
-          <div class="prose">
-            {about.paragraphs.map((p) => <p>{p}</p>)}
-          </div>
-        </div>
-      </section>
-
-      <!-- Focus areas -->
-      <section id="focus" class="sec">
-        <div class="wrap">
-          <p class="label">Focus areas</p>
-          {grouped.map(({ group, items }) => (
-            <div class="group">
-              <h2 class="group-title">{group}</h2>
-              {items.map((project) => (
-                <article class="project">
-                  <h3>
-                    {project.title}
-                    {project.links.map((link) => (
-                      <a class="repo" href={link.url} target="_blank" rel="noopener">{link.label} ↗</a>
-                    ))}
-                  </h3>
-                  <p class="project-tagline">{project.tagline}</p>
-                  <p class="project-body">{project.description}</p>
-                  <p class="tags">{project.tags.join('  ·  ')}</p>
-                </article>
-              ))}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <!-- Software: same grammar as Publications below -->
-      <section id="software" class="sec">
-        <div class="wrap">
-          <p class="label">Software</p>
-          {softwareGrouped.map(({ group, items }) => (
-            <div class="group">
-              <h2 class="group-title">{group}</h2>
-              <ol class="record">
-                {items.map((pkg) => (
-                  <li>
-                    <span class:list={['meta', pkg.role !== 'Contributor' && 'meta-strong']}>
-                      {pkg.role === 'Lead developer' ? 'Lead' : pkg.role}
-                    </span>
-                    <span class="entry">
-                      {/* One link per row: the repository, or the paper when
-                          the package is internal and has no repository. */}
-                      {(pkg.url ?? pkg.paper)
-                        ? <a href={pkg.url ?? pkg.paper} target="_blank" rel="noopener">{pkg.name}</a>
-                        : <span class="entry-title">{pkg.name}</span>}
-                      <span class="sub">
-                        {pkg.note}
-                        {pkg.language && <> · {pkg.language}</>}
-                        {!pkg.url && <> · Internal</>}
-                      </span>
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          ))}
-        </div>
-      </section>
-
-
-      <!-- Background -->
-      <section id="experience" class="sec">
-        <div class="wrap">
-          <p class="label">Experience</p>
-          <ol class="record">
-            {experiences.map((exp) => (
-              <li>
-                <span class="meta">{exp.period}</span>
-                <span class="entry">
-                  <span class="entry-title">{exp.title}</span>
-                  <span class="sub">{exp.role}</span>
-                  {exp.focus && <span class="sub faint">{exp.focus}</span>}
-                  {exp.advisor && <span class="sub faint">Advisor: {exp.advisor}</span>}
-                </span>
-              </li>
-            ))}
-          </ol>
-
-        </div>
-      </section>
-
-      <section id="education" class="sec">
-        <div class="wrap">
-          <p class="label">Education</p>
-          <ol class="record">
-            {education.map((edu) => (
-              <li>
-                <span class="meta">{edu.period}</span>
-                <span class="entry">
-                  <span class="entry-title">{edu.school}</span>
-                  <span class="sub">{edu.degree}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-      <!-- Publications -->
-      <section id="publications" class="sec">
-        <div class="wrap">
-          <p class="label">Publications</p>
-          <ol class="record">
-            {publications.map((pub) => (
-              <li>
-                <span class="meta meta-strong">{pub.year ?? '—'}</span>
-                <span class="entry">
-                  {publicationUrl(pub)
-                    ? <a href={publicationUrl(pub)} target="_blank" rel="noopener">{pub.title}</a>
-                    : <span class="entry-title">{pub.title}</span>}
-                  <span class="sub">
-                    {pub.journal ?? `Preprint · arXiv:${pub.arxivId}`}
-                  </span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-    </main>
-
-    <footer>
-      <div class="wrap">
-        <p class="colophon">© {new Date().getFullYear()} {identity.name}</p>
+<main class="gutter">
+  <section class="sec" id="about">
+    <h2><small>About</small></h2>
+    <div>
+    <div class="about-body">
+      <div>
+        <p class="lead">{about.standfirst}</p>
+        <div class="prose">{about.paragraphs.map((p) => <p>{p}</p>)}</div>
       </div>
-    </footer>
+      <Image class="portrait" src={photo} alt={identity.name} width={336} format="webp" quality={82} />
+    </div>
+      <dl class="stats">
+        <div><dt>{publications.length}</dt><dd>publications, incl. Nature Portfolio journals</dd></div>
+        <div><dt>{software.length}</dt><dd>software packages built or contributed to</dd></div>
+        <div><dt>{scholarStats.citations}</dt><dd>citations · h-index {scholarStats.hIndex}</dd></div>
+      </dl>
+    </div>
+  </section>
 
-    <script is:inline>
-      const root = document.documentElement;
-      const button = document.getElementById('theme-toggle');
-      const navLinks = [...document.querySelectorAll('[data-nav-link]')];
-      const byId = new Map(navLinks.map((a) => [a.getAttribute('href').slice(1), a]));
-      const spy = new IntersectionObserver(
-        (entries) => {
-          entries.filter((e) => e.isIntersecting).forEach((e) => {
-            navLinks.forEach((a) => a.classList.remove('is-active'));
-            byId.get(e.target.id)?.classList.add('is-active');
-          });
-        },
-        { rootMargin: '-25% 0px -65% 0px' }
-      );
-      [...byId.keys()].forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) spy.observe(el);
-      });
+  <section class="sec" id="work">
+    <h2><small>Work</small>What I work on</h2>
+    <div>
+      <div class="threads">
+        {workAreas.map((w) => {
+          const list = pubsFor(w.papers);
+          return (
+            <article class="thread">
+              <span class="k">{w.kind}</span>
+              <h3>{w.title}</h3>
+              <p>{w.text}</p>
+              {list.length > 0 && (
+                <details class="cp">
+                  <summary>Papers ({list.length})</summary>
+                  <ul>{list.map((p) => (
+                    <li><span class="cy">{p.year}</span><span>
+                      {publicationUrl(p) ? <a href={publicationUrl(p)} target="_blank" rel="noopener">{p.title}</a> : <span class="nl">{p.title}</span>}
+                      <span class="cv">{venue(p)}</span></span></li>
+                  ))}</ul>
+                </details>
+              )}
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
 
-      button?.addEventListener('click', () => {
-        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-        root.dataset.theme = next;
-        button.textContent = next === 'dark' ? 'Light' : 'Dark';
-      });
-    </script>
+  <section class="sec" id="software">
+    <h2><small>Software</small>Things I've built and shipped</h2>
+    <ul class="list">
+      {software.map((pkg) => (
+        <li>
+          <span class="n">{(pkg.url ?? pkg.paper) ? <a href={pkg.url ?? pkg.paper} target="_blank" rel="noopener">{pkg.name}</a> : pkg.name}</span>
+          <span class="r">{roleLabel(pkg.role)}</span>
+          <span class="d">{pkg.note}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="sec" id="papers">
+    <h2><small>Papers</small>Recent papers</h2>
+    <div>
+      <ul class="pubs">
+        {recent.map((p) => (
+          <li><span class="y">{p.year}</span><span>
+            {publicationUrl(p) ? <a href={publicationUrl(p)} target="_blank" rel="noopener">{p.title}</a> : <span class="nl">{p.title}</span>}
+            <span class="j">{venue(p)}</span></span></li>
+        ))}
+      </ul>
+      <details class="all">
+        <summary><span class="o">Show {older.length} more ({publications.length} in total)</span><span class="c">Show fewer</span></summary>
+        <ul class="pubs">
+          {older.map((p) => (
+            <li><span class="y">{p.year}</span><span>
+              {publicationUrl(p) ? <a href={publicationUrl(p)} target="_blank" rel="noopener">{p.title}</a> : <span class="nl">{p.title}</span>}
+              <span class="j">{venue(p)}</span></span></li>
+          ))}
+        </ul>
+      </details>
+      <a class="more" href={SCHOLAR_URL} target="_blank" rel="noopener">Google Scholar</a>
+    </div>
+  </section>
+
+  <section class="sec" id="experience">
+    <h2><small>Experience</small>Academia and industry</h2>
+    <div class="path">
+      {experiences.map((e) => (
+        <div><span class="t">{shortPeriod(e.period)}</span><span><b>{e.title}</b>
+          <span>{e.role}{e.advisor && ` with ${e.advisor}`}</span>
+          {e.focus && <span class="f">{e.focus}</span>}</span></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="sec" id="education">
+    <h2><small>Education</small>Academic background</h2>
+    <div class="path">
+      {education.map((e) => (
+        <div><span class="t">{shortPeriod(e.period)}</span><span><b>{e.degree}</b><span>{e.school}</span></span></div>
+      ))}
+      <a class="more" href={resume} target="_blank" rel="noopener">Full CV (PDF)</a>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Working on something useful?</h2>
+    <p class="cta-sub">I'd like to bring an AI + Science mindset to it.</p>
+    <div class="addr">{links.email.replace('mailto:', '')}</div>
+    <div class="links">
+      <a href={links.github} target="_blank" rel="noopener">GitHub</a>
+      <a href={links.scholar} target="_blank" rel="noopener">Google Scholar</a>
+      <a href={links.orcid} target="_blank" rel="noopener">ORCID</a>
+      <a href={links.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      <a href={links.twitter} target="_blank" rel="noopener">X / Twitter</a>
+      <a href={resume} target="_blank" rel="noopener">CV (PDF)</a>
+    </div>
+    <p class="colophon">© {new Date().getFullYear()} {identity.name}</p>
+  </section>
+</main>
+
+<script is:inline>
+
+(function(){
+  var css = getComputedStyle(document.documentElement);
+  function tok(n){ return css.getPropertyValue(n).trim(); }
+  var BG = tok("--bg"), INK = tok("--ink"), MUTED = tok("--muted"), WARM = tok("--warm"), COOL = tok("--cool");
+  var EL = { C: INK, N: COOL, O: WARM };
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var ro = document.getElementById("readout"); if(ro) ro.hidden = true;
+  function rng(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; var t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+  function gauss(r){ var u=1-r(), v=r(); return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v); }
+  function ease(a){ return a<.5 ? 4*a*a*a : 1-Math.pow(-2*a+2,3)/2; }
+
+  /* Real molecules, heavy atoms only, unit bond length: [element, x, y] and [i, j, order]. */
+  var MOLS = [
+    { atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.817,.809],["C",2.405,0],["N",1.817,-.809],["O",-1.732,1],["C",2.126,1.76],["C",3.104,1.968],["N",3.413,2.919]],
+      bonds:[[5,0,2],[0,1,1],[1,2,2],[2,3,1],[3,4,2],[4,5,1],[1,6,1],[6,7,2],[7,8,1],[8,2,1],[5,9,1],[6,10,1],[10,11,1],[11,12,1]] },                         // serotonin
+    { atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.732,1],["C",2.598,.5],["N",3.464,1],["O",-1.732,1],["O",-1.732,-1]],
+      bonds:[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,0,1],[1,6,1],[6,7,1],[7,8,1],[5,9,1],[4,10,1]] },                                                     // dopamine
+    { atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.817,.809],["C",2.405,0],["N",1.817,-.809],["O",-1.732,1],["C",2.126,1.76],["C",3.104,1.968],["N",3.413,2.919],["C",-2.598,1.5],["C",4.391,3.127],["O",4.7,4.078],["C",5.06,2.384]],
+      bonds:[[5,0,2],[0,1,1],[1,2,2],[2,3,1],[3,4,2],[4,5,1],[1,6,1],[6,7,2],[7,8,1],[8,2,1],[5,9,1],[6,10,1],[10,11,1],[11,12,1],[9,13,1],[12,14,1],[14,15,2],[14,16,1]] },   // melatonin
+    { atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.732,1],["C",2.598,.5],["N",3.464,1],["O",-1.732,1],["O",-1.732,-1],["O",1.732,2]],
+      bonds:[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,0,1],[1,6,1],[6,7,1],[7,8,1],[5,9,1],[4,10,1],[6,11,1]] },                                            // norepinephrine
+    { atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.732,1],["C",2.598,.5],["N",3.464,1],["O",-1.732,1],["O",-1.732,-1],["O",1.732,2],["C",4.33,.5]],
+      bonds:[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,0,1],[1,6,1],[6,7,1],[7,8,1],[5,9,1],[4,10,1],[6,11,1],[8,12,1]] },                                   // epinephrine
+    { atoms:[["N",0,0],["C",.866,.5],["C",1.732,0],["C",2.598,.5],["C",3.464,0],["O",3.464,-1],["O",4.33,.5]],
+      bonds:[[0,1,1],[1,2,1],[2,3,1],[3,4,1],[4,5,2],[4,6,1]] },                                                                                             // GABA
+    { atoms:[["C",0,0],["O",-.866,.5],["O",0,-1],["C",.866,.5],["N",.866,1.5],["C",1.732,0],["C",2.598,.5],["C",3.464,0],["O",3.464,-1],["O",4.33,.5]],
+      bonds:[[0,1,2],[0,2,1],[0,3,1],[3,4,1],[3,5,1],[5,6,1],[6,7,1],[7,8,2],[7,9,1]] },                                                                      // glutamate
+    { atoms:[["C",0,0],["C",.866,.5],["O",.866,1.5],["O",1.732,0],["C",2.598,.5],["C",3.464,0],["N",4.33,.5],["C",3.83,1.366],["C",5.196,1],["C",4.83,-.366]],
+      bonds:[[0,1,1],[1,2,2],[1,3,1],[3,4,1],[4,5,1],[5,6,1],[6,7,1],[6,8,1],[6,9,1]] },                                                                      // acetylcholine
+    { atoms:[["C",.809,.263],["C",0,.851],["N",-.809,.263],["C",-.5,-.688],["N",.5,-.688],["C",1.76,.572],["C",2.503,-.097],["N",3.454,.212]],
+      bonds:[[0,1,2],[1,2,1],[2,3,1],[3,4,2],[4,0,1],[0,5,1],[5,6,1],[6,7,1]] },                                                                              // histamine
+    { atoms:[["N",0,0],["C",.866,.5],["C",1.732,0],["O",1.732,-1],["O",2.598,.5]],
+      bonds:[[0,1,1],[1,2,1],[2,3,2],[2,4,1]] }                                                                                                               // glycine
+  ];
+  MOLS.forEach(function(m){ var sx=0,sy=0,n=m.atoms.length; m.atoms.forEach(function(a){sx+=a[1];sy+=a[2];}); sx/=n; sy/=n; m.P=m.atoms.map(function(a){ return [a[1]-sx, -(a[2]-sy)]; }); });
+
+  var cv = document.getElementById("cloud"), ctx = cv.getContext("2d");
+  var NOW = 0, tail = [], NAVBAND = 80, W=0, H=0, wide=true, stars=[], dust=[], glyphs=[], stage=[], roundStart=0, gl=4, bl=40;
+
+  function build(){
+    var r = rng(9);
+    var skyH = wide ? H : H*0.66;
+    stars = []; dust = [];
+    for(var i=0;i<(wide?440:200);i++) stars.push({x:r()*W, y:r()*skyH, s:0.6+Math.pow(r(),3)*1.7, a:0.3+r()*0.5, w:0.0003+r()*0.0011, p:r()*6.28, litT:0});
+    // a faint band of distant dust, like the Milky Way
+    for(i=0;i<(wide?900:420);i++){ var t=r(), off=gauss(r)*(wide?0.07:0.06);
+      var x = wide ? W*(0.25+0.8*t) : W*t, y = wide ? H*(0.95-0.85*t+off) : skyH*(0.85-0.6*t+off*1.4);
+      dust.push([x, y, 0.5+r()*0.6, 0.05+r()*0.1]); }
+    gl = wide ? 12 : 8.5;
+    NAVBAND = wide ? 80 : 125;
+    bl = wide ? Math.min(H*0.052, W*0.029) : W*0.046;
+    // the tour: serotonin -> dopamine -> adrenaline -> melatonin, each at a spot where its full structure fits
+    // spread across the whole sky, each in open space clear of the name, headline and menu
+    var S = wide ? [[0.66,0.45],[0.3,0.2],[0.32,0.84],[0.85,0.72]] : [[0.5,0.37],[0.3,0.26],[0.7,0.52],[0.38,0.56]];
+    var O = wide ? [[0.08,0.14],[0.47,0.1],[0.96,0.1],[0.53,0.9],[0.48,0.36],[0.97,0.45]]
+                 : [[0.1,0.42],[0.9,0.42],[0.1,0.62],[0.9,0.62],[0.88,0.24],[0.62,0.66]];
+    var MI = [0,1,4,2, 3,5,6,7,8,9];
+    glyphs = S.concat(O).map(function(p,k){ return {x:p[0]*W, y:p[1]*H, w:0.0005+0.0006*((k*37)%10)/10, p:k*1.7, mi:MI[k]}; });
+  }
+  // serotonin is the one focal point; every other molecule is a small shining star
+
+  function resize(){
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    W = cv.clientWidth; H = cv.clientHeight; wide = W > 820;
+    cv.width = W*dpr; cv.height = H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    roundStart = 0; firstTrip = true; build(); cyc = -1; edges = []; newCycle(performance.now());
+    if(reduce) still();
+  }
+
+  /* ---- one discovery: explore (draw constellations) -> bloom -> hold -> fold back ---- */
+  var TOUR = 4, FADE_MS = 30000, GEN = 3000, HOLD = 4500, FOLD = 700, RESET = 2600, travelT = 3000, genT = 3000, pathPts = [], pathLen = [], firstTrip = true;
+  var cyc = -1, route = [], site = null, target = null, eps = [], trails = [], phase = "explore", t0 = 0, ringT = -1, edges = [], lastLit = -1, lastNow = 0;
+  function newCycle(now){
+    var prev = cyc; cyc = (cyc + 1) % TOUR;
+    target = glyphs[cyc]; site = [target.x, target.y];
+    var side = Math.random() < 0.5 ? -1 : 1, start = prev < 0 ? [site[0] + side*(wide ? W*0.16 : W*0.32), site[1] + (Math.random()-0.5)*(wide ? H*0.25 : H*0.12)] : [glyphs[prev].x, glyphs[prev].y];   // the first star drifts in from nearby
+    route = [start];
+    var pool = stars.filter(function(s){ return (wide ? s.x > W*0.45 : true) && s.y > (wide?H*0.12:H*0.2) && s.y < (wide?H*0.9:H*0.62); });
+    var first = firstTrip; firstTrip = false;
+    // straight on to the next molecule along one gentle curve
+    var mx = (start[0]+site[0])/2, my = (start[1]+site[1])/2, dx = site[0]-start[0], dy = site[1]-start[1], bend = (Math.random() < 0.5 ? 1 : -1)*0.18;
+    route.push([mx - dy*bend, my + dx*bend]);
+    route.push(site.slice());
+    // one smooth curve through the waypoints (Catmull-Rom), travelled at a steady speed
+    pathPts = []; pathLen = [0];
+    for(var sg=0; sg<route.length-1; sg++){ var p0 = route[Math.max(0,sg-1)], p1 = route[sg], p2 = route[sg+1], p3 = route[Math.min(route.length-1, sg+2)];
+      for(var q=0; q<24; q++){ var t = q/24, t2 = t*t, t3 = t2*t;
+        pathPts.push([0.5*((2*p1[0]) + (-p0[0]+p2[0])*t + (2*p0[0]-5*p1[0]+4*p2[0]-p3[0])*t2 + (-p0[0]+3*p1[0]-3*p2[0]+p3[0])*t3),
+                      0.5*((2*p1[1]) + (-p0[1]+p2[1])*t + (2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*t2 + (-p0[1]+3*p1[1]-3*p2[1]+p3[1])*t3)]); } }
+    pathPts.push(site.slice());
+    for(var pi=1; pi<pathPts.length; pi++) pathLen.push(pathLen[pi-1] + Math.hypot(pathPts[pi][0]-pathPts[pi-1][0], pathPts[pi][1]-pathPts[pi-1][1]));
+    var speed = wide ? 0.19 : 0.12;   // px per ms
+    travelT = first ? 1800 : 2400;   // about 2.4 s from one molecule to the next
+    genT = first ? 1700 : 2400;   // the first serotonin is fully formed about 3 s after the page opens
+    var m = MOLS[target.mi];
+    eps = m.P.map(function(p){ var q=[p[0]*gl/bl + gauss(Math.random)*1.3, p[1]*gl/bl + gauss(Math.random)*1.3], path=[];
+      for(var k=0;k<40;k++){ path.push(q.slice()); q[0]+=gauss(Math.random)*0.11; q[1]+=gauss(Math.random)*0.11; }
+      return path.reverse(); });
+    trails = m.P.map(function(){ return []; });
+    phase = "explore"; t0 = now; ringT = -1;
+  }
+  function sched(u){ return (1-Math.cos(Math.PI*u))/2; }
+  function atomPos(j, u){ var m = MOLS[target.mi], a = sched(u), s = Math.sqrt(Math.max(0,1-a*a)), f=(1-u)*39, k=Math.floor(f), r=f-k, e0=eps[j][k], e1=eps[j][Math.min(39,k+1)], p=m.P[j];
+    return [site[0] + (a*p[0] + s*(e0[0]+(e1[0]-e0[0])*r))*bl, site[1] + (a*p[1] + s*(e0[1]+(e1[1]-e0[1])*r))*bl]; }
+  function explorerAt(el){
+    // glide: gentle start, steady cruise, settles as it arrives
+    var x = Math.min(1, el/travelT), q = x < 0.15 ? 0.5*(x/0.15)*(x/0.15)*0.15 : x > 0.75 ? 1 - 0.5*Math.pow((1-x)/0.25, 2)*0.25 : 0.075 + (x-0.15)*(1-0.075-0.125)/0.6;
+    var L = q*pathLen[pathLen.length-1], i = 1; while(i < pathLen.length-1 && pathLen[i] < L) i++;
+    var f = (L - pathLen[i-1]) / Math.max(1e-6, pathLen[i]-pathLen[i-1]);
+    return [pathPts[i-1][0] + (pathPts[i][0]-pathPts[i-1][0])*f, pathPts[i-1][1] + (pathPts[i][1]-pathPts[i-1][1])*f];
+  }
+
+  function drawMol(m, cx, cy, scale, alpha, colour){
+    var S = m.P.map(function(p){ return [cx+p[0]*scale, cy+p[1]*scale]; });
+    ctx.strokeStyle = INK; ctx.lineWidth = Math.max(0.7, scale*0.06); ctx.globalAlpha = alpha*0.85;
+    m.bonds.forEach(function(b){ var p=S[b[0]], q=S[b[1]];
+      if(b[2]===2 && scale > 8){ var dx=q[0]-p[0], dy=q[1]-p[1], L=Math.hypot(dx,dy)||1, o=scale*0.07, nx=-dy/L*o, ny=dx/L*o; ctx.beginPath(); ctx.moveTo(p[0]+nx,p[1]+ny); ctx.lineTo(q[0]+nx,q[1]+ny); ctx.moveTo(p[0]-nx,p[1]-ny); ctx.lineTo(q[0]-nx,q[1]-ny); ctx.stroke(); }
+      else { ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); } });
+    S.forEach(function(s,j){ var e = m.atoms[j][0]; if(e==="C" && scale <= 8) return;
+      var rr = scale > 8 ? (e==="C"?0.17:0.22)*scale : 1.1;
+      if(scale > 8){ ctx.globalAlpha = alpha; ctx.fillStyle = BG; ctx.beginPath(); ctx.arc(s[0],s[1],rr+2.5,0,6.283); ctx.fill(); }
+      ctx.globalAlpha = alpha*(scale>8?1:0.9); ctx.fillStyle = colour ? EL[e] : INK; ctx.beginPath(); ctx.arc(s[0],s[1],rr,0,6.283); ctx.fill(); });
+  }
+
+  // a molecule drawn as a small cluster of stars: each atom a twinkling point, bonds as faint constellation lines
+  function drawStarMol(m, cx, cy, scale, alpha, seed, now){
+    var S = m.P.map(function(p){ return [cx+p[0]*scale, cy+p[1]*scale]; });
+    ctx.strokeStyle = INK; ctx.lineWidth = 0.6; ctx.globalAlpha = alpha*0.22; ctx.beginPath();
+    m.bonds.forEach(function(b){ ctx.moveTo(S[b[0]][0], S[b[0]][1]); ctx.lineTo(S[b[1]][0], S[b[1]][1]); }); ctx.stroke();
+    // every atom is a white star: it brightens and dims on its own rhythm and sparkles at its peak
+    S.forEach(function(s,j){ var e = m.atoms[j][0];
+      var t = reduce ? 0.5 : Math.pow(0.5+0.5*Math.sin(now*(0.0006+0.0009*((j*7+seed)%5)/5) + j*1.9 + seed*0.7), 3);
+      ctx.globalAlpha = alpha*(0.4 + 0.6*t); ctx.fillStyle = INK;
+      ctx.beginPath(); ctx.arc(s[0], s[1], (e==="C" ? 1 : 1.2) + 0.35*t, 0, 6.283); ctx.fill();
+      if(t > 0.82){ var k = (t-0.82)/0.18, len = 1.8 + 2.6*k; ctx.strokeStyle = INK; ctx.lineWidth = 0.6; ctx.globalAlpha = alpha*0.55*k;
+        ctx.beginPath(); ctx.moveTo(s[0]-len, s[1]); ctx.lineTo(s[0]+len, s[1]); ctx.moveTo(s[0], s[1]-len); ctx.lineTo(s[0], s[1]+len); ctx.stroke(); } });
+  }
+
+  function draw(now){
+    NOW = now;
+    var dt = Math.min(50, now-(lastNow||now)); lastNow = now;
+    var el = now - t0, ex = null, u = 0, fade = 1, fold = 0;
+    if(phase==="explore"){ if(el >= travelT){ phase="gen"; t0=now; el=0; } else ex = explorerAt(el); }
+    if(phase==="gen"){ u = Math.min(1, el/genT); if(u>=1){ phase="hold"; t0=now; el=0; ringT=now; } }
+    if(phase==="hold"){ u = 1; if(el>=HOLD){ phase="fold"; t0=now; el=0; } }
+    if(phase==="fold"){ u = 1; fold = ease(Math.min(1, el/FOLD)); if(el>=FOLD){ newCycle(now); return draw(now); } }
+    if(phase==="reset"){ fade = 1-Math.min(1, el/RESET); if(el>=RESET){ edges=[]; lastLit=-1; stars.forEach(function(s){ s.litT=0; }); newCycle(now); return draw(now); } }
+
+    // the explorer links the stars it passes into constellations
+    if(ex){ var R = wide ? 46 : 32;
+      stars.forEach(function(s,i){ if((s.litT && NOW - s.litT < FADE_MS) || s.y < NAVBAND || s.s < 1.0 || Math.hypot(s.x-site[0], s.y-site[1]) < bl*3.2) return;
+        if(lastLit >= 0 && Math.hypot(s.x-stars[lastLit].x, s.y-stars[lastLit].y) < (wide ? 34 : 24)) return;
+        if(Math.hypot(s.x-ex[0], s.y-ex[1]) < R){ s.litT = NOW; if(lastLit>=0 && Math.hypot(s.x-stars[lastLit].x, s.y-stars[lastLit].y) < (wide?W*0.12:W*0.3)) edges.push([lastLit, i, NOW]); lastLit = i; } }); }
+
+    ctx.fillStyle = BG; ctx.fillRect(0,0,W,H);
+    function tw(w,p){ return reduce ? 0.5 : Math.pow(0.5+0.5*Math.sin(now*w+p), 3); }
+    ctx.fillStyle = MUTED; dust.forEach(function(d){ ctx.globalAlpha = d[3]; ctx.fillRect(d[0], d[1], d[2], d[2]); });
+    ctx.strokeStyle = INK; ctx.lineWidth = 0.7; ctx.globalAlpha = 0.18*fade; ctx.beginPath();
+    ctx.stroke();
+    edges = edges.filter(function(e){ return now - e[2] < FADE_MS; });
+    edges.forEach(function(e){ ctx.globalAlpha = 0.2*(1 - (now - e[2])/FADE_MS); ctx.beginPath(); ctx.moveTo(stars[e[0]].x, stars[e[0]].y); ctx.lineTo(stars[e[1]].x, stars[e[1]].y); ctx.stroke(); });
+    ctx.fillStyle = INK;
+    // natural twinkle: two slow, unrelated rhythms per star so the flicker never looks regular
+    stars.forEach(function(s){ var lit = s.litT ? Math.max(0, 1 - (now - s.litT)/FADE_MS) : 0;
+      var f = reduce ? 0.5 : 0.5 + 0.28*Math.sin(now*s.w + s.p) + 0.22*Math.sin(now*s.w*2.7 + s.p*1.3);
+      ctx.globalAlpha = Math.min(1, s.a*(0.5 + 0.8*f*f) + 0.35*lit); ctx.fillStyle = INK;
+      ctx.beginPath(); ctx.arc(s.x, s.y, (s.s*(0.9 + 0.2*f) + 0.6*lit)/2, 0, 6.283); ctx.fill();
+      if(s.s > 1.3 && f > 0.88){ var g = (f-0.88)/0.12, len = 1.4 + 1.8*g; ctx.strokeStyle = INK; ctx.lineWidth = 0.55; ctx.globalAlpha = 0.38*g;   // the brightest few glint faintly
+        ctx.beginPath(); ctx.moveTo(s.x-len, s.y); ctx.lineTo(s.x+len, s.y); ctx.moveTo(s.x, s.y-len); ctx.lineTo(s.x, s.y+len); ctx.stroke(); } });
+
+    // molecule stars, twinkling like planets; serotonin blooms when found
+    var blooming = phase==="gen" || phase==="hold" || (phase==="fold" && fold < 0.97);
+    glyphs.forEach(function(g,k){
+      var a = (0.75 + 0.25*tw(g.w, g.p)) * (wide && g.x < W*0.4 ? 0.6 : 1);
+      drawStarMol(MOLS[g.mi], g.x, g.y, gl, a, k*3+1, now); });
+
+    // the explorer: a shining star with twinkling rays and a short fading trail
+    if(phase==="explore" && ex){
+      tail.push(ex.slice()); if(tail.length > 18) tail.shift();
+      ctx.fillStyle = WARM;
+      tail.forEach(function(p,i){ var f = i/tail.length; ctx.globalAlpha = 0.22*f; ctx.beginPath(); ctx.arc(p[0], p[1], 0.5 + 0.9*f, 0, 6.283); ctx.fill(); });
+      var pulse = reduce ? 0.5 : 0.5 + 0.5*Math.sin(now*0.003), rot = reduce ? 0 : now*0.0004, L = (wide ? 6.5 : 5.5) + 2.5*pulse;
+      ctx.strokeStyle = WARM; ctx.lineCap = "round";
+      for(var ray=0; ray<4; ray++){ var ang = rot + ray*Math.PI/2, len = L;
+        ctx.globalAlpha = 0.5 + 0.25*pulse; ctx.lineWidth = 0.8; ctx.beginPath(); ctx.moveTo(ex[0]-Math.cos(ang)*2, ex[1]-Math.sin(ang)*2); ctx.lineTo(ex[0]+Math.cos(ang)*len, ex[1]+Math.sin(ang)*len); ctx.stroke(); }
+      ctx.globalAlpha = 0.95; ctx.fillStyle = INK; ctx.beginPath(); ctx.arc(ex[0], ex[1], 2 + 0.4*pulse, 0, 6.283); ctx.fill();
+      ctx.fillStyle = WARM; ctx.beginPath(); ctx.arc(ex[0], ex[1], 1.4, 0, 6.283); ctx.fill();
+    } else if(tail.length) tail = [];
+
+    if(blooming){
+      var m = MOLS[target.mi], k2 = 1 - fold*(1 - gl/bl);
+      if(phase==="gen") trails.forEach(function(t,j){ t.push(atomPos(j,u)); });
+      ctx.lineWidth = 1; trails.forEach(function(t,j){ if(t.length<2) return; ctx.globalAlpha = 0.22*(1-fold); ctx.strokeStyle = EL[m.atoms[j][0]]; ctx.beginPath(); ctx.moveTo(t[0][0],t[0][1]); for(var q=1;q<t.length;q++) ctx.lineTo(t[q][0],t[q][1]); ctx.stroke(); });
+      var S = m.P.map(function(_,j){ var p = atomPos(j,u); return [site[0]+(p[0]-site[0])*k2, site[1]+(p[1]-site[1])*k2]; }), a = sched(u), ba = Math.max(0, Math.min(1,(a-0.82)/0.18)), sc = bl*k2;
+      if(ba>0){ ctx.strokeStyle = INK; ctx.lineWidth = Math.max(0.8, sc*0.06); ctx.globalAlpha = ba*0.85;
+        m.bonds.forEach(function(b){ var p=S[b[0]], q=S[b[1]], dx=q[0]-p[0], dy=q[1]-p[1], L=Math.hypot(dx,dy)||1, o=Math.max(1, sc*0.07), nx=-dy/L*o, ny=dx/L*o;
+          ctx.beginPath(); if(b[2]===2 && sc>8){ ctx.moveTo(p[0]+nx,p[1]+ny); ctx.lineTo(q[0]+nx,q[1]+ny); ctx.moveTo(p[0]-nx,p[1]-ny); ctx.lineTo(q[0]-nx,q[1]-ny); } else { ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); } ctx.stroke(); }); }
+      var cc = Math.pow(a,3);
+      S.forEach(function(s,j){ var e = m.atoms[j][0], r = Math.max(1, (e==="C"?0.17:0.22)*sc);
+        ctx.globalAlpha = 1 - cc*0.999; ctx.fillStyle = MUTED; ctx.beginPath(); ctx.arc(s[0],s[1],r,0,6.283); ctx.fill();
+        if(cc>0.01){ ctx.globalAlpha = cc; ctx.fillStyle = EL[e]; ctx.beginPath(); ctx.arc(s[0],s[1],r,0,6.283); ctx.fill(); } });
+    }
+    if(ringT > 0){ var rt = (now-ringT)/1600; if(rt < 1){ ctx.globalAlpha = 0.5*(1-rt); ctx.strokeStyle = WARM; ctx.lineWidth = 1; ctx.beginPath(); ctx.arc(site[0], site[1], bl*(2.4 + rt*4.5), 0, 6.283); ctx.stroke(); } }
+    ctx.globalAlpha = 1;
+  }
+
+  function still(){
+    NOW = performance.now();
+    for(var e=0;e<=travelT;e+=60){ var ex = explorerAt(e), R = wide?46:32;
+      stars.forEach(function(s,i){ if((s.litT && NOW - s.litT < FADE_MS) || s.y < NAVBAND || s.s < 1.0 || Math.hypot(s.x-site[0], s.y-site[1]) < bl*3.2) return;
+        if(lastLit >= 0 && Math.hypot(s.x-stars[lastLit].x, s.y-stars[lastLit].y) < (wide ? 34 : 24)) return;
+        if(Math.hypot(s.x-ex[0], s.y-ex[1]) < R){ s.litT=NOW; if(lastLit>=0 && Math.hypot(s.x-stars[lastLit].x, s.y-stars[lastLit].y) < (wide?W*0.12:W*0.3)) edges.push([lastLit,i,NOW]); lastLit=i; } }); }
+    phase = "hold"; t0 = performance.now(); draw(performance.now());
+  }
+
+  function loop(now){ requestAnimationFrame(loop); try { draw(now); } catch(e){ console.error(e); } }
+  window.addEventListener("resize", function(){ clearTimeout(window.__rz); window.__rz = setTimeout(resize, 150); });
+  resize();
+  if(!reduce) requestAnimationFrame(loop);
+})();
+
+
+</script>
 </Layout>
 
 <style is:global>
-  :root {
-    --bg: #f7f6f3;
-    --fg: #16171b;
-    --muted: #55585f;
-    --faint: #676b72;
-    --rule: #e0ddd6;
-    --accent: #8a5a12;
 
-    /* Type scale. Three families, three jobs:
-       Newsreader — identity and the one-line thesis, nothing else.
-       Plex Sans  — every title and every piece of prose.
-       Plex Mono  — labels and data, at exactly two sizes.
-       Six near-identical mono sizes had accumulated between 0.65 and 0.85rem,
-       which reads as drift rather than hierarchy. */
-    --t-label: 0.78rem;
-    --t-meta: 0.7rem;
+/* Layout: full-bleed hero where a diffusion model's sampling run is the artwork (noise resolving
+   into a real molecule); below, a two-column editorial body. Committed single dark look; warm and
+   cool double as oxygen and nitrogen in the hero and as the page's only accents. */
+:root{
+  --bg:#0d1b33;     /* deep navy */
+  --bg-2:#12233f;
+  --ink:#f0f4fb;
+  --muted:#9fb0cc;
+  --rule:#20335a;
+  --warm:#ff9470;   /* oxygen, primary accent */
+  --cool:#86c8ff;   /* nitrogen, secondary accent */
+  --display:"Geist", "Helvetica Neue", Arial, sans-serif;
+  --body:"Figtree", system-ui, -apple-system, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--warm);outline-offset:3px;border-radius:2px}
+.gutter{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 
-    /* One column width for the whole page. Reading measure is controlled by
-       narrowing this, not by per-element caps — `ch` resolves against each
-       element's own font, so 62ch on a small mono heading came out 130px
-       narrower than 62ch on body text, and sections stopped lining up. */
-    --measure: 42rem;      /* reading column */
-    --rail: 8rem;          /* section label sits here, in what was dead margin */
-    --rail-gap: 3rem;
-    --composition: 53rem;  /* rail + gap + measure */
-    --gutter: clamp(1.25rem, 5vw, 4rem);
-  }
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:600px;overflow:hidden;border-bottom:1px solid var(--rule)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
+.hero canvas.drag{cursor:grabbing}
+.hero-in{position:relative;max-width:1180px;margin:0 auto;min-height:600px;display:flex;flex-direction:column;justify-content:space-between;padding-block:28px 32px;pointer-events:none}
+.hero-in > *{pointer-events:auto}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.bar nav{display:flex;gap:18px;flex-wrap:wrap}
+.bar a{text-decoration:none}
+.bar a:hover{color:var(--ink)}
+.mark{font-family:var(--mono);font-size:13px;color:var(--ink)}
+.title{max-width:640px}
+.title h1{font-family:var(--display);font-weight:600;font-size:clamp(36px,4.6vw,56px);line-height:1.02;letter-spacing:-.035em;margin:0 0 20px;text-wrap:balance}
+.title p{font-size:clamp(17px,1.6vw,20px);line-height:1.45;color:var(--ink);margin:0;max-width:34ch;opacity:.92}
+.title p .also{display:block;margin-top:6px;color:var(--muted)}
+.title p b{font-weight:600;color:var(--warm)}
+.title p i{font-style:normal;font-weight:600;color:var(--cool)}
+.spec{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:flex-end;justify-content:space-between}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{font:500 13px var(--mono);color:var(--muted);background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px solid var(--rule);padding:7px 12px;border-radius:999px;cursor:pointer;backdrop-filter:blur(4px)}
+.chips button:hover{color:var(--ink);border-color:var(--muted)}
+.chips button[aria-pressed="true"]{color:var(--bg);background:var(--ink);border-color:var(--ink)}
+.readout{font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.7;text-align:right}
+.chips .go{color:var(--warm);border-color:color-mix(in srgb,var(--warm) 45%,transparent)}
+.chips .go:hover{color:var(--bg);background:var(--warm);border-color:var(--warm)}
+.readout b{color:var(--ink);font-weight:500}
+.readout .sw{display:inline-block;width:8px;height:8px;border-radius:50%;margin:0 4px 0 10px;vertical-align:0}
 
-  :root[data-theme='dark'] {
-    --bg: #0d0e11;
-    --fg: #eceae5;
-    --muted: #9a9da4;
-    --faint: #8b8f97;
-    --rule: #24272d;
-    --accent: #d9a441;
-  }
+/* ---------- body ---------- */
+main{max-width:1180px;margin:0 auto}
+.sec{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px 64px;padding-block:64px;border-bottom:1px solid var(--rule)}
+.sec h2{font-family:var(--display);font-weight:600;font-size:clamp(24px,2.5vw,32px);line-height:1.1;letter-spacing:-.018em;margin:0;text-wrap:balance}
+.sec h2 small{display:block;font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.lead{font-size:clamp(18px,1.7vw,21px);line-height:1.4;margin:0 0 20px;max-width:none;font-family:var(--display);font-weight:400;letter-spacing:-.01em}
+.prose p{color:var(--muted);max-width:62ch;margin:0 0 14px;font-size:16px}
+.about-body{display:grid;grid-template-columns:minmax(0,1fr) 168px;gap:40px;align-items:start}
+.portrait{display:block;width:100%;height:auto;aspect-ratio:240/283;object-fit:cover;border-radius:6px;filter:grayscale(.25) contrast(1.02);opacity:.95}
+#about .prose p{max-width:66ch}
+.threads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.thread{background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:8px}
+.thread .k{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.thread h3{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.15;margin:0;letter-spacing:-.01em}
+.thread p{margin:0;color:var(--muted);font-size:15px}
+.thread .fig{font-family:var(--mono);font-size:13px;color:var(--warm);margin-top:auto;padding-top:6px}
+.cp{margin-top:auto;padding-top:10px}
+.cp summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;color:var(--warm);display:inline-block;padding-block:4px}
+.cp summary::-webkit-details-marker{display:none}
+.cp summary::before{content:"+ "}
+.cp[open] summary::before{content:"− "}
+.cp ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:10px}
+.cp li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:10px;font-size:14px;line-height:1.4}
+.cp .cy{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:2px}
+.cp a{text-decoration:none;color:var(--ink)}
+.cp a:hover{color:var(--warm)}
+.cp .cv{display:block;color:var(--muted);font-size:12px;font-style:italic;margin-top:1px}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;padding-block:16px;border-top:1px solid var(--rule);align-items:baseline}
+.list li:last-child{border-bottom:1px solid var(--rule)}
+.list .n{font-family:var(--display);font-size:18px;font-weight:600;letter-spacing:-.01em}
+.list .n a{text-decoration:none}
+.list .n a:hover{color:var(--warm)}
+.list .d{grid-column:1;color:var(--muted);font-size:15px}
+.list .r{font-family:var(--mono);font-size:12px;color:var(--muted);grid-row:1;grid-column:2;white-space:nowrap}
+.list .r.hi{color:var(--cool)}
+.pubs li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;padding-block:16px;border-top:1px solid var(--rule)}
+.pubs{list-style:none;margin:0;padding:0}
+.pubs .y{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.pubs a{text-decoration:none;font-size:16px;line-height:1.4}
+.pubs a:hover{color:var(--warm)}
+.pubs .j{display:block;font-size:14px;color:var(--muted);margin-top:2px;font-style:italic}
+.more{display:inline-block;margin-top:18px;font-family:var(--mono);font-size:13px;color:var(--warm);text-decoration:none;border-bottom:1px solid currentColor}
+.path{display:grid;gap:0}
+.path div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding-block:14px;border-top:1px solid var(--rule)}
+.path .t{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
+.path b{font-weight:600;display:block}
+.path span span{display:block;color:var(--muted);font-size:15px}
+.path span .f{font-size:14px;opacity:.85;margin-top:2px}
+.contact{padding-block:72px 56px}
+.contact h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.2vw,40px);line-height:1.1;letter-spacing:-.02em;margin:0 0 16px;text-wrap:balance}
+.contact .cta-sub{font-family:var(--body);font-size:clamp(16px,1.6vw,19px);line-height:1.45;color:var(--muted);margin:0 0 24px;max-width:46ch}
+.contact .addr{font-family:var(--mono);font-size:clamp(15px,1.6vw,18px);color:var(--warm);user-select:all}
+.contact .links{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:24px;font-size:15px;color:var(--muted)}
+.contact .links a{text-underline-offset:4px}
+.contact .links a:hover{color:var(--ink)}
+.colophon{margin-top:56px;font-family:var(--mono);font-size:12px;color:var(--muted);max-width:80ch;line-height:1.7}
 
-  *,
-  *::before,
-  *::after { box-sizing: border-box; }
+.stats{display:flex;flex-wrap:wrap;gap:12px 56px;margin:32px 0 0}
+.stats div{background:none;padding:0}
+.stats dt{font-family:var(--display);font-weight:600;font-size:clamp(22px,2.2vw,26px);letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.stats dd{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.4}
+.path h3{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.path div + h3{margin-top:32px}
+.pubs li.yr{display:block;border-top:0;padding:24px 0 4px;font-family:var(--mono);font-size:13px;color:var(--ink)}
+details.all{margin-top:8px}
+details.all summary{cursor:pointer;font-family:var(--mono);font-size:13px;color:var(--warm);padding-block:12px;list-style:none;border-top:1px solid var(--rule)}
+details.all summary::-webkit-details-marker{display:none}
+details.all summary::before{content:"+ ";}
+details.all[open] summary::before{content:"− ";}
+details.all .c{display:none}
+details.all[open] .o{display:none}
+details.all[open] .c{display:inline}
+.pubs > li.yr:first-child{padding-top:0}
+details.all .pubs li.yr:first-child{padding-top:8px}
+.pubs .nl{font-size:16px;line-height:1.4}
+details.all .pubs .nl{font-size:15px}
+details.all .pubs a{font-size:15px}
+details.all .pubs li{padding-block:10px}
+.more + .more{margin-left:20px}
 
-  html { scroll-behavior: smooth; }
+@media (max-width:480px){.stats{gap:12px 28px}}
+@media (max-width:820px){
+    .portrait{max-width:96px}
+  .hero-in{justify-content:flex-end;gap:20px}
+  .hero-in .bar{margin-bottom:auto}
+  .sec{grid-template-columns:minmax(0,1fr);padding-block:44px}
+  .threads{grid-template-columns:minmax(0,1fr)}
+  .hero,.hero-in{min-height:640px}
+  .readout{text-align:left}
+}
+@media (max-width:480px){
+  .bar{flex-direction:column;align-items:flex-start;gap:10px}
+  .bar nav{gap:16px}
+  .hero,.hero-in{min-height:560px}
+  .thread{padding:20px 18px}
 
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    font-weight: 300;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
+  .path div,.pubs li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .list li{grid-template-columns:minmax(0,1fr)}
+  .list .r{grid-row:auto;grid-column:1}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
-  a { color: inherit; }
+@media (max-width:520px){.about-body{grid-template-columns:minmax(0,1fr)}.about-body .portrait{width:120px;order:-1}}
 
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-  .wrap { max-width: var(--measure); margin-inline: auto; }
-
-  /* The label moves into the left rail rather than stacking above the text,
-     so the composition is 53rem wide while lines stay ~74 characters. No
-     markup change: the label takes column one, everything else column two. */
-  .sec > .wrap {
-    display: grid;
-    grid-template-columns: var(--rail) minmax(0, var(--measure));
-    column-gap: var(--rail-gap);
-    justify-content: center;
-    max-width: none;
-  }
-
-  .sec > .wrap > .label { grid-column: 1; grid-row: 1; margin-bottom: 0; }
-  .sec > .wrap > *:not(.label) { grid-column: 2; }
-
-  @media (max-width: 900px) {
-    .sec > .wrap {
-      display: block;
-      max-width: var(--measure);
-    }
-    .sec > .wrap > .label { margin-bottom: 1.5rem; }
-  }
-
-  /* Small brass label that opens every section. */
-  .label {
-    margin: 0 0 1.5rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-label);
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  /* ===== Top bar ===== */
-  .topbar {
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 0.9rem var(--gutter);
-    background: color-mix(in srgb, var(--bg) 90%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .wordmark {
-    order: 1;
-    margin-right: auto;
-    font-family: 'Newsreader', serif;
-    font-size: 1.05rem;
-    text-decoration: none;
-  }
-
-  .topbar nav { order: 2; display: flex; flex-wrap: nowrap; gap: 1.5rem; }
-
-  .topbar nav a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .topbar nav a:hover { color: var(--fg); }
-
-  .topbar nav a { position: relative; }
-  .topbar nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -5px;
-    height: 1px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-  }
-  .topbar nav a.is-active { color: var(--fg); }
-  .topbar nav a.is-active::after { transform: scaleX(1); }
-
-  #theme-toggle {
-    order: 3;
-    flex-shrink: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: none;
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    padding: 0.2rem 0.7rem;
-    cursor: pointer;
-    transition: border-color 0.2s;
-  }
-  #theme-toggle:hover { border-color: var(--accent); }
-
-  /* Phones: the name and the theme control share the top line, and the
-     section labels drop to their own row and slide sideways. Putting the
-     control in with the labels left them fighting over the same width. */
-  @media (max-width: 820px) {
-    .topbar { row-gap: 0.55rem; padding-bottom: 0.7rem; }
-    /* The control keeps the name's line; the labels take the row beneath. */
-    #theme-toggle { order: 2; }
-    .topbar nav {
-      order: 3;
-      width: 100%;
-      /* One line, always: it slides sideways and never reflows vertically,
-         so the header height never changes as the viewport narrows. */
-      flex-wrap: nowrap;
-      /* Dragging the strip should pan it, not scroll the page. Without this a
-         touch with any vertical component scrolls the document instead, so the
-         nav feels like it moves up and down. `contain` also stops a horizontal
-         overscroll chaining into the browser's back gesture. */
-      touch-action: pan-x;
-      overscroll-behavior-x: contain;
-      gap: 1.15rem;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      /* Fade both edges so a clipped label reads as "there is more" rather
-         than as broken text. One-sided, the left edge cut hard once scrolled. */
-      mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 92%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 5%, #000 92%, transparent 100%);
-    }
-    .topbar nav::-webkit-scrollbar { display: none; }
-    .topbar nav a { white-space: nowrap; }
-  }
-
-  /* ===== Masthead ===== */
-  .masthead { padding: clamp(3.5rem, 10vh, 7rem) var(--gutter) clamp(2.5rem, 6vh, 4rem); }
-
-  /* One centred stack at every width. On desktop the portrait used to sit
-     off to the right with a wide gap, which read as unbalanced; centred, the
-     masthead works as a title block above the left-aligned sections. */
-  .masthead-grid {
-    max-width: var(--composition);
-    margin-inline: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.4rem;
-  }
-
-  .portrait { order: -1; }
-
-  .eyebrow {
-    margin: 0 0 1.2rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-
-  .masthead h1 {
-    margin: 0;
-    font-family: 'Newsreader', serif;
-    font-weight: 400;
-    font-size: clamp(2.5rem, 6vw, 4rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-
-  .lede {
-    margin: 1.1rem 0 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.85rem;
-    letter-spacing: 0.02em;
-    color: var(--muted);
-  }
-
-  /* A middot-separated line, matching the tag rows and software meta
-     elsewhere on the page. Seven separately underlined items read as a row of
-     chips and wrapped into a ragged block on phones. */
-  .profiles {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: baseline;
-    gap: 0.35rem 1.35rem;
-    margin: 1.8rem 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  /* No separators. A dot belongs to the item before it, so whenever the row
-     wraps the last one on a line is stranded at the end and the line reads
-     off-centre. Spacing alone carries the rhythm at every width. */
-  .profiles li { display: flex; }
-
-  .profiles a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .profiles a:hover { color: var(--accent); }
-
-  .portrait img {
-    display: block;
-    width: 9.5rem;
-    aspect-ratio: 1;
-    object-fit: cover;
-    object-position: 50% 12%;
-    border-radius: 50%;
-    filter: grayscale(0.2);
-    /* A hairline so the disc has an edge even where the photograph's own
-       background is close to the page colour. */
-    box-shadow: 0 0 0 1px var(--rule);
-  }
-
-  /* In dark mode the photograph's grey studio backdrop sits on a near-black
-     page, so the circle loses its edge and the suit merges into it. Lifting
-     the image and strengthening the ring separates it again. */
-  :root[data-theme='dark'] .portrait img {
-    filter: grayscale(0.7) brightness(1.12) contrast(1.06);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--fg) 22%, transparent);
-  }
-
-  @media (max-width: 720px) {
-    .portrait img { width: 6.5rem; }
-    .lede { text-wrap: balance; }
-    /* Once the row wraps, the separators are what break the centring: the
-       dot belonging to the last item on a line stays behind on that line, so
-       it reads wider on one side. Drop them and let spacing do the work —
-       every line is then clean text, centred on its own. */
-    .profiles { column-gap: 1.1rem; }
-  }
-
-  /* ===== Sections ===== */
-  .sec {
-    padding: clamp(3rem, 8vh, 5rem) var(--gutter);
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .standfirst {
-    margin: 0 0 1.5rem;
-    font-family: 'Newsreader', serif;
-    font-weight: 400;
-    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
-    line-height: 1.4;
-  }
-
-  .prose p { margin: 0 0 1.1rem; color: var(--muted); }
-  .prose p:last-child { margin-bottom: 0; }
-
-  .section-note {
-    margin: -0.6rem 0 2rem;
-    font-size: 0.85rem;
-    color: var(--faint);
-  }
-  .section-note a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--rule); }
-  .section-note a:hover { border-color: var(--accent); }
-
-  /* ===== Focus areas ===== */
-  .group { margin-bottom: 3rem; }
-  .group:last-child { margin-bottom: 0; }
-
-  .group-title {
-    margin: 0 0 1.3rem;
-    padding-bottom: 0.55rem;
-    border-bottom: 1px solid var(--rule);
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 500;
-    font-size: var(--t-label);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--fg);
-  }
-
-  .project { margin-bottom: 1.8rem; }
-  .project:last-child { margin-bottom: 0; }
-
-  .project h3 {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.8rem;
-    margin: 0;
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
-    /* Identical to every other named item — package, paper, appointment.
-       The group heading above already says which section you are in, so the
-       title does not need extra weight to mark itself out. */
-    font-weight: 400;
-    font-size: 1rem;
-    letter-spacing: -0.005em;
-  }
-
-  .repo {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-  }
-  .repo:hover { border-color: var(--accent); }
-
-  /* The line under a title is sans everywhere else on the page; in mono it
-     was the odd one out. Mono stays for labels, meta and tags. */
-  .project-tagline {
-    margin: 0.25rem 0 0.6rem;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  .project-body { margin: 0; color: var(--muted); }
-
-  .tags {
-    margin: 0.6rem 0 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--faint);
-  }
-
-  /* ===== The record: one grammar, used by software, papers and background ===== */
-  .record { margin: 0; padding: 0; list-style: none; }
-
-  .record li {
-    display: grid;
-    grid-template-columns: 8.5rem minmax(0, 1fr);
-    gap: 1.5rem;
-    padding: 0.85rem 0;
-    border-top: 1px solid var(--rule);
-  }
-  .record li:first-child { border-top: 0; }
-
-  .meta {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    letter-spacing: 0.04em;
-    color: var(--faint);
-    padding-top: 0.28rem;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .meta-strong { color: var(--accent); }
-
-  .entry { display: flex; flex-direction: column; gap: 0.12rem; min-width: 0; }
-
-  .entry > a,
-  .entry-title {
-    font-size: 1rem;
-    font-weight: 400;
-    color: var(--fg);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .entry > a { border-bottom: 1px solid transparent; width: fit-content; }
-  .entry > a:hover { color: var(--accent); border-color: var(--accent); }
-
-  .sub { font-size: 0.85rem; color: var(--muted); }
-  .sub.faint { color: var(--faint); }
-
-  @media (max-width: 620px) {
-    .record li { grid-template-columns: 1fr; gap: 0.3rem; }
-    .meta { padding-top: 0; }
-  }
-
-  /* ===== Footer ===== */
-  footer { padding: clamp(2.5rem, 6vh, 4rem) var(--gutter); }
-  footer .wrap { max-width: var(--composition); }
-
-  .colophon {
-    margin: 0;
-    text-align: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: var(--t-meta);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--faint);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
-  }
 </style>
