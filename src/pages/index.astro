@@ -54,14 +54,16 @@ const resume = '/assets/resume.pdf';
       <span class="mark">hungqpham.com</span>
       <nav><a href="#work">Work</a><a href="#software">Software</a><a href="#papers">Papers</a><a href="#experience">CV</a><a href="#contact">Contact</a></nav>
     </div>
-    <div class="title" id="about">
+    <div class="hero-main" id="about">
+    <div class="title">
       <div class="headshot"><Image src={photo} alt={identity.name} width={360} format="webp" quality={82} /></div>
       <h1>{identity.name.replace(' Pham', ' Pham')}</h1>
       <p><b>{heroLine.a}</b> × <i>{heroLine.b}</i>{heroLine.rest}</p>
-      <div class="hero-about">
-        <p class="lead">{about.standfirst}</p>
-        <div class="prose">{about.paragraphs.map((p) => <p set:html={p} />)}</div>
-      </div>
+      <p class="standfirst">{about.standfirst}</p>
+    </div>
+    <div class="hero-about">
+      {about.paragraphs.map((p) => <p set:html={p} />)}
+    </div>
     </div>
     <div class="spec"><div class="readout" id="readout" hidden></div></div>
   </div>
@@ -209,11 +211,19 @@ const resume = '/assets/resume.pdf';
   MOLS.forEach(function(m){ var sx=0,sy=0,n=m.atoms.length; m.atoms.forEach(function(a){sx+=a[1];sy+=a[2];}); sx/=n; sy/=n; m.P=m.atoms.map(function(a){ return [a[1]-sx, -(a[2]-sy)]; }); });
 
   var cv = document.getElementById("cloud"), ctx = cv.getContext("2d");
-  var NOW = 0, tail = [], NAVBAND = 80, W=0, H=0, wide=true, stars=[], dust=[], glyphs=[], stage=[], roundStart=0, gl=4, bl=40;
+  var NOW = 0, tail = [], NAVBAND = 80, X0 = 0, B0 = 0, B1 = 0, W=0, H=0, wide=true, stars=[], dust=[], glyphs=[], stage=[], roundStart=0, gl=4, bl=40;
 
   function build(){
     var r = rng(9);
-    var skyH = wide ? H : H*0.66;
+    // The illustration stays clear of the text: on a wide screen it lives right of the
+    // name block (X0 onward) and above the bio card (up to B1); on a narrow one, it fills
+    // the band between the menu and the headshot (B0..B1).
+    var cr = cv.getBoundingClientRect(), tr = document.querySelector(".hero .title").getBoundingClientRect();
+    NAVBAND = wide ? 80 : 125;
+    X0 = wide ? Math.min(W*0.5, tr.right - cr.left + 24) : 0;
+    var ar = document.querySelector(".hero-about").getBoundingClientRect(), YB = ar.top - cr.top - 16;   // top of the bio card
+    B0 = NAVBAND; B1 = wide ? YB : Math.max(B0 + 120, tr.top - cr.top - 12);
+    var skyH = wide ? H : B1 + 40;
     stars = []; dust = [];
     for(var i=0;i<(wide?440:200);i++) stars.push({x:r()*W, y:r()*skyH, s:0.6+Math.pow(r(),3)*1.7, a:0.3+r()*0.5, w:0.0003+r()*0.0011, p:r()*6.28, litT:0});
     // a faint band of distant dust, like the Milky Way
@@ -221,15 +231,15 @@ const resume = '/assets/resume.pdf';
       var x = wide ? W*(0.25+0.8*t) : W*t, y = wide ? H*(0.95-0.85*t+off) : skyH*(0.85-0.6*t+off*1.4);
       dust.push([x, y, 0.5+r()*0.6, 0.05+r()*0.1]); }
     gl = wide ? 12 : 8.5;
-    NAVBAND = wide ? 80 : 125;
-    bl = wide ? Math.min(H*0.052, W*0.029) : W*0.046;
+    bl = wide ? Math.min(B1*0.07, W*0.029, (W-X0)*0.07) : Math.min(W*0.046, (B1-B0)*0.11);
     // the tour: serotonin -> dopamine -> adrenaline -> melatonin, each at a spot where its full structure fits
     // spread across the whole sky, each in open space clear of the name, headline and menu
-    var S = wide ? [[0.66,0.45],[0.3,0.2],[0.32,0.84],[0.85,0.72]] : [[0.5,0.37],[0.3,0.26],[0.7,0.52],[0.38,0.56]];
-    var O = wide ? [[0.08,0.14],[0.47,0.1],[0.96,0.1],[0.53,0.9],[0.48,0.36],[0.97,0.45]]
-                 : [[0.1,0.42],[0.9,0.42],[0.1,0.62],[0.9,0.62],[0.88,0.24],[0.62,0.66]];
+    // positions are fractions of that region, not of the whole canvas
+    var S = wide ? [[0.42,0.42],[0.3,0.17],[0.28,0.8],[0.78,0.66]] : [[0.5,0.5],[0.22,0.3],[0.78,0.42],[0.32,0.8]];
+    var O = wide ? [[0.04,0.08],[0.62,0.07],[0.96,0.1],[0.62,0.94],[0.05,0.55],[0.97,0.4]]
+                 : [[0.06,0.15],[0.94,0.12],[0.06,0.85],[0.94,0.82],[0.62,0.12],[0.66,0.9]];
     var MI = [0,1,4,2, 3,5,6,7,8,9];
-    glyphs = S.concat(O).map(function(p,k){ return {x:p[0]*W, y:p[1]*H, w:0.0005+0.0006*((k*37)%10)/10, p:k*1.7, mi:MI[k]}; });
+    glyphs = S.concat(O).map(function(p,k){ return {x: wide ? X0 + p[0]*(W-X0-24) : p[0]*W, y: wide ? 24 + p[1]*(B1-24) : B0 + p[1]*(B1-B0), w:0.0005+0.0006*((k*37)%10)/10, p:k*1.7, mi:MI[k]}; });
   }
   // serotonin is the one focal point; every other molecule is a small shining star
 
@@ -249,7 +259,7 @@ const resume = '/assets/resume.pdf';
     target = glyphs[cyc]; site = [target.x, target.y];
     var side = Math.random() < 0.5 ? -1 : 1, start = prev < 0 ? [site[0] + side*(wide ? W*0.16 : W*0.32), site[1] + (Math.random()-0.5)*(wide ? H*0.25 : H*0.12)] : [glyphs[prev].x, glyphs[prev].y];   // the first star drifts in from nearby
     route = [start];
-    var pool = stars.filter(function(s){ return (wide ? s.x > W*0.45 : true) && s.y > (wide?H*0.12:H*0.2) && s.y < (wide?H*0.9:H*0.62); });
+    var pool = stars.filter(function(s){ return wide ? (s.x > X0 && s.y > B1*0.12 && s.y < B1*0.92) : (s.y > B0 && s.y < B1); });
     var first = firstTrip; firstTrip = false;
     // straight on to the next molecule along one gentle curve
     var mx = (start[0]+site[0])/2, my = (start[1]+site[1])/2, dx = site[0]-start[0], dy = site[1]-start[1], bend = (Math.random() < 0.5 ? 1 : -1)*0.18;
@@ -456,17 +466,18 @@ main{max-width:1180px;margin:0 auto}
 .lead{font-size:clamp(18px,1.7vw,21px);line-height:1.4;margin:0 0 20px;max-width:none;font-family:var(--display);font-weight:400;letter-spacing:-.01em}
 .prose p{color:var(--muted);max-width:62ch;margin:0 0 14px;font-size:16px}
 /* About lives in the hero: headshot above the name, bio set over the sky */
-.title{max-width:700px}
+.hero-main{display:grid;grid-template-columns:minmax(0,1fr);gap:40px} /* name block on top, bio card along the bottom of the hero */
+.title{max-width:520px}
 .headshot{width:104px;height:104px;border-radius:50%;overflow:hidden;margin:0 0 22px;border:1px solid var(--rule)}
 /* The source is a half-body portrait; zoom in so the circle reads as a face, not a figure */
 .headshot img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0;transform:scale(1.9);transform-origin:52% 14%;filter:grayscale(.25) contrast(1.02)}
-.hero-about{margin-top:32px}
+.hero-about{padding:28px 30px;border-radius:16px;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);background:color-mix(in srgb,var(--bg) 22%,transparent);-webkit-backdrop-filter:blur(2.5px);backdrop-filter:blur(2.5px)} /* light glass: the sky stays visible through it, just softened */
 .spec:has(> .readout[hidden]){display:none} /* the readout is never shown; without this its empty row adds a gap under the bio */
-.hero-about .lead{font-size:clamp(17px,1.5vw,19px);margin:0 0 14px;max-width:none;opacity:1;color:var(--ink)}
-.hero-about .prose p{font-size:15.5px;line-height:1.6;max-width:66ch;margin:0 0 12px;opacity:1;color:var(--muted);text-shadow:0 0 12px var(--bg)}
-.hero-about .prose p:last-child{margin-bottom:0}
-.hero-about .prose a{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
-.hero-about .prose a:hover{color:var(--ink);text-decoration-color:currentColor}
+.title .standfirst{margin-top:18px;font-size:16px;color:var(--muted);opacity:1;max-width:36ch}
+.hero-about p{font-size:15.5px;line-height:1.6;max-width:none;margin:0 0 12px;opacity:1;color:var(--muted)}
+.hero-about p:last-child{margin-bottom:0}
+.hero-about a{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+.hero-about a:hover{color:var(--ink);text-decoration-color:currentColor}
 .threads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
 .thread{background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:8px}
 .thread .k{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
@@ -545,6 +556,9 @@ details.all .pubs li{padding-block:10px}
   .sec{grid-template-columns:minmax(0,1fr);padding-block:44px}
   .threads{grid-template-columns:minmax(0,1fr)}
   .hero-in{gap:40px;padding-bottom:44px}
+  .hero-main{grid-template-columns:minmax(0,1fr);gap:28px}
+  .hero .title{margin-top:190px} /* open sky above the headshot for the illustration */
+  .hero-about{padding:22px 20px}
   .readout{text-align:left}
 }
 @media (max-width:480px){
