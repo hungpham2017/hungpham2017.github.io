@@ -85,7 +85,7 @@ export const SOFTWARE_GROUPS = ['Scientific packages', 'Side projects'] as const
  */
 export const software = [
   { name: 'ByteQC', group: 'Scientific packages', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc', paper: null },
-  { name: 'ByteCRN', group: 'Scientific packages', role: 'Core developer', note: 'Generative exploration of chemical reaction networks at scale', language: null, url: 'https://bytedance-seed.github.io/ByteCRN-page/', paper: null },
+  { name: 'ByteCRN', group: 'Scientific packages', role: 'Lead developer', note: 'Generative exploration of chemical reaction networks at scale', language: null, url: 'https://bytedance-seed.github.io/ByteCRN-page/', paper: null },
   { name: 'PySCF', group: 'Scientific packages', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf', paper: null },
   { name: 'ipie', group: 'Scientific packages', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie', paper: null },
   { name: 'pDMET', group: 'Scientific packages', role: 'Lead developer', note: 'Periodic density matrix embedding theory', language: 'Python', url: 'https://github.com/hungpham2017/pDMET', paper: null },
@@ -167,7 +167,7 @@ export const about = {
   // Facts are taken from the resume (resume/experiences.tex) -- keep them in
   // step when that changes.
   paragraphs: [
-    "I'm a Research Scientist at ByteDance Seed (AI for Science) in San Jose, California. I earned my Ph.D. in quantum chemistry at the University of Minnesota with Laura Gagliardi, developing quantum embedding methods for materials, then did a postdoc at Columbia University with David Reichman on auxiliary-field quantum Monte Carlo for periodic solids before joining ByteDance in 2022. There I work on generative AI for reaction chemistry (Trèfle and ByteCRN) and develop FEMION, a GPU-accelerated quantum embedding framework for metals.",
+    "I'm a Research Scientist at ByteDance Seed (AI for Science) in San Jose, California. I earned my Ph.D. in quantum chemistry at the University of Minnesota with Laura Gagliardi, developing quantum embedding methods for materials, then did a postdoc at Columbia University with David Reichman on auxiliary-field quantum Monte Carlo for periodic solids before joining ByteDance in 2022. There I work on generative AI for reaction chemistry (Trèfle and ByteCRN), build high-throughput data pipelines for AI for Science, and develop FEMION, a GPU-accelerated quantum embedding framework for metals.",
     "I build at the intersection of AI and science — using modern deep learning techniques and agentic AI combined with ab initio high-fidelity data from quantum chemistry to reveal hidden chemical transformations that can drive progress in drug development, materials design, energy, and beyond.",
     "Beyond fundamental research, I bring the same AI + Science mindset to real-world problems — building systems and models that integrate AI into different fields to boost productivity and efficiency. From agentic workflows to intelligent tools, if there's a way AI can make something faster, smarter, or more impactful, I want to build it.",
   ],
