@@ -85,7 +85,7 @@ export const SOFTWARE_GROUPS = ['Scientific packages', 'Side projects'] as const
  */
 export const software = [
   { name: 'ByteQC', group: 'Scientific packages', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc', paper: null },
-  { name: 'ByteCRN', group: 'Scientific packages', role: 'Lead developer', note: 'Generative exploration of chemical reaction networks at scale', language: null, url: 'https://bytedance-seed.github.io/ByteCRN-page/', paper: null },
+  { name: 'ByteCRN', group: 'Scientific packages', role: 'Core developer', note: 'Generative exploration of chemical reaction networks at scale', language: null, url: 'https://bytedance-seed.github.io/ByteCRN-page/', paper: null },
   { name: 'PySCF', group: 'Scientific packages', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf', paper: null },
   { name: 'ipie', group: 'Scientific packages', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie', paper: null },
   { name: 'pDMET', group: 'Scientific packages', role: 'Lead developer', note: 'Periodic density matrix embedding theory', language: 'Python', url: 'https://github.com/hungpham2017/pDMET', paper: null },
