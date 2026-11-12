@@ -163,8 +163,12 @@ export const identity = {
 /** About copy, in order. The first line is set as a standfirst. */
 export const about = {
   standfirst: 'Science accelerates when AI meets deep domain expertise.',
+  // Three beats, in order: who he is, what he does, what he is on right now.
+  // Facts are taken from the resume (resume/experiences.tex) -- keep them in
+  // step when that changes.
   paragraphs: [
-    "I build at that intersection — using modern deep learning techniques and agentic AI combined with ab initio high-fidelity data from quantum chemistry to reveal hidden chemical transformations that can drive progress in drug development, materials design, energy, and beyond.",
+    "I'm a Research Scientist at ByteDance Seed (AI for Science) in San Jose, California. I earned my Ph.D. in quantum chemistry at the University of Minnesota with Laura Gagliardi, developing quantum embedding methods for materials, then did a postdoc at Columbia University with David Reichman on auxiliary-field quantum Monte Carlo for periodic solids before joining ByteDance in 2022. There I work on generative AI for reaction chemistry (Trèfle and ByteCRN) and develop FEMION, a GPU-accelerated quantum embedding framework for metals.",
+    "I build at the intersection of AI and science — using modern deep learning techniques and agentic AI combined with ab initio high-fidelity data from quantum chemistry to reveal hidden chemical transformations that can drive progress in drug development, materials design, energy, and beyond.",
     "Beyond fundamental research, I bring the same AI + Science mindset to real-world problems — building systems and models that integrate AI into different fields to boost productivity and efficiency. From agentic workflows to intelligent tools, if there's a way AI can make something faster, smarter, or more impactful, I want to build it.",
   ],
 };
