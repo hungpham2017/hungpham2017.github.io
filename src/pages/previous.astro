@@ -95,7 +95,7 @@ const sections = [
           <p class="label">About</p>
           <p class="standfirst">{about.standfirst}</p>
           <div class="prose">
-            {about.paragraphs.map((p) => <p>{p}</p>)}
+            {about.paragraphs.map((p) => <p set:html={p} />)}
           </div>
         </div>
       </section>

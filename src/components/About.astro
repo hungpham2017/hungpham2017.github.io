@@ -11,7 +11,7 @@ import { about } from '../data/content';
         {about.standfirst}
       </p>
       {about.paragraphs.map((paragraph) => (
-        <p class="text-gray-400 leading-relaxed mb-6 last:mb-0">{paragraph}</p>
+        <p class="text-gray-400 leading-relaxed mb-6 last:mb-0" set:html={paragraph} />
       ))}
     </div>
   </div>
