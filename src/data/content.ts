@@ -85,6 +85,8 @@ export const SOFTWARE_GROUPS = ['Scientific packages', 'Side projects'] as const
  */
 export const software = [
   { name: 'ByteQC', group: 'Scientific packages', role: 'Contributor', note: 'GPU-accelerated quantum chemistry for large-scale systems', language: 'CUDA', url: 'https://github.com/bytedance/byteqc', paper: null },
+  // Trèfle: a model rather than a public package, so it links to its paper.
+  { name: 'Trèfle', group: 'Scientific packages', role: 'Contributor', note: 'One-step flow-matching model for reaction mechanisms, refined with reinforcement learning', language: null, url: null, paper: 'https://arxiv.org/abs/2609.32073' },
   { name: 'ByteCRN', group: 'Scientific packages', role: 'Lead developer', note: 'Generative exploration of chemical reaction networks at scale', language: null, url: 'https://bytedance-seed.github.io/ByteCRN-page/', paper: null },
   { name: 'PySCF', group: 'Scientific packages', role: 'Contributor', note: 'Python-based simulations of chemistry', language: 'Python', url: 'https://github.com/pyscf/pyscf', paper: null },
   { name: 'ipie', group: 'Scientific packages', role: 'Contributor', note: 'Auxiliary-field quantum Monte Carlo', language: 'Python', url: 'https://github.com/JoonhoLee-Group/ipie', paper: null },
@@ -169,8 +171,8 @@ export const about = {
   // Facts are taken from the resume (resume/experiences.tex) -- keep them in
   // step when that changes.
   paragraphs: [
-    "I'm a Research Scientist at ByteDance Seed. I earned my Ph.D. in quantum chemistry with <a href='https://gagliardigroup.uchicago.edu/' target='_blank' rel='noopener'>Laura Gagliardi</a> at the University of Minnesota, developing quantum embedding methods for materials, then did a postdoc with <a href='https://reichmangroup.chem.columbia.edu/' target='_blank' rel='noopener'>David Reichman</a> at Columbia on auxiliary-field quantum Monte Carlo for periodic solids. Since joining ByteDance in 2022, I've worked on generative AI for reaction chemistry, high-throughput scientific data pipelines, and FEMION, a GPU-accelerated embedding framework for metals.",
-    "I build at the intersection of AI and science, combining modern deep learning and agentic AI with high-fidelity ab initio data from quantum chemistry to reveal hidden chemical transformations that drive progress in drug development, materials design, energy, and beyond. Outside fundamental research, I bring the same AI + Science mindset to real-world problems, creating systems that bring AI into new fields to boost productivity. From agentic workflows to intelligent tools, if AI can make something faster, smarter, or more impactful, I want to build it.",
+    "I'm a Research Scientist at ByteDance Seed. I earned my Ph.D. in quantum chemistry with <a href='https://gagliardigroup.uchicago.edu/' target='_blank' rel='noopener'>Laura Gagliardi</a> at the University of Minnesota, developing quantum embedding methods for materials, then a postdoc with <a href='https://reichmangroup.chem.columbia.edu/' target='_blank' rel='noopener'>David Reichman</a> at Columbia on auxiliary-field quantum Monte Carlo for periodic solids. Since 2022, I've worked on generative AI for chemistry, high-throughput scientific data pipelines, and GPU-accelerated embedding theory for metals.",
+    "I build at the intersection of AI and science, combining deep learning and agentic AI with high-fidelity ab initio quantum chemistry data to reveal hidden chemical transformations in drug development, materials design, energy, and beyond. Outside research, I bring the same AI + Science mindset to real-world problems, creating systems that bring AI into new fields to boost productivity. From agentic workflows to intelligent tools, if AI can make something faster, smarter, or more impactful, I want to build it.",
   ],
 };
 
@@ -238,7 +240,7 @@ export const workAreas = [
   {
     kind: 'Quantum chemistry',
     title: 'Quantum many-body methods',
-    text: 'Quantum embedding and quantum Monte Carlo for strongly correlated and metallic systems, at 1 kcal/mol accuracy.',
+    text: 'Quantum embedding and quantum Monte Carlo for strongly correlated and metallic systems.',
     papers: [
       'A multi-resolution', 'Quantum Many-Body Simulations of Catalytic', 'Advancing Surface Chemistry',
       'Ab initio quantum simulation', 'Excited States of Crystalline', 'Periodic Electronic Structure Calculations with the Density',

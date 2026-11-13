@@ -54,14 +54,15 @@ const resume = '/assets/resume.pdf';
       <span class="mark">hungqpham.com</span>
       <nav><a href="#work">Work</a><a href="#software">Software</a><a href="#papers">Papers</a><a href="#experience">CV</a><a href="#contact">Contact</a></nav>
     </div>
-    <div class="title" id="about">
+    <div class="hero-main" id="about">
+    <div class="title">
       <div class="headshot"><Image src={photo} alt={identity.name} width={360} format="webp" quality={82} /></div>
       <h1>{identity.name.replace(' Pham', ' Pham')}</h1>
       <p><b>{heroLine.a}</b> × <i>{heroLine.b}</i>{heroLine.rest}</p>
-      <div class="hero-about">
-        <p class="lead">{about.standfirst}</p>
-        <div class="prose">{about.paragraphs.map((p) => <p set:html={p} />)}</div>
-      </div>
+    </div>
+    <div class="hero-about">
+      {about.paragraphs.map((p) => <p set:html={p} />)}
+    </div>
     </div>
     <div class="spec"><div class="readout" id="readout" hidden></div></div>
   </div>
@@ -76,6 +77,7 @@ const resume = '/assets/resume.pdf';
           const list = pubsFor(w.papers);
           return (
             <article class="thread">
+              <canvas class="art" data-art={w.title} aria-hidden="true"></canvas>
               <span class="k">{w.kind}</span>
               <h3>{w.title}</h3>
               <p>{w.text}</p>
@@ -177,6 +179,125 @@ const resume = '/assets/resume.pdf';
   function tok(n){ return css.getPropertyValue(n).trim(); }
   var BG = tok("--bg"), INK = tok("--ink"), MUTED = tok("--muted"), WARM = tok("--warm"), COOL = tok("--cool");
   var EL = { C: INK, N: COOL, O: WARM };
+  // On a bright page a star field reads as specks of dirt, so the sky is drawn as a
+  // sketch instead: no galaxy band, a sparse scatter of soft violet and blue points,
+  // and molecules in thin blue lines. LIGHT is detected from the page colour.
+  var LIGHT = (function(h){ h=h.replace("#",""); if(h.length===3) h=h.replace(/./g,"$&$&"); var n=parseInt(h,16); return ((n>>16&255)*.3+(n>>8&255)*.59+(n&255)*.11) > 140; })(BG);
+  var SKETCH = LIGHT ? COOL : INK;
+
+  // ---- bright mode: noise -> electron cloud (AI x Quantum in one image) ----
+  // Thousands of fine dots start as a shapeless Gaussian cloud (the generative model's
+  // noise), flow along smooth curved trajectories (its sampling path) and settle into the
+  // electron density of a molecule (the quantum part): dense at the nuclei, a haze along
+  // the bonds, wispy at the edges. It breathes, then dissolves back into noise and the
+  // next molecule forms. Dots take the colour of the atom they belong to.
+  // The haze fills the whole banner; one cloud tours the open sky, condensing into a
+  // molecule at each stop and drifting on as noise to the next.
+  var GLOW0 = (function(h){ h=h.replace("#",""); if(h.length===3) h=h.replace(/./g,"$&$&"); var n=parseInt(h,16); return "rgba("+(n>>16&255)+","+(n>>8&255)+","+(n&255)+",0)"; })(WARM);
+  var TOUR_MOLS = [0, 1, 4, 2], TXT_TOP = 0, dens = null, CARBON = "#52627a";   // carbon in soft blue-slate, not ink          // serotonin, dopamine, epinephrine, melatonin
+  function buildDensity(){
+    var r = rng(5), x0 = wide ? X0 : 0;
+    TXT_TOP = document.querySelector(".hero .title h1").getBoundingClientRect().top - cv.getBoundingClientRect().top - 8;
+    // one cloud on a tour, like the old explorer: each molecule forms at the next spot
+    // (fractions of the open sky), and the noise drifts there between molecules
+    var y0 = wide ? 40 : B0, rw = W - x0, rh = (wide ? B1 : B1) - y0;
+    var bw = wide ? rw*0.42 : rw*0.8, bh = wide ? rh*0.6 : rh*0.85, spots;
+    if(wide){
+      // on a wide screen the tour stays near the headshot: a row of stops just right of
+      // the portrait, in the open band above the name and beside the tagline
+      var cr = cv.getBoundingClientRect(), hs = document.querySelector(".hero .headshot").getBoundingClientRect();
+      var hx = hs.right - cr.left, hy = (hs.top + hs.bottom)/2 - cr.top;
+      bw = Math.min(320, W*0.24); bh = Math.min(170, (hs.bottom - cr.top)*0.95);
+      spots = [[hx + 40 + bw*0.5, hy], [hx + 40 + bw*1.45, hy - 8], [hx + 40 + bw*0.95, hy + 6], [hx + 40 + bw*1.9, hy + 4]];
+    } else {
+      spots = [[0.5,0.45],[0.3,0.55],[0.7,0.5],[0.5,0.6]].map(function(f){ return [x0 + f[0]*rw, y0 + f[1]*rh]; });
+    }
+    spots = spots.map(function(p){ return [Math.max(bw*0.5 + 8, Math.min(W - bw*0.55 - 12, p[0])), Math.max(bh*0.5 + 8, p[1])]; });   // keep every stop fully on screen
+    var slots = [[spots[0][0], spots[0][1], bw, bh, wide ? 4600 : 2400, 0.0, 0]];
+    function dot(){ return { nx: gauss(r), ny: gauss(r), u1: r(), u2: r(), u3: r(), g1: gauss(r), g2: gauss(r), bend: gauss(r)*0.35, ph: r()*6.28, a: 0.45 + r()*0.55, tint: r() < 0.5 ? COOL : WARM, lag: Math.pow(r(), 1.6) }; }
+    dens = { slots: slots.map(function(sl){ var P = []; for(var i=0;i<sl[4];i++) P.push(dot());
+               return { cx: sl[0], cy: sl[1], w: sl[2], h: sl[3], off: sl[5], first: sl[6], P: P, cyc: -1, T: null, spots: spots, from: spots[0] }; }),
+             haze: [] };
+    for(var i=0;i<(wide?1500:700);i++) dens.haze.push({ x: r()*W, y: r()*H, ph: r()*6.28, a: 0.08 + r()*0.16, sp: 0.4 + r()*0.8 });
+  }
+  function densityTargets(sl, m){
+    // fit the molecule into its slot, then give every dot a place in its electron cloud
+    var xs = m.P.map(function(p){ return p[0]; }), ys = m.P.map(function(p){ return p[1]; });
+    var mx = (Math.min.apply(0,xs)+Math.max.apply(0,xs))/2, my = (Math.min.apply(0,ys)+Math.max.apply(0,ys))/2;
+    var sc = Math.min(sl.w*0.8/(Math.max.apply(0,xs)-Math.min.apply(0,xs)+1.2), sl.h*0.9/(Math.max.apply(0,ys)-Math.min.apply(0,ys)+1.2));
+    var heavy = { C: 6, N: 7, O: 8 }, wsum = 0, comps = [];
+    m.atoms.forEach(function(a,k){ var wgt = heavy[a[0]] || 6; comps.push({ k: k, w: wgt }); wsum += wgt; });
+    sl.geom = { A: m.P.map(function(q){ return [sl.cx + (q[0]-mx)*sc, sl.cy + (q[1]-my)*sc]; }), el: m.atoms.map(function(a){ return a[0]; }), bonds: m.bonds, sc: sc };
+    return sl.P.map(function(p){
+      var X, Y, el, ax, ay;
+      if(p.u1 < 0.55){                                 // around a nucleus, weighted by its electrons
+        var pick = p.u2*wsum, c = comps[0]; for(var q=0;q<comps.length;q++){ pick -= comps[q].w; if(pick <= 0){ c = comps[q]; break; } }
+        var s = p.u3 < 0.88 ? 0.14 : 0.36;             // a tight core and a thin halo
+        ax = m.P[c.k][0]; ay = m.P[c.k][1]; X = ax + p.g1*s; Y = ay + p.g2*s; el = m.atoms[c.k][0];
+      } else {                                         // shared along a bond
+        var b = m.bonds[Math.floor(p.u2*m.bonds.length)], A = m.P[b[0]], B = m.P[b[1]], f = p.u3;
+        ax = A[0] + (B[0]-A[0])*f; ay = A[1] + (B[1]-A[1])*f; X = ax + p.g1*0.07; Y = ay + p.g2*0.07; el = f < 0.5 ? m.atoms[b[0]][0] : m.atoms[b[1]][0];
+      }
+      return [sl.cx + (X-mx)*sc, sl.cy + (Y-my)*sc, el === "N" ? COOL : el === "O" ? WARM : CARBON, sl.cx + (ax-mx)*sc, sl.cy + (ay-my)*sc];
+    });
+  }
+  // the resolved molecule: fine bonds and small atoms, in the page's slate, cyan and indigo
+  function drawSkeleton(sl, k, breathe){
+    var G = sl.geom, P = G.A.map(function(a){ return [sl.cx + (a[0]-sl.cx)*breathe, sl.cy + (a[1]-sl.cy)*breathe]; });
+    var rC = Math.max(2.2, Math.min(3.6, G.sc*0.075)), off = Math.max(1.4, G.sc*0.05);
+    ctx.lineCap = "round"; ctx.strokeStyle = "#334155"; ctx.lineWidth = 1.1; ctx.globalAlpha = 0.85*k;
+    G.bonds.forEach(function(b){ var p = P[b[0]], q = P[b[1]], dx = q[0]-p[0], dy = q[1]-p[1], L = Math.hypot(dx,dy)||1, nx = -dy/L*off, ny = dx/L*off;
+      ctx.beginPath();
+      if(b[2]===2){ ctx.moveTo(p[0]+nx,p[1]+ny); ctx.lineTo(q[0]+nx,q[1]+ny); ctx.moveTo(p[0]-nx,p[1]-ny); ctx.lineTo(q[0]-nx,q[1]-ny); }
+      else { ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); }
+      ctx.stroke(); });
+    P.forEach(function(q,j){ var el = G.el[j], r = el === "C" ? rC : rC*1.3;
+      ctx.globalAlpha = k; ctx.fillStyle = BG; ctx.beginPath(); ctx.arc(q[0], q[1], r + 1.4, 0, 6.283); ctx.fill();
+      ctx.fillStyle = el === "N" ? COOL : el === "O" ? WARM : "#334155"; ctx.beginPath(); ctx.arc(q[0], q[1], r, 0, 6.283); ctx.fill(); });
+  }
+  function quiet(x, y){ return wide ? (x < X0 - 30 && y > TXT_TOP && y < B1 ? 0.22 : 1) : (y > B1 && y < H*0.8 ? 0.3 : 1); }   // hush behind the name and text
+  function drawDensity(now){
+    if(!dens) return;
+    var t = now*0.001;
+    // the ambient haze: noise that is always there, drifting slowly
+    ctx.fillStyle = MUTED;
+    dens.haze.forEach(function(h){ var x = h.x + Math.sin(t*0.2*h.sp + h.ph)*14, y = h.y + Math.cos(t*0.17*h.sp + h.ph)*10;
+      ctx.globalAlpha = h.a*quiet(x,y); ctx.fillRect(x, y, 1, 1); });
+    dens.slots.forEach(function(sl){
+      var D = 11000, ph = now/D + sl.off, c = Math.floor(ph), v = ph - c;
+      if(reduce){ c = 0; v = 0.7; }
+      if(c !== sl.cyc){ var n = sl.spots.length, prev = sl.spots[((c-1) % n + n) % n], cur = sl.spots[c % n];
+        sl.cyc = c; sl.from = prev; sl.cx = cur[0]; sl.cy = cur[1];
+        sl.T = densityTargets(sl, MOLS[TOUR_MOLS[(c + sl.first) % TOUR_MOLS.length]]); }
+      // travel (noise drifts to the new spot) -> flow -> hold (breathing) -> dissolve back to noise
+      var e = v < .22 ? 0 : v < .52 ? ease((v-.22)/.3) : v < .9 ? 1 : 1 - ease((v-.9)/.1);
+      var k = v < .52 ? 0 : v < .62 ? ease((v-.52)/.1) : v < .83 ? 1 : v < .9 ? 1 - ease((v-.83)/.07) : 0;   // the real molecule
+      if(reduce){ e = 1; k = 1; }
+      var go = reduce ? 1 : ease(Math.min(1, v/.22)), hx = sl.from[0] + (sl.cx - sl.from[0])*go, hy = sl.from[1] + (sl.cy - sl.from[1])*go;
+      var tdx = sl.cx - sl.from[0], tdy = sl.cy - sl.from[1], trail = reduce ? 0 : 0.7*Math.sin(Math.PI*Math.min(1, v/.22));
+      var R = Math.min(sl.w, sl.h)*0.3, breathe = 1 + 0.025*Math.sin(t*1.3 + sl.off*6);
+      var ncx = hx + Math.sin(t*0.3 + sl.off*5)*R*0.1, ncy = hy + Math.cos(t*0.25 + sl.off*5)*R*0.08, ct = Math.cos(t*0.12), st = Math.sin(t*0.12);
+      if(e > 0.05){   // a faint indigo glow where the molecule is forming
+        var gr = Math.max(sl.w, sl.h)*0.55, g = ctx.createRadialGradient(sl.cx, sl.cy, 0, sl.cx, sl.cy, gr);
+        g.addColorStop(0, WARM); g.addColorStop(1, GLOW0);   // fade to transparent indigo, not to black
+        ctx.globalAlpha = 0.07*e; ctx.fillStyle = g; ctx.fillRect(sl.cx-gr, sl.cy-gr, gr*2, gr*2); }
+      var last = null;
+      for(var i=0;i<sl.P.length;i++){
+        var p = sl.P[i], T = sl.T[i];
+        var nx = ncx + (p.nx*ct - p.ny*st)*R - trail*p.lag*tdx, ny = ncy + (p.nx*st + p.ny*ct)*R*0.7 - trail*p.lag*tdy;   // streams behind while it travels
+        var tight = 1 - 0.55*k, bx = T[3] + (T[0]-T[3])*tight, by = T[4] + (T[1]-T[4])*tight;   // the cloud draws in around the skeleton
+        var tx = sl.cx + (bx-sl.cx)*breathe, ty = sl.cy + (by-sl.cy)*breathe;
+        var dx = tx-nx, dy = ty-ny, arc = Math.sin(Math.PI*e)*p.bend;          // a gentle curve, not a straight line
+        var x = nx + dx*e - dy*arc, y = ny + dy*e + dx*arc;
+        x += Math.sin(t*1.7 + p.ph)*(0.35 + 1.8*(1-e)); y += Math.cos(t*1.5 + p.ph*1.3)*(0.35 + 1.8*(1-e));   // walkers never sit still
+        var col = e > 0.5 ? T[2] : p.tint;
+        if(col !== last){ ctx.fillStyle = col; last = col; }
+        ctx.globalAlpha = p.a*(e > 0.5 ? (0.3 + 0.32*e)*(1 - 0.45*k) : 0.4)*(e > 0.5 ? 1 : quiet(x,y));
+        ctx.fillRect(x, y, 0.9, 0.9);
+      }
+      if(k > 0.01) drawSkeleton(sl, k, breathe);
+    });
+  }
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var ro = document.getElementById("readout"); if(ro) ro.hidden = true;
   function rng(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; var t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
@@ -209,11 +330,19 @@ const resume = '/assets/resume.pdf';
   MOLS.forEach(function(m){ var sx=0,sy=0,n=m.atoms.length; m.atoms.forEach(function(a){sx+=a[1];sy+=a[2];}); sx/=n; sy/=n; m.P=m.atoms.map(function(a){ return [a[1]-sx, -(a[2]-sy)]; }); });
 
   var cv = document.getElementById("cloud"), ctx = cv.getContext("2d");
-  var NOW = 0, tail = [], NAVBAND = 80, W=0, H=0, wide=true, stars=[], dust=[], glyphs=[], stage=[], roundStart=0, gl=4, bl=40;
+  var NOW = 0, tail = [], NAVBAND = 80, X0 = 0, B0 = 0, B1 = 0, W=0, H=0, wide=true, stars=[], dust=[], glyphs=[], stage=[], roundStart=0, gl=4, bl=40;
 
   function build(){
     var r = rng(9);
-    var skyH = wide ? H : H*0.66;
+    // The illustration stays clear of the text: on a wide screen it lives right of the
+    // name block (X0 onward) and above the bio card (up to B1); on a narrow one, it fills
+    // the band between the menu and the headshot (B0..B1).
+    var cr = cv.getBoundingClientRect(), tr = document.querySelector(".hero .title").getBoundingClientRect();
+    NAVBAND = wide ? 80 : 125;
+    X0 = wide ? Math.min(W*0.5, tr.right - cr.left + 24) : 0;
+    var ar = document.querySelector(".hero-about").getBoundingClientRect(), YB = ar.top - cr.top - 16;   // top of the bio card
+    B0 = NAVBAND; B1 = wide ? YB : Math.max(B0 + 120, tr.top - cr.top - 12);
+    var skyH = wide ? H : B1 + 40;
     stars = []; dust = [];
     for(var i=0;i<(wide?440:200);i++) stars.push({x:r()*W, y:r()*skyH, s:0.6+Math.pow(r(),3)*1.7, a:0.3+r()*0.5, w:0.0003+r()*0.0011, p:r()*6.28, litT:0});
     // a faint band of distant dust, like the Milky Way
@@ -221,15 +350,16 @@ const resume = '/assets/resume.pdf';
       var x = wide ? W*(0.25+0.8*t) : W*t, y = wide ? H*(0.95-0.85*t+off) : skyH*(0.85-0.6*t+off*1.4);
       dust.push([x, y, 0.5+r()*0.6, 0.05+r()*0.1]); }
     gl = wide ? 12 : 8.5;
-    NAVBAND = wide ? 80 : 125;
-    bl = wide ? Math.min(H*0.052, W*0.029) : W*0.046;
+    bl = wide ? Math.min(B1*0.07, W*0.029, (W-X0)*0.07) : Math.min(W*0.046, (B1-B0)*0.11);
     // the tour: serotonin -> dopamine -> adrenaline -> melatonin, each at a spot where its full structure fits
     // spread across the whole sky, each in open space clear of the name, headline and menu
-    var S = wide ? [[0.66,0.45],[0.3,0.2],[0.32,0.84],[0.85,0.72]] : [[0.5,0.37],[0.3,0.26],[0.7,0.52],[0.38,0.56]];
-    var O = wide ? [[0.08,0.14],[0.47,0.1],[0.96,0.1],[0.53,0.9],[0.48,0.36],[0.97,0.45]]
-                 : [[0.1,0.42],[0.9,0.42],[0.1,0.62],[0.9,0.62],[0.88,0.24],[0.62,0.66]];
+    // positions are fractions of that region, not of the whole canvas
+    var S = wide ? [[0.42,0.42],[0.3,0.17],[0.28,0.8],[0.78,0.66]] : [[0.5,0.5],[0.22,0.3],[0.78,0.42],[0.32,0.8]];
+    var O = wide ? [[0.04,0.08],[0.62,0.07],[0.96,0.1],[0.62,0.94],[0.05,0.55],[0.97,0.4]]
+                 : [[0.06,0.15],[0.94,0.12],[0.06,0.85],[0.94,0.82],[0.62,0.12],[0.66,0.9]];
     var MI = [0,1,4,2, 3,5,6,7,8,9];
-    glyphs = S.concat(O).map(function(p,k){ return {x:p[0]*W, y:p[1]*H, w:0.0005+0.0006*((k*37)%10)/10, p:k*1.7, mi:MI[k]}; });
+    glyphs = S.concat(O).map(function(p,k){ return {x: wide ? X0 + p[0]*(W-X0-24) : p[0]*W, y: wide ? 24 + p[1]*(B1-24) : B0 + p[1]*(B1-B0), w:0.0005+0.0006*((k*37)%10)/10, p:k*1.7, mi:MI[k]}; });
+    if(LIGHT) buildDensity();
   }
   // serotonin is the one focal point; every other molecule is a small shining star
 
@@ -249,7 +379,7 @@ const resume = '/assets/resume.pdf';
     target = glyphs[cyc]; site = [target.x, target.y];
     var side = Math.random() < 0.5 ? -1 : 1, start = prev < 0 ? [site[0] + side*(wide ? W*0.16 : W*0.32), site[1] + (Math.random()-0.5)*(wide ? H*0.25 : H*0.12)] : [glyphs[prev].x, glyphs[prev].y];   // the first star drifts in from nearby
     route = [start];
-    var pool = stars.filter(function(s){ return (wide ? s.x > W*0.45 : true) && s.y > (wide?H*0.12:H*0.2) && s.y < (wide?H*0.9:H*0.62); });
+    var pool = stars.filter(function(s){ return wide ? (s.x > X0 && s.y > B1*0.12 && s.y < B1*0.92) : (s.y > B0 && s.y < B1); });
     var first = firstTrip; firstTrip = false;
     // straight on to the next molecule along one gentle curve
     var mx = (start[0]+site[0])/2, my = (start[1]+site[1])/2, dx = site[0]-start[0], dy = site[1]-start[1], bend = (Math.random() < 0.5 ? 1 : -1)*0.18;
@@ -299,14 +429,14 @@ const resume = '/assets/resume.pdf';
   // a molecule drawn as a small cluster of stars: each atom a twinkling point, bonds as faint constellation lines
   function drawStarMol(m, cx, cy, scale, alpha, seed, now){
     var S = m.P.map(function(p){ return [cx+p[0]*scale, cy+p[1]*scale]; });
-    ctx.strokeStyle = INK; ctx.lineWidth = 0.6; ctx.globalAlpha = alpha*0.22; ctx.beginPath();
+    ctx.strokeStyle = SKETCH; ctx.lineWidth = LIGHT ? 0.8 : 0.6; ctx.globalAlpha = alpha*(LIGHT ? 0.35 : 0.22); ctx.beginPath();
     m.bonds.forEach(function(b){ ctx.moveTo(S[b[0]][0], S[b[0]][1]); ctx.lineTo(S[b[1]][0], S[b[1]][1]); }); ctx.stroke();
     // every atom is a white star: it brightens and dims on its own rhythm and sparkles at its peak
     S.forEach(function(s,j){ var e = m.atoms[j][0];
       var t = reduce ? 0.5 : Math.pow(0.5+0.5*Math.sin(now*(0.0006+0.0009*((j*7+seed)%5)/5) + j*1.9 + seed*0.7), 3);
-      ctx.globalAlpha = alpha*(0.4 + 0.6*t); ctx.fillStyle = INK;
+      ctx.globalAlpha = alpha*(LIGHT ? 0.35 + 0.4*t : 0.4 + 0.6*t); ctx.fillStyle = LIGHT ? EL[e] : INK;   // on paper, atoms take their element colour
       ctx.beginPath(); ctx.arc(s[0], s[1], (e==="C" ? 1 : 1.2) + 0.35*t, 0, 6.283); ctx.fill();
-      if(t > 0.82){ var k = (t-0.82)/0.18, len = 1.8 + 2.6*k; ctx.strokeStyle = INK; ctx.lineWidth = 0.6; ctx.globalAlpha = alpha*0.55*k;
+      if(!LIGHT && t > 0.82){ var k = (t-0.82)/0.18, len = 1.8 + 2.6*k; ctx.strokeStyle = INK; ctx.lineWidth = 0.6; ctx.globalAlpha = alpha*0.55*k;
         ctx.beginPath(); ctx.moveTo(s[0]-len, s[1]); ctx.lineTo(s[0]+len, s[1]); ctx.moveTo(s[0], s[1]-len); ctx.lineTo(s[0], s[1]+len); ctx.stroke(); } });
   }
 
@@ -328,23 +458,25 @@ const resume = '/assets/resume.pdf';
 
     ctx.fillStyle = BG; ctx.fillRect(0,0,W,H);
     function tw(w,p){ return reduce ? 0.5 : Math.pow(0.5+0.5*Math.sin(now*w+p), 3); }
-    ctx.fillStyle = MUTED; dust.forEach(function(d){ ctx.globalAlpha = d[3]; ctx.fillRect(d[0], d[1], d[2], d[2]); });
-    ctx.strokeStyle = INK; ctx.lineWidth = 0.7; ctx.globalAlpha = 0.18*fade; ctx.beginPath();
+    // bright mode: the banner is the noise -> electron cloud; the explorer is not drawn
+    if(LIGHT){ drawDensity(now); ctx.globalAlpha = 1; return; }
+    else { ctx.fillStyle = MUTED; dust.forEach(function(d){ ctx.globalAlpha = d[3]; ctx.fillRect(d[0], d[1], d[2], d[2]); }); }
+    ctx.strokeStyle = SKETCH; ctx.lineWidth = 0.7; ctx.globalAlpha = 0.18*fade; ctx.beginPath();
     ctx.stroke();
     edges = edges.filter(function(e){ return now - e[2] < FADE_MS; });
-    edges.forEach(function(e){ ctx.globalAlpha = 0.2*(1 - (now - e[2])/FADE_MS); ctx.beginPath(); ctx.moveTo(stars[e[0]].x, stars[e[0]].y); ctx.lineTo(stars[e[1]].x, stars[e[1]].y); ctx.stroke(); });
+    if(!LIGHT) edges.forEach(function(e){ ctx.globalAlpha = 0.2*(1 - (now - e[2])/FADE_MS); ctx.beginPath(); ctx.moveTo(stars[e[0]].x, stars[e[0]].y); ctx.lineTo(stars[e[1]].x, stars[e[1]].y); ctx.stroke(); });
     ctx.fillStyle = INK;
     // natural twinkle: two slow, unrelated rhythms per star so the flicker never looks regular
-    stars.forEach(function(s){ var lit = s.litT ? Math.max(0, 1 - (now - s.litT)/FADE_MS) : 0;
+    if(!LIGHT) stars.forEach(function(s,i){ var lit = s.litT ? Math.max(0, 1 - (now - s.litT)/FADE_MS) : 0;
       var f = reduce ? 0.5 : 0.5 + 0.28*Math.sin(now*s.w + s.p) + 0.22*Math.sin(now*s.w*2.7 + s.p*1.3);
-      ctx.globalAlpha = Math.min(1, s.a*(0.5 + 0.8*f*f) + 0.35*lit); ctx.fillStyle = INK;
+      ctx.globalAlpha = Math.min(1, s.a*(0.5 + 0.8*f*f)*(LIGHT?0.55:1) + 0.35*lit); ctx.fillStyle = LIGHT ? (i%2 ? COOL : WARM) : INK;
       ctx.beginPath(); ctx.arc(s.x, s.y, (s.s*(0.9 + 0.2*f) + 0.6*lit)/2, 0, 6.283); ctx.fill();
-      if(s.s > 1.3 && f > 0.88){ var g = (f-0.88)/0.12, len = 1.4 + 1.8*g; ctx.strokeStyle = INK; ctx.lineWidth = 0.55; ctx.globalAlpha = 0.38*g;   // the brightest few glint faintly
+      if(!LIGHT && s.s > 1.3 && f > 0.88){ var g = (f-0.88)/0.12, len = 1.4 + 1.8*g; ctx.strokeStyle = INK; ctx.lineWidth = 0.55; ctx.globalAlpha = 0.38*g;   // the brightest few glint faintly
         ctx.beginPath(); ctx.moveTo(s.x-len, s.y); ctx.lineTo(s.x+len, s.y); ctx.moveTo(s.x, s.y-len); ctx.lineTo(s.x, s.y+len); ctx.stroke(); } });
 
     // molecule stars, twinkling like planets; serotonin blooms when found
     var blooming = phase==="gen" || phase==="hold" || (phase==="fold" && fold < 0.97);
-    glyphs.forEach(function(g,k){
+    if(!LIGHT) glyphs.forEach(function(g,k){
       var a = (0.75 + 0.25*tw(g.w, g.p)) * (wide && g.x < W*0.4 ? 0.6 : 1);
       drawStarMol(MOLS[g.mi], g.x, g.y, gl, a, k*3+1, now); });
 
@@ -395,6 +527,355 @@ const resume = '/assets/resume.pdf';
 
 
 </script>
+
+<script is:inline>
+/* Card illustrations for "What I work on", in the hero's fine-dot style. Each is a
+   small canvas that animates only while on screen (and holds still for reduced motion):
+   generative modeling = a diffusion run, noise denoising into a molecule;
+   agentic AI = an agent with a world model exploring an energy landscape: observe, predict, plan, act, update, mapping minima and TSs;
+   many-body methods = the exploding many-body problem collapses into the exact answer, which the approximations climb towards;
+   GPU = periodic RI-RPA: k-points shared across GPUs (MPI), GEMMs per k, reduced into Pi. */
+(function(){
+  var css = getComputedStyle(document.documentElement);
+  function tok(n){ return css.getPropertyValue(n).trim(); }
+  var INK = tok("--ink"), MUTED = tok("--muted"), WARM = tok("--warm"), COOL = tok("--cool");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function rnd(seed){ return function(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }; }
+  function gauss(r){ var u=1-r(), v=r(); return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v); }
+  function ease(a){ a=Math.max(0,Math.min(1,a)); return a<.5 ? 4*a*a*a : 1-Math.pow(-2*a+2,3)/2; }
+
+  // the hero's tour, generated in turn: [element, x, y] and bonds [i, j, order]
+  var MOLS = [
+    { name:'serotonin', atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.817,.809],["C",2.405,0],["N",1.817,-.809],["O",-1.732,1],["C",2.126,1.76],["C",3.104,1.968],["N",3.413,2.919]], bonds:[[5,0,2],[0,1,1],[1,2,2],[2,3,1],[3,4,2],[4,5,1],[1,6,1],[6,7,2],[7,8,1],[8,2,1],[5,9,1],[6,10,1],[10,11,1],[11,12,1]] },
+    { name:'dopamine', atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.732,1],["C",2.598,.5],["N",3.464,1],["O",-1.732,1],["O",-1.732,-1]], bonds:[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,0,1],[1,6,1],[6,7,1],[7,8,1],[5,9,1],[4,10,1]] },
+    { name:'adrenaline', atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.732,1],["C",2.598,.5],["N",3.464,1],["O",-1.732,1],["O",-1.732,-1],["O",1.732,2],["C",4.33,.5]], bonds:[[0,1,2],[1,2,1],[2,3,2],[3,4,1],[4,5,2],[5,0,1],[1,6,1],[6,7,1],[7,8,1],[5,9,1],[4,10,1],[6,11,1],[8,12,1]] },
+    { name:'melatonin', atoms:[["C",0,1],["C",.866,.5],["C",.866,-.5],["C",0,-1],["C",-.866,-.5],["C",-.866,.5],["C",1.817,.809],["C",2.405,0],["N",1.817,-.809],["O",-1.732,1],["C",2.126,1.76],["C",3.104,1.968],["N",3.413,2.919],["C",-2.598,1.5],["C",4.391,3.127],["O",4.7,4.078],["C",5.06,2.384]], bonds:[[5,0,2],[0,1,1],[1,2,2],[2,3,1],[3,4,2],[4,5,1],[1,6,1],[6,7,2],[7,8,1],[8,2,1],[5,9,1],[6,10,1],[10,11,1],[11,12,1],[9,13,1],[12,14,1],[14,15,2],[14,16,1]] }
+  ];
+
+  var ARTS = {
+    // a diffusion sampling run: each atom starts as noise, travels a jittery path (left as
+    // a faint trail) to its place, then the bonds snap in and the colours resolve
+    gen: function(w,h){
+      var EL = { C: INK, N: COOL, O: WARM }, A, T, M;
+      function setMol(m){ M = m; A = m.atoms; var xs = A.map(function(a){ return a[1]; }), ys = A.map(function(a){ return a[2]; });
+        var mx = (Math.min.apply(0,xs)+Math.max.apply(0,xs))/2, my = (Math.min.apply(0,ys)+Math.max.apply(0,ys))/2;
+        var sc = Math.min(w*0.78/(Math.max.apply(0,xs)-Math.min.apply(0,xs)), h*0.78/(Math.max.apply(0,ys)-Math.min.apply(0,ys)), 30);
+        T = A.map(function(a){ return [w/2 + (a[1]-mx)*sc, h/2 - (a[2]-my)*sc]; }); }
+      var paths = [], cyc = -1, S = 40;
+      function newPaths(seed){ var r = rnd(seed*7919+11);
+        paths = T.map(function(t){ var n = [w/2 + gauss(r)*w*0.2, h/2 + gauss(r)*h*0.3], p = [], o = [0,0];
+          for(var k=0;k<=S;k++){ var s = k/S; o = [o[0]*0.8 + gauss(r)*3, o[1]*0.8 + gauss(r)*3];
+            var amp = Math.sqrt(s*(1-s))*2; p.push([n[0]+(t[0]-n[0])*s + o[0]*amp, n[1]+(t[1]-n[1])*s + o[1]*amp]); }
+          return p; }); }
+      function at(p, u){ var f = u*S, k = Math.min(S-1, Math.floor(f)), r = f-k; return [p[k][0]+(p[k+1][0]-p[k][0])*r, p[k][1]+(p[k+1][1]-p[k][1])*r]; }
+      return function(ctx, t){
+        var D = 9000, c = Math.floor(t/D), v = (t % D)/D; if(c !== cyc){ cyc = c; setMol(MOLS[c % MOLS.length]); newPaths(c+1); }
+        var u = v < .1 ? 0 : v < .58 ? ease((v-.1)/.48) : 1, fade = v > .9 ? 1-(v-.9)/.1 : 1;
+        var e = u*u*(3-2*u), ba = Math.max(0, Math.min(1, (u-0.82)/0.18)), cc = Math.pow(u,3);
+        // trails
+        ctx.lineWidth = 0.8;
+        paths.forEach(function(p,j){ var n = Math.max(1, Math.floor(u*S)); ctx.globalAlpha = 0.22*fade*(v > .58 ? Math.max(0,1-(v-.58)/.2) : 1);
+          ctx.strokeStyle = A[j][0]==="C" ? MUTED : EL[A[j][0]]; ctx.beginPath(); ctx.moveTo(p[0][0],p[0][1]);
+          for(var k=1;k<=n;k++) ctx.lineTo(p[k][0],p[k][1]); var q = at(p,u); ctx.lineTo(q[0],q[1]); ctx.stroke(); });
+        var P = paths.map(function(p){ return at(p,u); });
+        // bonds
+        if(ba > 0){ ctx.strokeStyle = INK; ctx.lineWidth = 1.1; ctx.globalAlpha = 0.75*ba*fade;
+          M.bonds.forEach(function(b){ var p = P[b[0]], q = P[b[1]], dx = q[0]-p[0], dy = q[1]-p[1], L = Math.hypot(dx,dy)||1, nx = -dy/L*1.7, ny = dx/L*1.7;
+            ctx.beginPath();
+            if(b[2]===2){ ctx.moveTo(p[0]+nx,p[1]+ny); ctx.lineTo(q[0]+nx,q[1]+ny); ctx.moveTo(p[0]-nx,p[1]-ny); ctx.lineTo(q[0]-nx,q[1]-ny); }
+            else { ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); }
+            ctx.stroke(); }); }
+        // atoms: grey noise points that resolve into element colours
+        P.forEach(function(q,j){ var el = A[j][0], r = el==="C" ? 2.6 : 3.3;
+          ctx.globalAlpha = fade; ctx.fillStyle = getComputedStyle(document.body).backgroundColor; ctx.beginPath(); ctx.arc(q[0],q[1],r+1.6,0,6.283); ctx.fill();
+          ctx.globalAlpha = fade*(1-cc); ctx.fillStyle = MUTED; ctx.beginPath(); ctx.arc(q[0],q[1],r*0.8,0,6.283); ctx.fill();
+          ctx.globalAlpha = fade*cc; ctx.fillStyle = EL[el]; ctx.beginPath(); ctx.arc(q[0],q[1],r,0,6.283); ctx.fill(); });
+        ctx.globalAlpha = 0.7*fade; ctx.fillStyle = MUTED; ctx.font = "11px 'JetBrains Mono', monospace"; ctx.textAlign = "right";
+        ctx.fillText("t = " + String(Math.round(1000*(1-e))), w-4, h-6);   // the sampling step only; no molecule names
+      };
+    },
+    // an agent exploring a potential energy surface with a world model (an MLIP). Below, the
+    // world: the PES (minima are stable structures, saddles are transition states); it never
+    // changes. Above, in a dashed frame, the model's view of the surface around the agent.
+    // Each leg follows the model-based loop, labelled in world-model words only:
+    //   observe  - the agent reads where it is (a stable structure)
+    //   predict  - the model predicts energies and forces along candidate directions
+    //   plan     - it chooses the route with the lowest predicted barrier
+    //   act      - it crosses the barrier and settles into the next stable structure
+    //   update   - the new structure is checked and folded back into the model (active learning)
+    // states it has found (rings) and the transitions between them (links) build up as a small
+    // graph until the surface is explored and it starts over.
+    agent: function(w,h){
+      var WELLS = [[0.2,0.62,1.0,0.016],[0.42,0.3,0.8,0.016],[0.66,0.5,0.9,0.016],[0.84,0.24,0.75,0.014],[0.82,0.82,0.95,0.016]], NW = WELLS.length;
+      function E(x,z){ var e = 0.55*((x-0.5)*(x-0.5) + 0.6*(z-0.55)*(z-0.55));
+        WELLS.forEach(function(W){ var dx = x-W[0], dz = z-W[1]; e -= W[2]*Math.exp(-(dx*dx + dz*dz)/W[3]); }); return e; }
+      var DWELL = 3200, HOP = 1000, LEG = 4600;   // the last 400 ms: settled, updating the model
+      function route(A, B, f, bend){ var mx = (A[0]+B[0])/2 - (B[1]-A[1])*bend, mz = (A[1]+B[1])/2 + (B[0]-A[0])*bend;
+        return [(1-f)*(1-f)*A[0] + 2*(1-f)*f*mx + f*f*B[0], (1-f)*(1-f)*A[1] + 2*(1-f)*f*mz + f*f*B[1]]; }
+      function state(t){ var n = Math.floor(t/LEG), u = t - n*LEG, A = WELLS[n % NW], B = WELLS[(n+1) % NW];
+        if(u < DWELL){ var v = u*0.011, r = 0.03; return [A[0] + r*Math.sin(v*1.7)*Math.cos(v*0.37), A[1] + r*0.8*Math.sin(v*2.3 + 1.1)*Math.cos(v*0.29)]; }
+        return route(A, B, ease(Math.min(1, (u - DWELL)/HOP)), 0.12); }
+      var top = h*0.5, bot = h*0.97;
+      function proj(x,z){ var d = 1 + (1-z)*1.6;   // the world, lower half; low energy sits low
+        return [w*0.5 + (x-0.5)*w*1.3/d, top + (bot - top)*(1/d - 1/2.6)/(1 - 1/2.6) - E(x,z)*26/d]; }
+      var DW = Math.min(150, w*0.42), DH = h*0.3, WARM0 = (function(c){ c=c.replace('#',''); var n=parseInt(c,16); return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+',0)'; })(WARM);
+      var NX = 52, NZ = 18, G = [];
+      for(var j=0;j<NZ;j++) for(var i=0;i<NX;i++) G.push({ x: i/(NX-1), z: j/(NZ-1) });
+      return function(ctx, t){
+        var n = Math.floor(t/LEG), u = (t - n*LEG)/LEG, A = WELLS[n % NW], B = WELLS[(n+1) % NW], C = WELLS[(n+2) % NW];
+        var S = state(t), pa = proj(S[0], S[1]), acting = u >= DWELL/LEG;
+        ctx.font = "10px 'JetBrains Mono', monospace";   // the frame always fits "model" and the longest step label
+        var fw = Math.min(w - 4, Math.max(DW*1.24, ctx.measureText("model").width + ctx.measureText("predict").width + 28));
+        var cx = Math.max(fw/2 + 2, Math.min(w - fw/2 - 2, pa[0])), cy = h*0.2;
+        // the model's view: the ground around the agent, scaled into the frame
+        function dream(x, z){ var lx = (x - S[0])/0.32, lz = (z - S[1])/0.3; return [cx + lx*DW*0.5 + lz*DW*0.12, cy + lz*DH*0.45 - E(x,z)*12]; }
+        function inFrame(x, z){ return Math.abs(x - S[0]) < 0.32 && Math.abs(z - S[1]) < 0.3; }
+        // the world: shaded by depth only; it does not change
+        G.forEach(function(g){ var p = proj(g.x, g.z), deep = Math.max(0, Math.min(1, -E(g.x, g.z)*1.5));
+          ctx.globalAlpha = (0.12 + 0.36*deep)*(0.6 + 0.4*g.z); ctx.fillStyle = deep > 0.45 ? COOL : MUTED; ctx.fillRect(p[0]-0.6, p[1]-0.6, 1.2, 1.2); });
+        // what the agent has learned so far: states it has found (rings) and the transitions
+        // between them (thin links), a small graph that grows, then clears for a new exploration
+        var k = n % (NW - 1), hopF = acting ? Math.min(1, (u - DWELL/LEG)/(HOP/LEG)) : 0, nMin = k + 1 + (hopF >= 1 ? 1 : 0);
+        var base = n - k;
+        ctx.strokeStyle = COOL; ctx.lineWidth = 0.8;
+        for(var m=0;m<nMin-1;m++){ var P0 = WELLS[(base + m) % NW], P1 = WELLS[(base + m + 1) % NW];
+          ctx.globalAlpha = 0.4; ctx.beginPath();
+          for(var q=0;q<=16;q++){ var st = route(P0, P1, q/16, 0.12), p = proj(st[0], st[1]); if(q) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }
+          ctx.stroke(); }
+        for(var m=0;m<nMin;m++){ var Wm = WELLS[(base + m) % NW], p = proj(Wm[0], Wm[1]);
+          ctx.globalAlpha = 0.7; ctx.beginPath(); ctx.arc(p[0], p[1], 4, 0, 6.283); ctx.stroke(); }
+        // the link: the agent consulting its model
+        ctx.fillStyle = WARM; for(var q=0;q<=14;q++){ var f = q/14; ctx.globalAlpha = 0.25; ctx.fillRect(pa[0] + (cx-pa[0])*f - 0.5, pa[1] - 6 + (cy + DH*0.2 - pa[1] + 6)*f - 0.5, 1, 1); }
+        // the model frame
+        var fx = cx - fw/2, fy = cy - DH*0.62, fh = DH*1.12;
+        var g0 = ctx.createRadialGradient(cx, cy, 0, cx, cy, DW*0.6); g0.addColorStop(0, WARM); g0.addColorStop(1, WARM0);
+        ctx.globalAlpha = 0.06; ctx.fillStyle = g0; ctx.beginPath(); ctx.arc(cx, cy, DW*0.6, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = 0.35; ctx.strokeStyle = WARM; ctx.lineWidth = 0.8; ctx.setLineDash([2,3]);
+        ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(fx, fy, fw, fh, 8); else ctx.rect(fx, fy, fw, fh); ctx.stroke(); ctx.setLineDash([]);
+        var learn = u > (DWELL + HOP)/LEG ? Math.sin(Math.PI*(u - (DWELL + HOP)/LEG)/(1 - (DWELL + HOP)/LEG)) : 0;   // the model takes in what it saw
+        ctx.save(); ctx.beginPath(); ctx.rect(fx+1, fy+14, fw-2, fh-15); ctx.clip();
+        ctx.fillStyle = WARM;
+        for(var jz=0;jz<9;jz++) for(var ix=0;ix<17;ix++){ var x = S[0] + (ix/8 - 1)*0.32, z = S[1] + (jz/4 - 1)*0.3, edge = 1 - Math.max(Math.abs(ix/8-1), Math.abs(jz/4-1))*0.7, p = dream(x, z);
+          ctx.globalAlpha = (0.42 + learn*0.45)*edge; ctx.fillRect(p[0]-0.55, p[1]-0.55, 1.1, 1.1); }
+        // imagine: routes toward each other basin (and one more), grown in the model; the best is chosen
+        var grow = Math.max(0, Math.min(1, (u - 0.1)/0.26)), pick = Math.max(0, Math.min(1, (u - 0.38)/0.14));
+        [[B, 0.12, true], [C, -0.1, false], [B, -0.25, false]].forEach(function(o){
+          for(var q=1;q<=20;q++){ var f = q/20; if(f > grow) break; var st = route(S, o[0], f*0.55, o[1]);
+            if(!inFrame(st[0], st[1])) break; var p = dream(st[0], st[1]);
+            ctx.globalAlpha = o[2] ? 0.45 + 0.45*pick : 0.45*(1 - 0.75*pick); ctx.fillStyle = o[2] ? WARM : COOL; ctx.fillRect(p[0]-0.7, p[1]-0.7, 1.4, 1.4); } });
+        var pd = dream(S[0], S[1]); ctx.globalAlpha = 0.9; ctx.fillStyle = WARM; ctx.beginPath(); ctx.arc(pd[0], pd[1], 2, 0, 6.283); ctx.fill();
+        ctx.restore();
+        // act: the chosen route appears on the real ground, and the agent takes it
+        var commit = Math.max(0, Math.min(1, (u - 0.52)/0.14)), fade = acting ? 1 - Math.max(0, (u - 0.85)/0.15) : 1;
+        if(commit > 0) for(var q=1;q<=22;q++){ var f = q/22, st = route(A, B, f, 0.12), p = proj(st[0], st[1]); ctx.globalAlpha = 0.6*commit*fade*(1 - 0.5*f); ctx.fillStyle = WARM; ctx.fillRect(p[0]-0.7, p[1]-0.7, 1.4, 1.4); }
+        ctx.globalAlpha = 0.18; ctx.fillStyle = WARM; ctx.beginPath(); ctx.arc(pa[0], pa[1], 6.5, 0, 6.283); ctx.fill();
+        ctx.globalAlpha = 1; ctx.beginPath(); ctx.arc(pa[0], pa[1], 2.8, 0, 6.283); ctx.fill();
+        // labels
+        ctx.font = "10px 'JetBrains Mono', monospace"; ctx.globalAlpha = 0.75;
+        ctx.textAlign = "left"; ctx.fillStyle = WARM; ctx.fillText("model", fx + 6, fy + 11);
+        var step = u < 0.1 ? "observe" : u < 0.38 ? "predict" : !acting ? "plan" : hopF < 1 ? "act" : "update";
+        ctx.textAlign = "right"; ctx.fillStyle = acting ? COOL : WARM; ctx.fillText(step, fx + fw - 6, fy + 11);
+        ctx.textAlign = "left"; ctx.fillStyle = MUTED; ctx.fillText("world", 4, h - 4);
+      };
+    },
+    // the many-body problem, then how quantum chemistry approaches it, linked in one story.
+    // 1. the problem grows: electrons are added, each interacting with every other, and the web
+    //    spreads across the card while dim H explodes under H Psi = E Psi;
+    // 2. it collapses into the target: the whole web shrinks into the top-right corner of the map,
+    //    the exact answer (FCI in the complete-basis-set limit), which every method approaches;
+    //    the counter is the FCI space, C(M, N_up) x C(M, N_down) Slater determinants, for real molecules in cc-pVTZ;
+    // 3. the approximations climb towards it on a cost vs accuracy map, one plain dot per method.
+    body: function(w,h){
+      var r = rnd(31), NE = 42, E = [], Wt = {};   // up to benzene's 42 electrons, one dot each
+      for(var i=0;i<NE;i++){ var an = i*2.399 + 0.3, rr = 0.06 + 0.94*Math.sqrt((i+0.5)/NE); E.push([w*0.5 + Math.cos(an)*w*0.4*rr, h*0.5 + Math.sin(an)*h*0.3*rr, r()*6.28]); }   // a filled disc, no hole in the middle
+      var M = [{ name: "DFT", sc: "N\u00b3", x: 0.04, y: 0.3 },
+               { name: "HF", sc: "N\u2074", x: 0.18, y: 0.06 },
+               { name: "RPA", sc: "N\u2074", x: 0.2, y: 0.46 },   // with RI; the backbone of FEMION, and the Pi(iw) of the GPU card
+               { name: "MP2", sc: "N\u2075", x: 0.5, y: 0.56 },
+               { name: "CCSD(T)", sc: "N\u2077", x: 0.68, y: 0.76 },
+               { name: "QMC", sc: "N\u00b3\u2013N\u2074", x: 0.34, y: 0.8 }];
+      // the exact solution is not a method: it sits in the top-right corner, perfect accuracy at prohibitive cost
+      M.forEach(function(m){ m.R = 2; });   // one size for every method: no claims about system size
+      var X0 = 26, X1 = w - 12, Y0 = h - 18, Y1 = 14, SUP = "\u2070\u00b9\u00b2\u00b3\u2074\u2075\u2076\u2077\u2078\u2079";
+      function px(f){ return X0 + (X1 - X0)*f; } function py(f){ return Y0 - (Y0 - Y1)*f; }
+      function fmt(n){ if(n < 1e4) return Math.round(n).toLocaleString("en-US"); var e = Math.floor(Math.log10(n)), m = n/Math.pow(10, e);
+        return m.toFixed(1) + " \u00d7 10" + String(e).split("").map(function(d){ return SUP[+d]; }).join(""); }
+      // size of the FCI space: determinants for N electrons in M spatial orbitals, C(M, N_up) x C(M, N_down)
+      function choose(m, k){ var c = 1; for(var i=1;i<=k;i++) c = c*(m - k + i)/i; return c; }
+      // log10 of the FCI space, C(M, N_up) x C(M, N_down), computed in log space to stay exact for large spaces
+      function lchoose(m, k){ var c = 0; for(var i=1;i<=k;i++) c += Math.log10((m - k + i)/i); return c; }
+      function fciLog(ne, M){ return lchoose(M, Math.ceil(ne/2)) + lchoose(M, Math.floor(ne/2)); }
+      function fmtLog(lg){ if(lg < 4) return Math.round(Math.pow(10, lg)).toLocaleString("en-US"); var e = Math.floor(lg), m = Math.pow(10, lg - e);
+        if(m >= 9.95){ m = 1; e += 1; } return m.toFixed(1) + "\u00d710" + String(e).split("").map(function(d){ return SUP[+d]; }).join(""); }
+      // real molecules in cc-pVTZ (spherical: H 14 functions; Li, C, N, O 30), no symmetry, no frozen core;
+      // "at" is how many electron dots are on screen when each one is shown
+      var LADDER = [{ mol: "H\u2082", ne: 2, M: 28, at: 2 }, { mol: "LiH", ne: 4, M: 44, at: 4 }, { mol: "H\u2082O", ne: 10, M: 58, at: 7 },
+                    { mol: "N\u2082", ne: 14, M: 60, at: 9 }, { mol: "C\u2082H\u2084", ne: 16, M: 116, at: 11 }, { mol: "C\u2086H\u2086", ne: 42, M: 264, at: 14 }];
+      // each method is a single dot
+      // act 3, embedding, on a real molecule: dopamine, split into chemically sensible fragments (the aromatic
+      // ring, the two hydroxyls, the ethylamine side chain). Each fragment carries its own electron cloud in the
+      // banner's fine-dot style; the fragments lift out while a ghost of dopamine stays behind as their
+      // environment, each cloud condenses as its fragment is solved, and the pieces settle back and merge into
+      // one electron cloud over the whole molecule.
+      var DOPA = MOLS.filter(function(m){ return m.name === "dopamine"; })[0];
+      var FR = [{ ids: [0,1,2,3,4,5], col: COOL, off: [0, -0.06] }, { ids: [9,10], col: WARM, off: [-0.13, 0] }, { ids: [6,7,8], col: INK, off: [0.13, 0.04] }];
+      var dxs = DOPA.atoms.map(function(a){ return a[1]; }), dys = DOPA.atoms.map(function(a){ return a[2]; });
+      var dmx = (Math.min.apply(0,dxs) + Math.max.apply(0,dxs))/2, dmy = (Math.min.apply(0,dys) + Math.max.apply(0,dys))/2;
+      var dsc = Math.min(w*0.5/(Math.max.apply(0,dxs) - Math.min.apply(0,dxs)), h*0.3/(Math.max.apply(0,dys) - Math.min.apply(0,dys)));   // room for the title above and the steps below
+      var DA = DOPA.atoms.map(function(a){ return [w/2 + (a[1] - dmx)*dsc, h*0.54 - (a[2] - dmy)*dsc, a[0]]; });
+      var fragOf = []; FR.forEach(function(F, f){ F.ids.forEach(function(id){ fragOf[id] = f; }); });
+      FR.forEach(function(F, f){   // each fragment's cloud: dense at its nuclei, a haze along its own bonds
+        F.pts = []; var own = DOPA.bonds.filter(function(b){ return fragOf[b[0]] === f && fragOf[b[1]] === f; });
+        for(var q=0;q<F.ids.length*55;q++){ var x, y;
+          if(own.length && r() < 0.35){ var b = own[Math.floor(r()*own.length)], u = r(); x = DA[b[0]][0] + (DA[b[1]][0] - DA[b[0]][0])*u; y = DA[b[0]][1] + (DA[b[1]][1] - DA[b[0]][1])*u; x += gauss(r)*dsc*0.06; y += gauss(r)*dsc*0.06; }
+          else { var A0 = DA[F.ids[Math.floor(r()*F.ids.length)]], s0 = r() < 0.8 ? 0.14 : 0.32; x = A0[0] + gauss(r)*dsc*s0; y = A0[1] + gauss(r)*dsc*s0; }
+          F.pts.push([x, y, gauss(r)*dsc*0.9, gauss(r)*dsc*0.6, r()*6.28]); } });
+      // the opening: dopamine whole, with its full electron cloud, and the size of its exact problem
+      var DOPA_LINE = "dopamine (cc-pVTZ) \u2192 82 e\u207b in 484 orbitals \u2192 3.9\u00d710\u00b9\u00b9\u2079 SDs";   // C(484,41)^2, exact
+      // a wavefunction label typeset by hand: italic serif Psi with a small subscript digit (the font has no clean subscripts)
+      function psi(ctx, sub, x, y){ ctx.font = "italic 12px 'Times New Roman', Georgia, serif"; var pw = ctx.measureText("\u03a8").width, sw = 5, x0 = x - (pw + sw)/2;
+        ctx.textAlign = "left"; ctx.fillText("\u03a8", x0, y); ctx.font = "8px 'Times New Roman', Georgia, serif"; ctx.fillText(String(sub), x0 + pw + 0.5, y + 3); }
+      function embedding(ctx, e, t, intro){
+        var a = intro != null ? Math.min(1, intro/0.15) : (e > 0.94 ? 1 - (e - 0.94)/0.06 : 1);
+        var lasso = Math.max(0, Math.min(1, (e - 0.06)/0.12)), lift = e < 0.18 ? 0 : e < 0.32 ? ease((e - 0.18)/0.14) : e < 0.68 ? 1 : e < 0.82 ? 1 - ease((e - 0.68)/0.14) : 0;
+        // the whole molecule's cloud first dissolves into each fragment's unknown, then each fragment is solved
+        var solve = e < 0.04 ? 1 : e < 0.18 ? 1 - ease((e - 0.04)/0.14) : e < 0.32 ? 0 : e < 0.62 ? ease((e - 0.32)/0.3) : 1, merge = e < 0.7 ? 0 : Math.min(1, (e - 0.7)/0.14), glow = e < 0.82 ? -1 : (e - 0.82)/0.12;
+        if(intro != null){ lasso = 0; lift = 0; solve = 1; merge = 1; glow = -1; }
+        function O(f){ return [FR[f].off[0]*w*lift, FR[f].off[1]*h*lift]; }
+        function line(p, q){ ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke(); }
+        // the whole molecule's bonds, fading away as the fragments come apart (no ghost left behind)
+        ctx.strokeStyle = MUTED; ctx.lineWidth = 0.6; ctx.globalAlpha = a*0.6*(1 - lift);
+        DOPA.bonds.forEach(function(b){ line(DA[b[0]], DA[b[1]]); });
+        var tint = intro != null ? 0 : Math.min(1, Math.max(0, (e - 0.04)/0.14))*(1 - merge);   // 0: one molecule (cyan), 1: fragment colours
+        FR.forEach(function(F, f){ var o = O(f), col = F.col;
+          var xs = F.ids.map(function(id){ return DA[id][0]; }), ys = F.ids.map(function(id){ return DA[id][1]; });
+          var cx = (Math.min.apply(0,xs) + Math.max.apply(0,xs))/2 + o[0], cy = (Math.min.apply(0,ys) + Math.max.apply(0,ys))/2 + o[1];
+          var rx = (Math.max.apply(0,xs) - Math.min.apply(0,xs))/2 + dsc*0.45, ry = (Math.max.apply(0,ys) - Math.min.apply(0,ys))/2 + dsc*0.45;
+          if(lasso > 0 && merge < 1){ ctx.globalAlpha = a*0.5*(1 - merge); ctx.strokeStyle = F.col; ctx.lineWidth = 0.8; ctx.setLineDash([2,3]);   // the outline draws itself
+            ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, -Math.PI/2, -Math.PI/2 + 6.283*lasso); ctx.stroke(); ctx.setLineDash([]); }
+          // the fragment's electron cloud: diffuse, then condensing as the fragment is solved
+          F.pts.forEach(function(p){ var k = solve, x = p[0] + o[0] + p[2]*(1 - k) + Math.sin(t*0.0019 + p[4])*0.7, y = p[1] + o[1] + p[3]*(1 - k) + Math.cos(t*0.0017 + p[4])*0.7, al = a*(0.1 + 0.5*k);
+            if(tint < 1){ ctx.globalAlpha = al*(1 - tint); ctx.fillStyle = COOL; ctx.fillRect(x - 0.5, y - 0.5, 1, 1); }
+            if(tint > 0){ ctx.globalAlpha = al*tint; ctx.fillStyle = col; ctx.fillRect(x - 0.5, y - 0.5, 1, 1); } });
+          // its own wavefunction, labelled as it is solved: Psi_1, Psi_2, Psi_3
+          if(intro == null && e >= 0.32 && merge < 1){ ctx.save();   // only from the solve step; on recombine they slide together into Psi_0 ctx.font = "italic 11px 'Times New Roman', Georgia, serif"; ctx.textAlign = "center";
+            ctx.globalAlpha = a*0.85*Math.min(1, (e - 0.32)/0.08)*Math.pow(1 - merge, 2); ctx.fillStyle = F.col === MUTED ? INK : F.col;   // gone by the time they meet
+            var topY0 = Math.min.apply(0, DA.map(function(q){ return q[1]; })), ly = Math.max(24, cy - ry - 4), m2 = ease(merge);
+            psi(ctx, f + 1, cx + (w/2 - cx)*m2, ly + (Math.max(26, topY0 - dsc*0.55) - ly)*m2); ctx.restore(); }
+          // its skeleton, carried with it
+          ctx.strokeStyle = INK; ctx.lineWidth = 0.8; ctx.globalAlpha = a*(0.35 + 0.45*lift + 0.3*merge);
+          DOPA.bonds.forEach(function(b){ if(fragOf[b[0]] === f && fragOf[b[1]] === f) line([DA[b[0]][0] + o[0], DA[b[0]][1] + o[1]], [DA[b[1]][0] + o[0], DA[b[1]][1] + o[1]]); });
+          F.ids.forEach(function(id){ var A0 = DA[id]; ctx.globalAlpha = a*0.9; ctx.fillStyle = A0[2] === "N" ? COOL : A0[2] === "O" ? WARM : INK;
+            ctx.beginPath(); ctx.arc(A0[0] + o[0], A0[1] + o[1], A0[2] === "C" ? 1.6 : 2.1, 0, 6.283); ctx.fill(); }); });
+        // the whole molecule's ground state, Psi_0: at the start, and again once the fragments are recombined
+        var g0a = intro != null ? 1 : (e < 0.1 ? 1 - e/0.1 : merge > 0.75 ? (merge - 0.75)/0.25 : 0);   // Psi_0 reappears as the three labels arrive
+        if(g0a > 0){ var topY = Math.min.apply(0, DA.map(function(q){ return q[1]; })); ctx.save(); ctx.font = "italic 11px 'Times New Roman', Georgia, serif"; ctx.textAlign = "center";
+          ctx.globalAlpha = a*0.85*g0a; ctx.fillStyle = INK; psi(ctx, 0, w/2, Math.max(26, topY - dsc*0.55)); ctx.restore(); }
+        // recombined: a soft glow sweeps across the whole molecule
+        if(glow >= 0 && glow <= 1){ var gx = w*(0.2 + 0.6*glow), gy = h*0.54, gr = dsc*1.6, g0 = ctx.createRadialGradient(gx, gy, 0, gx, gy, gr);
+          g0.addColorStop(0, COOL); g0.addColorStop(1, "rgba(255,255,255,0)"); ctx.globalAlpha = a*0.14*Math.sin(Math.PI*glow); ctx.fillStyle = g0; ctx.fillRect(gx - gr, gy - gr, gr*2, gr*2); }
+        if(intro != null){   // the opening line: why it cannot be solved exactly
+          ctx.font = "9px 'JetBrains Mono', monospace"; var lw5 = ctx.measureText(DOPA_LINE).width; if(lw5 > w - 8) ctx.font = (9*(w - 8)/lw5).toFixed(1) + "px 'JetBrains Mono', monospace";
+          ctx.textAlign = "center"; ctx.globalAlpha = a*0.75*(intro > 0.85 ? 1 - (intro - 0.85)/0.15 : 1); ctx.fillStyle = MUTED; ctx.fillText(DOPA_LINE, w/2, h - 5);
+          ctx.font = "9px 'JetBrains Mono', monospace"; ctx.globalAlpha = a*0.6; ctx.fillText("dopamine", w/2, 13); return; }
+        // the step line, current step dark
+        var steps = ["fragment", "solve", "recombine"], cur = e < 0.32 ? 0 : e < 0.68 ? 1 : 2;
+        ctx.font = "9px 'JetBrains Mono', monospace"; var parts = [], tot = 0;
+        steps.forEach(function(st, k){ var tx = st + (k < 2 ? (w < 300 ? " \u2192 " : "  \u2192  ") : ""); parts.push(tx); tot += ctx.measureText(tx).width; });
+        if(tot > w - 8){ ctx.font = (9*(w - 8)/tot).toFixed(1) + "px 'JetBrains Mono', monospace"; tot = parts.reduce(function(s2, tx){ return s2 + ctx.measureText(tx).width; }, 0); }   // fit a narrow card
+        var x0 = w/2 - tot/2; ctx.textAlign = "left";
+        var sIn = Math.min(1, e/0.08); parts.forEach(function(tx, k){ ctx.globalAlpha = a*sIn*(k === cur ? 0.9 : 0.4); ctx.fillStyle = k === cur ? INK : MUTED; ctx.fillText(tx, x0, h - 5); x0 += ctx.measureText(tx).width; });
+        ctx.globalAlpha = a*0.6; ctx.fillStyle = MUTED; ctx.textAlign = "center"; ctx.fillText(tint < 0.5 && merge < 0.5 ? "dopamine" : "embedding", w/2, 13);
+      }
+      function cluster(ctx, m, x, y, a, t, on){ var g = ease(Math.min(1, on == null ? 1 : on)), rr = 2*g;
+        if(on != null && on < 1){ ctx.globalAlpha = 0.25*(1 - on); ctx.strokeStyle = INK; ctx.lineWidth = 0.5; ctx.beginPath(); ctx.arc(x, y, 2 + 3.5*on, 0, 6.283); ctx.stroke(); }
+        if(m.mine){ ctx.globalAlpha = 0.16*a; ctx.fillStyle = WARM; ctx.beginPath(); ctx.arc(x, y, rr + 4, 0, 6.283); ctx.fill(); }
+        ctx.globalAlpha = a*0.9; ctx.fillStyle = m.mine ? WARM : INK; ctx.beginPath(); ctx.arc(x, y, rr, 0, 6.283); ctx.fill(); }
+      function label(ctx, m, x, y, a){ var lx = m.left ? x - m.R - 5 : x + m.R + 5; ctx.textAlign = m.left ? "right" : "left";
+        var dy = m.dy || 0; ctx.font = "9px 'JetBrains Mono', monospace"; ctx.globalAlpha = a*(m.mine ? 0.95 : 0.8); ctx.fillStyle = m.mine ? WARM : INK; ctx.fillText(m.name + (m.sc ? "  O(" + m.sc + ")" : ""), lx, y + 1 + dy);   // formal scaling in big-O notation
+        }
+      return function(ctx, t){
+        // one story: dopamine whole, with the size of its exact problem, then embedding makes it tractable
+        var T = 15000, raw = (t % T)/T;
+        if(raw < 0.2) embedding(ctx, 0, t, raw/0.2); else embedding(ctx, (raw - 0.2)/0.8, t);
+      };
+    },
+    // periodic RPA on GPUs, following the actual algorithm: one MPI rank per GPU, k-points split
+    // across ranks. For each momentum transfer q (a serial loop), and each frequency iw, every rank
+    // sums its own k-points' contributions to Pi_q(iw) on its GPU (Pi is additive over k, which is
+    // why it parallelises); a single MPI.Reduce of the naux x naux matrix to rank 0 is the only
+    // communication, and rank 0 takes ln det(1 - Pi) + Tr Pi.
+    gpu: function(w,h){
+      var NG = 4, KG = 4, COLS = [COOL, WARM, INK, MUTED], NW = 3, NQ = 3;   // GPUs (= MPI ranks), k-grid side, frequencies, momentum transfers
+      var top = 26, bot = h - 14, mid = (top + bot)/2, compact = w < 300;
+      // layout, left to right with fixed gaps: k-points | GPUs | Pi and E_c; chips take what is left
+      var kStep = compact ? 9 : 11, kW = kStep*(KG-1), pn = 8, pStep = compact ? 5 : 6, pW = pStep*(pn-1), gapX = compact ? 18 : 28, gapK = compact ? 18 : 28, cgap = compact ? 6 : 8;   // more air between the k-points and the chips
+      // square chips (a GPU die is square, as Pi is naux x naux): one side for width and height, shrinking before anything overlaps
+      var avail = w - 10 - kW - gapK - gapX - pW - 6, side = Math.max(20, Math.min(40, (avail - cgap)/2, (h - 26 - 14 - cgap)/2)), cw = side, blockW = 2*side + cgap;
+      // balanced: equal space before, between and after the three groups
+      var G = Math.max(compact ? 14 : 18, (w - kW - blockW - pW)/4), kx0 = G, ky0 = mid - kW/2;
+      // four GPUs drawn as chips in a 2x2 block: package, pins, and a die of SM tiles
+      var chH = side, gx0 = kx0 + kW + G, gy0 = mid - chH - cgap/2;
+      function chip(g){ return [gx0 + (g % 2)*(cw + cgap), gy0 + Math.floor(g/2)*(chH + cgap)]; }
+      var px0 = Math.min(w - pW - 6, gx0 + blockW + G), py0 = mid - pW/2;   // Pi, level with the chips, never past the edge
+      function kOwner(i){ return i % NG; }   // k-point i (row-major) -> its GPU
+      return function(ctx, t){
+        var D = 3600, cyc = Math.floor(t/D), u = (t % D)/D, wi = cyc % NW, qi = Math.floor(cyc/NW) % NQ, round = Math.min(KG - 1, Math.floor(u/0.6*KG)), comp = u < 0.6;
+        var red = Math.max(0, Math.min(1, (u - 0.6)/0.25)), done = u > 0.85;
+        ctx.font = "9px 'JetBrains Mono', monospace";
+        // the formula
+        ctx.textAlign = "center"; ctx.globalAlpha = 0.8; ctx.fillStyle = INK;
+        [["\u03a0(i\u03c9) = \u03a3\u2096 \u03a0\u207d\u1d4f\u207e(i\u03c9)", 13]].forEach(function(L){   // just the sum over k: additive, so it parallelises
+          ctx.font = "9px 'JetBrains Mono', monospace"; var lw4 = ctx.measureText(L[0]).width;   // shrink to fit a narrow card
+          if(lw4 > w - 8) ctx.font = (9*(w - 8)/lw4).toFixed(1) + "px 'JetBrains Mono', monospace";
+          ctx.fillText(L[0], w/2, L[1]); });
+        ctx.font = "9px 'JetBrains Mono', monospace";
+        // k-points, coloured by the GPU that owns them; the ones in work now pulse
+        for(var i=0;i<KG*KG;i++){ var gx = kx0 + (i % KG)*kStep, gy = ky0 + Math.floor(i/KG)*kStep, g = kOwner(i), active = comp && Math.floor(i/NG) === round;
+          ctx.globalAlpha = active ? 0.95 : 0.45; ctx.fillStyle = COLS[g]; ctx.beginPath(); ctx.arc(gx, gy, active ? 2.4 : 1.6, 0, 6.283); ctx.fill();
+          if(active){ var C = chip(g); ctx.globalAlpha = 0.25; ctx.strokeStyle = COLS[g]; ctx.lineWidth = 0.6; ctx.beginPath(); ctx.moveTo(gx + 3, gy); ctx.lineTo(C[0] - 3, C[1] + chH/2); ctx.stroke(); } }
+        // GPUs: chips whose SM tiles light in parallel waves while they contract their k-points
+        for(var g=0;g<NG;g++){ var C = chip(g), cx = C[0], cy = C[1];
+          if(comp){ ctx.globalAlpha = 0.07; ctx.fillStyle = COLS[g]; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(cx - 3, cy - 3, cw + 6, chH + 6, 6); else ctx.rect(cx - 3, cy - 3, cw + 6, chH + 6); ctx.fill(); }
+          ctx.globalAlpha = 0.45; ctx.strokeStyle = MUTED; ctx.lineWidth = 0.7; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(cx, cy, cw, chH, 4); else ctx.rect(cx, cy, cw, chH); ctx.stroke();
+          ctx.globalAlpha = 0.35; ctx.lineWidth = 0.6;   // pins
+          for(var q=1;q<=6;q++){ var px_ = cx + q*cw/7, py_ = cy + q*chH/7; ctx.beginPath(); ctx.moveTo(px_, cy); ctx.lineTo(px_, cy - 2.5); ctx.moveTo(px_, cy + chH); ctx.lineTo(px_, cy + chH + 2.5);
+            ctx.moveTo(cx, py_); ctx.lineTo(cx - 2.5, py_); ctx.moveTo(cx + cw, py_); ctx.lineTo(cx + cw + 2.5, py_); ctx.stroke(); }
+          var dx = cx + 5, dy = cy + 5, dw = cw - 10, dh = chH - 10, tc = 6, tr = 6, tw = dw/tc, th = dh/tr;   // the die: SM tiles
+          for(var a=0;a<tc;a++) for(var b=0;b<tr;b++){ var lit = comp ? Math.pow(0.5 + 0.5*Math.sin(t*0.012 - a*0.8 - b*0.9 + g*1.3), 4) : 0;
+            ctx.globalAlpha = 0.1 + 0.65*lit; ctx.fillStyle = lit > 0.3 ? COLS[g] : MUTED; ctx.fillRect(dx + a*tw + 0.5, dy + b*th + 0.5, tw - 1, th - 1); }
+        }   // no transfer animation: Pi simply fills in once the GPUs have summed their k-points
+        // Pi_q(iw): fills in as the reduction completes
+        var fill = comp ? 0 : red;
+        for(var a=0;a<pn;a++) for(var b=0;b<pn;b++){ var on = (a + b)/(2*(pn-1)) < fill + 0.001, diag = 1 - Math.min(1, Math.abs(a - b)/3);
+          ctx.globalAlpha = on ? 0.25 + 0.55*diag : 0.12; ctx.fillStyle = on ? INK : MUTED; ctx.fillRect(px0 + a*pStep - 0.8, py0 + b*pStep - 0.8, 1.6, 1.6); }
+        // one row of labels underneath, each centred on its block, plus the current Pi above its matrix
+        ctx.globalAlpha = 0.6; ctx.fillStyle = MUTED; ctx.textAlign = "center";
+        var labs = [["k-points", kx0 + kW/2], ["GPUs \u00b7 MPI", gx0 + blockW/2], ["\u03a0", px0 + pW/2]], prevR = 0;   // four chips drawn, but any number of ranks
+        labs.forEach(function(L){ var lw3 = ctx.measureText(L[0]).width, lx3 = Math.max(prevR + 6, Math.min(w - 2 - lw3, L[1] - lw3/2));
+          ctx.textAlign = "left"; ctx.fillText(L[0], lx3, h - 3); prevR = lx3 + lw3; });
+
+      };
+    }
+  };
+  function kind(title){ title = title.toLowerCase();
+    return /generative/.test(title) ? "gen" : /agentic/.test(title) ? "agent" : /many-body/.test(title) ? "body" : /gpu/.test(title) ? "gpu" : null; }
+
+  var items = [];
+  document.querySelectorAll("canvas.art").forEach(function(cv){
+    var k = kind(cv.dataset.art || ""); if(!k){ cv.remove(); return; }
+    var it = { cv: cv, ctx: cv.getContext("2d"), k: k, draw: null, on: false };
+    function size(){ var dpr = Math.min(window.devicePixelRatio||1, 2), w = cv.clientWidth, h = cv.clientHeight;
+      cv.width = w*dpr; cv.height = h*dpr; it.ctx.setTransform(dpr,0,0,dpr,0,0); it.w = w; it.h = h; it.draw = ARTS[k](w, h); }
+    size(); it.size = size; items.push(it);
+  });
+  function frame(it, t){ it.ctx.clearRect(0,0,it.w,it.h); it.draw(it.ctx, t); it.ctx.globalAlpha = 1; }
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ items.forEach(function(it){ if(it.cv === e.target) it.on = e.isIntersecting; }); }); });
+  items.forEach(function(it){ io.observe(it.cv); frame(it, it.k === 'agent' ? 14900 : it.k === 'body' ? 9000 : it.k === 'gpu' ? 1500 : 7400);   /* still frames: the agent mid-imagining, the molecule formed */ });
+  window.addEventListener("resize", function(){ clearTimeout(window.__artrz); window.__artrz = setTimeout(function(){ items.forEach(function(it){ it.size(); frame(it, 7400); }); }, 150); });
+  if(!reduce) (function loop(t){ requestAnimationFrame(loop); items.forEach(function(it){ if(it.on) frame(it, t); }); })(0);
+})();
+</script>
 </Layout>
 
 <style is:global>
@@ -403,17 +884,21 @@ const resume = '/assets/resume.pdf';
    into a real molecule); below, a two-column editorial body. Committed single dark look; warm and
    cool double as oxygen and nitrogen in the hero and as the page's only accents. */
 :root{
-  --bg:#0d1b33;     /* deep navy */
-  --bg-2:#12233f;
-  --ink:#f0f4fb;
-  --muted:#9fb0cc;
-  --rule:#20335a;
-  --warm:#ff9470;   /* oxygen, primary accent */
-  --cool:#86c8ff;   /* nitrogen, secondary accent */
+  /* Bright palette. The night-sky values, for switching back:
+     bg #0d1b33, bg-2 #12233f, ink #f0f4fb, muted #9fb0cc, rule #20335a,
+     warm #ff9470, cool #86c8ff, color-scheme dark. */
+  /* Minimal and modern: near-monochrome neutrals, two crisp accents used sparingly */
+  --bg:#fafaf9;     /* neutral off-white */
+  --bg-2:#f3f3f2;
+  --ink:#0f172a;    /* slate ink */
+  --muted:#64748b;  /* slate grey */
+  --rule:#e7e5e4;
+  --warm:#4f46e5;   /* indigo: primary accent (links, "AI") and oxygen in the art */
+  --cool:#0891b2;   /* cyan: secondary accent ("Quantum") and nitrogen */
   --display:"Geist", "Helvetica Neue", Arial, sans-serif;
   --body:"Figtree", system-ui, -apple-system, sans-serif;
   --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
-  color-scheme:dark;
+  color-scheme:light;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55}
@@ -456,22 +941,23 @@ main{max-width:1180px;margin:0 auto}
 .lead{font-size:clamp(18px,1.7vw,21px);line-height:1.4;margin:0 0 20px;max-width:none;font-family:var(--display);font-weight:400;letter-spacing:-.01em}
 .prose p{color:var(--muted);max-width:62ch;margin:0 0 14px;font-size:16px}
 /* About lives in the hero: headshot above the name, bio set over the sky */
-.title{max-width:700px}
+.hero-main{display:grid;grid-template-columns:minmax(0,1fr);gap:40px} /* name block on top, bio card along the bottom of the hero */
+.title{max-width:520px}
 .headshot{width:104px;height:104px;border-radius:50%;overflow:hidden;margin:0 0 22px;border:1px solid var(--rule)}
 /* The source is a half-body portrait; zoom in so the circle reads as a face, not a figure */
 .headshot img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0;transform:scale(1.9);transform-origin:52% 14%;filter:grayscale(.25) contrast(1.02)}
-.hero-about{margin-top:32px}
+.hero-about{padding:28px 30px;border-radius:16px;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent);background:color-mix(in srgb,#fff 38%,transparent);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);box-shadow:0 12px 40px -24px color-mix(in srgb,var(--ink) 35%,transparent)} /* frosted glass: the sketch stays visible through it */
 .spec:has(> .readout[hidden]){display:none} /* the readout is never shown; without this its empty row adds a gap under the bio */
-.hero-about .lead{font-size:clamp(17px,1.5vw,19px);margin:0 0 14px;max-width:none;opacity:1;color:var(--ink)}
-.hero-about .prose p{font-size:15.5px;line-height:1.6;max-width:66ch;margin:0 0 12px;opacity:1;color:var(--muted);text-shadow:0 0 12px var(--bg)}
-.hero-about .prose p:last-child{margin-bottom:0}
-.hero-about .prose a{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
-.hero-about .prose a:hover{color:var(--ink);text-decoration-color:currentColor}
+.hero-about p{font-size:15.5px;line-height:1.6;max-width:none;margin:0 0 12px;opacity:1;color:var(--muted)}
+.hero-about p:last-child{margin-bottom:0}
+.hero-about a{text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:3px}
+.hero-about a:hover{color:var(--ink);text-decoration-color:currentColor}
 .threads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
 .thread{background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:8px}
 .thread .k{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.04em}
 .thread h3{font-family:var(--display);font-weight:600;font-size:19px;line-height:1.15;margin:0;letter-spacing:-.01em}
 .thread p{margin:0;color:var(--muted);font-size:15px}
+.thread .art{display:block;width:100%;height:140px;margin:0 0 12px}
 .thread .fig{font-family:var(--mono);font-size:13px;color:var(--warm);margin-top:auto;padding-top:6px}
 .cp{margin-top:auto;padding-top:10px}
 .cp summary{cursor:pointer;list-style:none;font-family:var(--mono);font-size:12px;color:var(--warm);display:inline-block;padding-block:4px}
@@ -545,6 +1031,9 @@ details.all .pubs li{padding-block:10px}
   .sec{grid-template-columns:minmax(0,1fr);padding-block:44px}
   .threads{grid-template-columns:minmax(0,1fr)}
   .hero-in{gap:40px;padding-bottom:44px}
+  .hero-main{grid-template-columns:minmax(0,1fr);gap:28px}
+  .hero .title{margin-top:190px} /* open sky above the headshot for the illustration */
+  .hero-about{padding:22px 20px}
   .readout{text-align:left}
 }
 @media (max-width:480px){
